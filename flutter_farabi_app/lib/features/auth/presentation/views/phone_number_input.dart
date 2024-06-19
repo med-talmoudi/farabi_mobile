@@ -37,7 +37,7 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
   final _phoneNumberController = TextEditingController();
   final _formKeyRegister = GlobalKey<FormState>();
   final RegExp tunisianPhoneNumberRegExp = RegExp(r'^[23459]\d{7}$');
-  AuthRepository phoneRegisterRepository = AuthRepository(RegisterApi());
+  AuthRepository phoneRegisterRepository = AuthRepository(AuthApi());
 
   @override
   void dispose() {

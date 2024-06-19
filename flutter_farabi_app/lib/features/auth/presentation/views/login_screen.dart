@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter_farabi_app/core/extensions/spacing.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/bloc/user_login/user_login_cubit.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/widgets/header.dart';
@@ -114,10 +116,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             action: TextInputAction.next,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(8),
-                              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9]')),
                             ],
                             keyboardType: TextInputType.number,
-                            
                             hintText: "20 000 000",
                             controller: _numberController,
                             validator: (value) {
@@ -156,13 +158,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           CustomInputTextField(
                             keyboardType: TextInputType.text,
                             action: TextInputAction.done,
-                            
                             hintText: "* * * * * * * *",
                             controller: _passwordController,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Veuillez saisir votre mot de passe';
-                              } 
+                              }
                               // else if (value.length < 8 || value.length > 16) {
                               //   // personal
                               //   return 'Mot de passe non valide';
@@ -192,14 +193,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                   style: GoogleFonts.poppins(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w400,
-                                    color: const Color.fromRGBO(112, 123, 129, 1),
+                                    color:
+                                        const Color.fromRGBO(112, 123, 129, 1),
                                   ),
                                 ),
                               )
                                   .animate(
                                       delay: const Duration(milliseconds: 700))
                                   .fadeIn(
-                                      duration: const Duration(milliseconds: 300),
+                                      duration:
+                                          const Duration(milliseconds: 300),
                                       curve: Curves.ease)
                                   .moveX(begin: 30.w, end: 0),
                             ],
@@ -252,16 +255,26 @@ class _LoginScreenState extends State<LoginScreen> {
                           BlocConsumer<UserLoginCubit, UserLoginState>(
                             listener: (context, state) {
                               if (state is UserLoginLoaded) {
-                                // ignore: avoid_print
-                                print("your token is : ${state.token}");
+                              
+                                // print("your token is : ${state.token}");
                                 box!.put('token', state.token);
-                                Navigator.pushNamed(
-                                  context,
-                                  '/check_card',
-                                );
+                                if (state.hasCard == true) {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/card',
+                                  );
+                                  print("/card");
+                                } else {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/add_card',
+                                  );
+                                  print("/add_card");
+                                }
                               }
                               if (state is UserLoginError) {
-                                FocusScope.of(context).requestFocus(FocusNode());
+                                FocusScope.of(context)
+                                    .requestFocus(FocusNode());
                                 CustomErrorModal(
                                         message: state.stringError,
                                         btnText: "Réessayer",
@@ -304,7 +317,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20.r)),
+                                      borderRadius:
+                                          BorderRadius.circular(20.r)),
                                   minimumSize: Size(double.infinity.w, 50.h),
                                   backgroundColor: state is UserLoginLoading
                                       ? const Color.fromRGBO(250, 177, 196, 1)
@@ -337,7 +351,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   .animate(
                                       delay: const Duration(milliseconds: 800))
                                   .fadeIn(
-                                      duration: const Duration(milliseconds: 300),
+                                      duration:
+                                          const Duration(milliseconds: 300),
                                       curve: Curves.ease)
                                   .moveY(begin: 20.h, end: 0);
                             },

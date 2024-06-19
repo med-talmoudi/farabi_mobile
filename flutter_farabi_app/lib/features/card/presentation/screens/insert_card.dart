@@ -1,15 +1,16 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
+import 'package:flutter_farabi_app/core/extensions/spacing.dart';
 import 'package:flutter_farabi_app/core/theming/colors.dart';
-import 'package:flutter_farabi_app/features/card/presentation/screens/card_history.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
+
 import 'package:simple_barcode_scanner/enum.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
@@ -82,32 +83,32 @@ class _InsertCardState extends State<InsertCard> {
         //   ),
         // ),
         title: Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding:  EdgeInsets.only(top: 5.h),
           child: SizedBox(
-            width: 100,
-            height: 50,
+            width: 100.w,
+            height: 50.h,
             child: Stack(
               children: [
                 Positioned(
-                  top: 6,
-                  left: 2,
+                  top: 9.h,
+                  left: 2.w,
                   child: Container(
                     child: SvgPicture.asset(
                       'assets/img/three_lines.svg',
-                      width: 19,
-                      height: 19,
+                      width: 19.w,
+                      height: 19.h,
                     ),
                   ),
                 ),
                 Positioned(
-                  bottom: 0,
-                  right: 0,
+                  bottom: 0.h,
+                  right: 0.w,
                   child: Container(
                     child: Text(
                       'Carte',
                       style: GoogleFonts.raleway(
                         color: Color.fromRGBO(43, 43, 43, 1),
-                        fontSize: 33,
+                        fontSize: 33.sp,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -133,22 +134,20 @@ class _InsertCardState extends State<InsertCard> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                height: 40,
-              ),
+              20.vs,
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding:  EdgeInsets.all(8.0.w),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                    borderRadius: BorderRadius.circular(20),
+                    color:  Color.fromARGB(255, 255, 255, 255),
+                    borderRadius: BorderRadius.circular(20.r),
                     boxShadow: [
                       BoxShadow(
                         color:
                             Color.fromARGB(129, 197, 197, 197).withOpacity(0.5),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+                        offset: Offset(0, 3.h), // changes position of shadow
                       ),
                     ],
                   ),
@@ -169,20 +168,18 @@ class _InsertCardState extends State<InsertCard> {
                                     image: AssetImage(
                                       "assets/img/el_farabi_logo.png",
                                     ),
-                                    width: 50,
-                                    height: 50,
+                                    width: 50.w,
+                                    height: 50.h,
                                   ),
-                                  SizedBox(
-                                    width: 6,
-                                  ),
+                                  6.vs,
                                   Padding(
-                                    padding: EdgeInsets.only(top: 10),
+                                    padding: EdgeInsets.only(top: 10.h),
                                     child: Image(
                                       image: AssetImage(
                                         "assets/img/el_farabi_text.png",
                                       ),
-                                      width: 110,
-                                      height: 50,
+                                      width: 110.w,
+                                      height: 50.h,
                                     ),
                                   ),
                                 ],
@@ -197,11 +194,9 @@ class _InsertCardState extends State<InsertCard> {
                             // ),
                           ],
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
+                        15.vs,
                         Padding(
-                          padding: const EdgeInsets.only(right: 30),
+                          padding:  EdgeInsets.only(right: 30.w),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -209,7 +204,7 @@ class _InsertCardState extends State<InsertCard> {
                                 _subStrings[0],
                                 style: GoogleFonts.poppins(
                                   color: const Color.fromRGBO(43, 43, 43, 1),
-                                  fontSize: 15,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -217,7 +212,7 @@ class _InsertCardState extends State<InsertCard> {
                                 _subStrings[1],
                                 style: GoogleFonts.poppins(
                                   color: const Color.fromRGBO(43, 43, 43, 1),
-                                  fontSize: 15,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -225,7 +220,7 @@ class _InsertCardState extends State<InsertCard> {
                                 _subStrings[2],
                                 style: GoogleFonts.poppins(
                                   color: const Color.fromRGBO(43, 43, 43, 1),
-                                  fontSize: 15,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -233,7 +228,7 @@ class _InsertCardState extends State<InsertCard> {
                                 _subStrings[3],
                                 style: GoogleFonts.poppins(
                                   color: const Color.fromRGBO(43, 43, 43, 1),
-                                  fontSize: 15,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -241,7 +236,7 @@ class _InsertCardState extends State<InsertCard> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(23, 25, 0, 0),
+                          padding:  EdgeInsets.fromLTRB(23.w, 20.h, 0, 0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -249,7 +244,7 @@ class _InsertCardState extends State<InsertCard> {
                                 "Propriétaire",
                                 style: GoogleFonts.raleway(
                                   color: const Color.fromRGBO(149, 149, 149, 1),
-                                  fontSize: 15,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -257,13 +252,11 @@ class _InsertCardState extends State<InsertCard> {
                                 _name.isEmpty ? 'William Smith' : _name,
                                 style: GoogleFonts.poppins(
                                   color: const Color.fromRGBO(43, 43, 43, 1),
-                                  fontSize: 15,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              SizedBox(
-                                height: 28,
-                              )
+                              18.vs
                             ],
                           ),
                         ),
@@ -272,9 +265,7 @@ class _InsertCardState extends State<InsertCard> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 40,
-              ),
+              25.vs,
               Column(
                 children: [
                   GestureDetector(
@@ -300,16 +291,14 @@ class _InsertCardState extends State<InsertCard> {
                       children: [
                         SvgPicture.asset(
                           'assets/img/barcode_icon.svg',
-                          width: 25,
-                          height: 25,
+                          width: 25.w,
+                          height: 25.h,
                         ),
-                        SizedBox(
-                          width: 5,
-                        ),
+                        5.hs,
                         Text(
                           "Scan your card",
                           style: GoogleFonts.raleway(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.w600,
                             color: ColorManager.lightPink,
                           ),
@@ -317,14 +306,12 @@ class _InsertCardState extends State<InsertCard> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 8),
+                  8.vs,
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    padding:  EdgeInsets.symmetric(horizontal: 30.w),
                     child: Column(
                       children: [
-                        SizedBox(
-                          height: 20,
-                        ),
+                        20.vs,
                         Form(
                           key: _formKey,
                           child: Column(
@@ -333,25 +320,21 @@ class _InsertCardState extends State<InsertCard> {
                               Text(
                                 "Ajout Nouvelle Carte",
                                 style: GoogleFonts.raleway(
-                                  fontSize: 22,
+                                  fontSize: 22.sp,
                                   fontWeight: FontWeight.w600,
                                   color: Color.fromRGBO(66, 67, 71, 1)
                                 ),
                               ),
-                                SizedBox(
-                          height: 25,
-                        ),
+                          25.vs,
                               Text(
                                 'Nom Sur La Carte',
                                 style: GoogleFonts.raleway(
                                   color: const Color.fromRGBO(26, 37, 48, 1),
-                                  fontSize: 16,
+                                  fontSize: 16.sp,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              const SizedBox(
-                                height: 10,
-                              ),
+                              10.vs,
                               TextFormField(
                                 controller: _nomController,
                                 validator: (value) {
@@ -367,7 +350,7 @@ class _InsertCardState extends State<InsertCard> {
                                   return null;
                                 },
                                 style: GoogleFonts.poppins(
-                                  fontSize: 16,
+                                  fontSize: 16.sp,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 keyboardType: TextInputType.name,
@@ -377,25 +360,21 @@ class _InsertCardState extends State<InsertCard> {
                                       const Color.fromRGBO(247, 247, 249, 1),
                                   hintText: "xxxxxxx",
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
+                                    borderRadius: BorderRadius.circular(20.r),
                                     borderSide: BorderSide.none,
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                height: 10,
-                              ),
+                              10.vs,
                               Text(
                                 'Numéro Carte',
                                 style: GoogleFonts.raleway(
                                   color: const Color.fromRGBO(26, 37, 48, 1),
-                                  fontSize: 16,
+                                  fontSize: 16.sp,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              const SizedBox(
-                                height: 10,
-                              ),
+                              10.vs,
                               TextFormField(
                                 inputFormatters: [
                                   LengthLimitingTextInputFormatter(16),
@@ -412,7 +391,7 @@ class _InsertCardState extends State<InsertCard> {
                                   return null;
                                 },
                                 style: GoogleFonts.poppins(
-                                  fontSize: 16,
+                                  fontSize: 16.sp,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 keyboardType: TextInputType.number,
@@ -422,34 +401,31 @@ class _InsertCardState extends State<InsertCard> {
                                       const Color.fromRGBO(247, 247, 249, 1),
                                   hintText: "3282  3282  3282  3282",
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20),
+                                    borderRadius: BorderRadius.circular(20.r),
                                     borderSide: BorderSide.none,
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                height: 30,
-                              ),
+                              30.vs,
                               ElevatedButton(
                                 onPressed: () {
                                   FocusScope.of(context)
                                       .requestFocus(FocusNode());
-                                  Navigator.push(
-                                      context,
-                                      PageTransition(
-                                          child: const CardHistory(),
-                                          type: PageTransitionType.fade));
+                                   Navigator.pushNamed(
+                                  context,
+                                  '/card',
+                                );
                                 },
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
+                                    borderRadius: BorderRadius.circular(20.r),
                                   ),
-                                  minimumSize: const Size(double.infinity, 60),
+                                  minimumSize:  Size(double.infinity, 50.h),
                                   backgroundColor:
                                       const Color.fromRGBO(217, 80, 116, 1),
                                   foregroundColor: Colors.white,
                                   textStyle: GoogleFonts.raleway(
-                                    fontSize: 15,
+                                    fontSize: 15.sp,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -457,14 +433,12 @@ class _InsertCardState extends State<InsertCard> {
                                   "Ajout carte",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.raleway(
-                                    fontSize: 15,
+                                    fontSize: 15.sp,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                height: 40,
-                              )
+                             
                             ],
                           ),
                         ),

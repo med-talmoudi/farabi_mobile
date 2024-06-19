@@ -84,7 +84,7 @@ class _OtpVerificationState extends State<OtpVerification> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => OptVerificationCubit(AuthRepository(RegisterApi())),
+      create: (context) => OptVerificationCubit(AuthRepository(AuthApi())),
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(

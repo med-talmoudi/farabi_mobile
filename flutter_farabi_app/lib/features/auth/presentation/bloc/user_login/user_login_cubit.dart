@@ -7,15 +7,27 @@ import 'package:meta/meta.dart';
 part 'user_login_state.dart';
 
 class UserLoginCubit extends Cubit<UserLoginState> {
-  final RegisterApi registerApi;
-  UserLoginCubit(this.registerApi) : super(UserLoginInitial());
+  final AuthApi authApi;
+  UserLoginCubit(this.authApi) : super(UserLoginInitial());
 
   Future<void> userLogin(String phone, String password) async {
     emit(UserLoginLoading());
-    var response = await registerApi.userLogin(phone, password);
-    if (response.containsKey('token')) {
+    var response = await authApi.userLogin(phone, password);
+    if (response == "erreur inattendue!") {
+      
+      emit(UserLoginError(stringError: "erreur inattendue!"));
     
-      emit(UserLoginLoaded(token: response['token'].toString()));
+    }
+    
+    else if (response.containsKey('token')) {
+      if((response.containsKey('card')) && (response['card'].toString() != "null" )){
+        emit(UserLoginLoaded(token: response['token'].toString(), hasCard: true));
+      }else{
+         emit(UserLoginLoaded(token: response['token'].toString(), hasCard: false));
+      }
+        
+      
+     
     } else {
       emit(UserLoginError(stringError: response['errors'][0]['msg']));
     }

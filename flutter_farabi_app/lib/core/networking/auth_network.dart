@@ -4,10 +4,10 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_farabi_app/core/exceptions/exceptions.dart';
 
-class RegisterApi {
+class AuthApi {
   late Dio dio;
 
-  RegisterApi() {
+  AuthApi() {
     final headers = <String, String>{
       "Content-Type": "application/json",
       "Accept": "application/json"
@@ -147,7 +147,7 @@ class RegisterApi {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final Map<String, dynamic> responseData =
             json.decode(response.toString());
-        print(responseData);
+        print(" this is login api $responseData");
 
         return responseData;
       } else if (response.statusCode == 400) {

@@ -214,7 +214,7 @@ class _GenderSelectionState extends State<GenderSelection> {
                           ),
                           context: context,
                         );
-                        Future.delayed(const Duration(milliseconds: 2500), () {
+                        Future.delayed(const Duration(milliseconds: 3000), () {
                           Navigator.pushNamed(context, '/login');
                         });
                       }

@@ -16,9 +16,9 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
 
   Future<void> createAccount(String phone, String name, String lastName,
       String password, String date, String gender) async {
-        print("before loading");
+        
     emit(CreateAccountLoading());
-    print("after loading");
+ 
 
     var response = await authRepository.createAccount(
         phone, name, lastName, password, date, gender);

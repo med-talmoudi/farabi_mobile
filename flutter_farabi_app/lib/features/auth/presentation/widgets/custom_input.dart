@@ -21,7 +21,8 @@ class CustomInputTextField extends StatefulWidget {
     this.obscureText = false,
     this.hintText = "",
     required this.action,
-    required this.keyboardType, this.inputFormatters,
+    required this.keyboardType,
+    this.inputFormatters,
   });
 
   @override
@@ -44,7 +45,6 @@ class _CustomInputTextFieldState extends State<CustomInputTextField> {
       ),
       keyboardType: widget.keyboardType,
       inputFormatters: widget.inputFormatters,
-
       obscureText: widget.obscureText ? isObscure : false,
       decoration: InputDecoration(
         filled: true,

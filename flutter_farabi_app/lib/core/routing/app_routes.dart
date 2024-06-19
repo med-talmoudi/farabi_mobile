@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
+import 'package:flutter_farabi_app/core/networking/card_network.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/bloc/reset_pwd/reset_password_cubit.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/views/login_screen.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/bloc/complete_register/create_account_cubit.dart';
@@ -7,12 +8,16 @@ import 'package:flutter_farabi_app/features/auth/presentation/bloc/verify_otp/op
 import 'package:flutter_farabi_app/features/auth/presentation/bloc/pre_register/phone_register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_farabi_app/features/card/data/repository/card_repository.dart';
+import 'package:flutter_farabi_app/features/card/presentation/bloc/create_e_card/create_e_card_cubit.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../features/auth/presentation/bloc/resend_otp/resend_otp_cubit.dart';
 import '../../features/auth/presentation/bloc/user_login/user_login_cubit.dart';
 import '../../features/auth/presentation/views/reset_password_screen.dart';
-import '../../features/card/presentation/screens/check_card.dart';
+import '../../features/card/presentation/screens/add_card.dart';
+import '../../features/card/presentation/screens/card_space.dart';
+import '../../features/card/presentation/screens/insert_card.dart';
 import '../../features/onboarding/splash_screen.dart';
 import '../../features/onboarding/welcome_screen.dart';
 
@@ -61,7 +66,7 @@ class AppRouter {
             type: PageTransitionType.fade,
             child: BlocProvider(
               create: (context) =>
-                  UserLoginCubit(RegisterApi()),
+                  UserLoginCubit(AuthApi()),
               child: const LoginScreen(),
             ));
 
@@ -70,7 +75,7 @@ class AppRouter {
           type: PageTransitionType.fade,
           child: BlocProvider(
             create: (context) =>
-                ResetPasswordCubit(AuthRepository(RegisterApi())),
+                ResetPasswordCubit(AuthRepository(AuthApi())),
             child: const ResetPasswordScreen(),
           ),
         );
@@ -83,7 +88,7 @@ class AppRouter {
             providers: [
               BlocProvider(
                 create: (context) =>
-                    CreateAccountCubit(AuthRepository(RegisterApi())),
+                    CreateAccountCubit(AuthRepository(AuthApi())),
               ),
             ],
             child: GenderSelection(),
@@ -98,7 +103,7 @@ class AppRouter {
               providers: [
                 BlocProvider(
                   create: (context) =>
-                      PhoneRegisterCubit(AuthRepository(RegisterApi())),
+                      PhoneRegisterCubit(AuthRepository(AuthApi())),
                 ),
                 BlocProvider(
                   create: (context) => VerifyPhoneNumberCubit(),
@@ -117,11 +122,11 @@ class AppRouter {
               providers: [
                 BlocProvider(
                   create: (context) =>
-                      OptVerificationCubit(AuthRepository(RegisterApi())),
+                      OptVerificationCubit(AuthRepository(AuthApi())),
                 ),
                 BlocProvider(
                   create: (context) =>
-                      ResendOtpCubit(AuthRepository(RegisterApi())),
+                      ResendOtpCubit(AuthRepository(AuthApi())),
                 ),
               ],
               child: OtpVerification(),
@@ -129,10 +134,35 @@ class AppRouter {
             settings: settings);
 
 
-            case '/check_card':
+            case '/add_card':
         return PageTransition(
             type: PageTransitionType.fade,
-            child:  CheckCard());
+            child:  BlocProvider(
+              create: (context) => CreateECardCubit(CardRepository(CardApi())),
+              child: AddCard(),
+            ));
+
+
+            case '/card':
+        return PageTransition(
+            type: PageTransitionType.fade,
+            child:  BlocProvider(
+              create: (context) => CreateECardCubit(CardRepository(CardApi())),
+              child: CardSpace(),
+            ));
+
+
+
+
+          case '/insert_card':
+        return PageTransition(
+            type: PageTransitionType.fade,
+            child:  BlocProvider(
+              create: (context) => CreateECardCubit(CardRepository(CardApi())),
+              child: InsertCard(),
+            ));
+
+
       default:
         return null;
 

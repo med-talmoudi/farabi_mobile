@@ -2,6 +2,7 @@
 
 import 'package:flutter_farabi_app/core/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,14 +12,14 @@ import '../../../../core/theming/colors.dart';
 import '../widgets/has_history.dart';
 import '../widgets/no_history.dart';
 
-class CardHistory extends StatefulWidget {
-  const CardHistory({super.key});
+class CardSpace extends StatefulWidget {
+  const CardSpace({super.key});
 
   @override
-  State<CardHistory> createState() => _CardHistoryState();
+  State<CardSpace> createState() => _CardSpaceState();
 }
 
-class _CardHistoryState extends State<CardHistory> {
+class _CardSpaceState extends State<CardSpace> {
    bool isToggled = false;
 
    
@@ -48,8 +49,8 @@ class _CardHistoryState extends State<CardHistory> {
             child: Stack(
               children: [
                 Positioned(
-                  top: 6,
-                  left: 2,
+                 top: 9.h,
+                  left: 2.w,
                   child: Container(
                     child: SvgPicture.asset(
                       'assets/img/three_lines.svg',
