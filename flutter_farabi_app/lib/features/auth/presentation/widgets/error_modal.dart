@@ -48,7 +48,7 @@ class CustomErrorModal extends StatelessWidget {
                   Text(
                     "Oh non!",
                     style: GoogleFonts.raleway(
-                      fontSize: 20,
+                      fontSize: 20.sp,
                       fontWeight: FontWeight.w700,
                       color: const Color.fromRGBO(74, 74, 74, 1),
                     ),
@@ -68,9 +68,9 @@ class CustomErrorModal extends StatelessWidget {
                     onPressed: onPressed,
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(20.r),
                       ),
-                      minimumSize:  Size(double.infinity.w, 50.h),
+                      minimumSize:  Size(double.infinity, 50.h),
                       backgroundColor: const Color.fromRGBO(217, 80, 116, 1),
                       foregroundColor: Colors.white,
                       textStyle: GoogleFonts.raleway(

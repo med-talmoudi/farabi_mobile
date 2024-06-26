@@ -10,10 +10,10 @@ class InsertCardCubit extends Cubit<InsertCardState> {
   final CardRepository cardRepository;
   InsertCardCubit(this.cardRepository) : super(InsertCardInitial());
 
-  Future<void> getUser() async {
+  Future<void> addCard(cardNumber) async {
     emit(InsertCardLoading());
 
-    var response = await cardRepository.getUser();
+    var response = await cardRepository.addCard(cardNumber);
     print(response);
     if (response == "erreur inattendue") {
       emit(InsertCardError(stringError: response.toString()));
@@ -27,5 +27,7 @@ class InsertCardCubit extends Cubit<InsertCardState> {
       
     }
   }
+
+  
 
 }

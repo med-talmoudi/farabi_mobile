@@ -217,7 +217,7 @@ class _OtpVerificationState extends State<OtpVerification> {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(20.r)),
-                                    minimumSize: Size(double.infinity.w, 50.h),
+                                    minimumSize: Size(double.infinity, 50.h),
                                     backgroundColor:
                                         const Color.fromRGBO(250, 177, 196, 1),
                                     // Background color
@@ -248,7 +248,7 @@ class _OtpVerificationState extends State<OtpVerification> {
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20.r)),
-                                minimumSize: Size(double.infinity.w, 50.h),
+                                minimumSize: Size(double.infinity, 50.h),
                                 backgroundColor:
                                     backgroundColor, // Background color
                                 foregroundColor: ColorManager.white,

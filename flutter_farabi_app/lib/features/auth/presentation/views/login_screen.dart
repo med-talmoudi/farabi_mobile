@@ -36,6 +36,11 @@ class _LoginScreenState extends State<LoginScreen> {
   final RegExp tunisianPhoneNumberRegExp = RegExp(r'^[23459]\d{7}$');
   bool isObscurePwd = true;
   bool isObscureCode = true;
+   String capitalizeFirstLetterOfEachWord(String str) {
+  return str.split(' ').map((word) {
+    if (word.isEmpty) return word;
+    return '${word[0].toUpperCase()}${word.substring(1).toLowerCase()}';
+  }).join(' ');}
 
   @override
   void initState() {
@@ -255,7 +260,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           BlocConsumer<UserLoginCubit, UserLoginState>(
                             listener: (context, state) {
                               if (state is UserLoginLoaded) {
-                              
                                 // print("your token is : ${state.token}");
                                 box!.put('token', state.token);
                                 if (state.hasCard == true) {
@@ -265,10 +269,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   );
                                   print("/card");
                                 } else {
-                                  Navigator.pushNamed(
-                                    context,
-                                    '/add_card',
-                                  );
+                                  String fullName = capitalizeFirstLetterOfEachWord(state.fullName.toString());
+                                  
+                                  Navigator.pushNamed(context, '/add_card',
+                                      arguments: fullName);
                                   print("/add_card");
                                 }
                               }
@@ -319,7 +323,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.circular(20.r)),
-                                  minimumSize: Size(double.infinity.w, 50.h),
+                                  minimumSize: Size(double.infinity, 50.h),
                                   backgroundColor: state is UserLoginLoading
                                       ? const Color.fromRGBO(250, 177, 196, 1)
                                       : ColorManager

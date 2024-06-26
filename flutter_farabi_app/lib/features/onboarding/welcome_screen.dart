@@ -28,7 +28,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       opacity: 0.06,
                       child: Image(
                         height: 600.h,
-                        width: double.infinity.w,
+                        width: double.infinity,
                         fit: BoxFit.fill,
                         image: const AssetImage("assets/img/woman_image.jpg"),
                       ),
@@ -107,7 +107,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.r)),
-                      minimumSize: Size(double.infinity.w, 50.h),
+                      minimumSize: Size(double.infinity, 50.h),
                       backgroundColor: const Color.fromRGBO(
                           217, 80, 116, 1), // Background color
                       foregroundColor: Colors.white, // Text color

@@ -264,7 +264,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                                           20.r),
                                                 ),
                                                 minimumSize: Size(
-                                                    double.infinity.w, 50.h),
+                                                    double.infinity, 50.h),
                                                 backgroundColor:
                                                     const Color.fromRGBO(
                                                         217, 80, 116, 1),

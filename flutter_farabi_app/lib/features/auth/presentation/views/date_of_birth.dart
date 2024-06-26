@@ -107,7 +107,7 @@ class _DateOfBirthState extends State<DateOfBirth> {
                             diameterRatio: 5.0.r,
                             squeeze: 0.6.r,
                             selectionOverlay: Container(
-                              width: double.infinity.w,
+                              width: double.infinity,
                               height: 50.h,
                               decoration: const BoxDecoration(
                                 color: Color.fromRGBO(217, 80, 116, 0.15),

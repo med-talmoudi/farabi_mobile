@@ -6,9 +6,11 @@ import 'package:flutter_farabi_app/core/theming/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+  final String id;
+  const BottomNavBar({super.key, required this.id});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -16,6 +18,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
+  late String id ;
   int currentIndex = 1;
 
   setBottomBarIndex(index) {
@@ -23,9 +26,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
       currentIndex = index;
     });
   }
+  @override
+  void initState() {
+    super.initState();
+    id = widget.id;  // Initialize 'id' with the value from the widget
+  }
 
   @override
   Widget build(BuildContext context) {
+     
+  
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white.withAlpha(55),
@@ -75,7 +85,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                     children: [
                                       const SizedBox(height: 40),
                                       Text(
-                                        "QR Code",
+                                        "QR code",
                                         style: GoogleFonts.raleway(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w700,
@@ -83,12 +93,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                               74, 74, 74, 1),
                                         ),
                                       ),
-                                        const SizedBox(height: 10,),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 30),
                                         child: Text(
-                                          "Présentez Ce QR Code Pour Tous Vos Achats!",
+                                          "Présentez ce QR code pour tous vos achats!",
                                           textAlign: TextAlign.center,
                                           style: GoogleFonts.raleway(
                                             fontSize: 20,
@@ -98,11 +110,33 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(height: 30,),
-                                      SvgPicture.asset(
-                                        'assets/img/qr_code.svg',
-                                        width: 190,
-                                        height: 190,
+                                      const SizedBox(
+                                        height: 30,
+                                      ),
+                                      // SvgPicture.asset(
+                                      //   'assets/img/qr_code.svg',
+                                      //   width: 190,
+                                      //   height: 190,
+                                      // ),
+
+                                      SizedBox(width: 200,
+                                      height: 200,
+                                        child: 
+                                        
+                                       
+                                        
+                                        PrettyQrView.data(
+                                          data: id,
+                                          decoration: const PrettyQrDecoration(
+                                            image: PrettyQrDecorationImage(
+                                              scale: 0.35,
+                                              image: AssetImage(
+                                                
+                                                  "assets/img/el_farabi_logo.png"),
+                                            ),
+                                          ),
+                                        ),
+                                        
                                       ),
                                       const SizedBox(height: 30),
                                       ElevatedButton(
@@ -123,13 +157,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                             fontWeight: FontWeight.w600,
                                           ),
                                         ),
-                                        child:  Text(
-                                          "C'est Bon!",
-                                          style: GoogleFonts.raleway(
+                                        child: Text("C'est Bon!",
+                                            style: GoogleFonts.raleway(
                                               fontSize: 15,
-                                            fontWeight: FontWeight.w600,
-                                          )
-                                        ),
+                                              fontWeight: FontWeight.w600,
+                                            )),
                                       ),
                                     ],
                                   ),

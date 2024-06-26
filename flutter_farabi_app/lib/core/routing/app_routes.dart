@@ -15,6 +15,8 @@ import 'package:page_transition/page_transition.dart';
 import '../../features/auth/presentation/bloc/resend_otp/resend_otp_cubit.dart';
 import '../../features/auth/presentation/bloc/user_login/user_login_cubit.dart';
 import '../../features/auth/presentation/views/reset_password_screen.dart';
+import '../../features/card/presentation/bloc/card_details/card_details_cubit.dart';
+import '../../features/card/presentation/bloc/insert_card/insert_card_cubit.dart';
 import '../../features/card/presentation/screens/add_card.dart';
 import '../../features/card/presentation/screens/card_space.dart';
 import '../../features/card/presentation/screens/insert_card.dart';
@@ -34,7 +36,6 @@ import '../../features/auth/presentation/views/phone_number_input.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings, String initialRoute) {
-  
     switch (settings.name) {
       case '/splach':
         return MaterialPageRoute(builder: (_) => SplashScreen());
@@ -65,8 +66,7 @@ class AppRouter {
         return PageTransition(
             type: PageTransitionType.fade,
             child: BlocProvider(
-              create: (context) =>
-                  UserLoginCubit(AuthApi()),
+              create: (context) => UserLoginCubit(AuthApi()),
               child: const LoginScreen(),
             ));
 
@@ -74,8 +74,7 @@ class AppRouter {
         return PageTransition(
           type: PageTransitionType.fade,
           child: BlocProvider(
-            create: (context) =>
-                ResetPasswordCubit(AuthRepository(AuthApi())),
+            create: (context) => ResetPasswordCubit(AuthRepository(AuthApi())),
             child: const ResetPasswordScreen(),
           ),
         );
@@ -133,35 +132,32 @@ class AppRouter {
             ),
             settings: settings);
 
+      case '/add_card':
+        final String fullName = settings.arguments as String;
 
-            case '/add_card':
         return PageTransition(
             type: PageTransitionType.fade,
-            child:  BlocProvider(
+            child: BlocProvider(
               create: (context) => CreateECardCubit(CardRepository(CardApi())),
-              child: AddCard(),
+              child: AddCard(fullName: fullName),
             ));
 
-
-            case '/card':
+      case '/card':
         return PageTransition(
             type: PageTransitionType.fade,
-            child:  BlocProvider(
-              create: (context) => CreateECardCubit(CardRepository(CardApi())),
+            child: BlocProvider(
+              create: (context) => CardDetailsCubit(CardApi()),
               child: CardSpace(),
             ));
 
-
-
-
-          case '/insert_card':
+      case '/insert_card':
+        final String fullName = settings.arguments as String;
         return PageTransition(
             type: PageTransitionType.fade,
-            child:  BlocProvider(
-              create: (context) => CreateECardCubit(CardRepository(CardApi())),
-              child: InsertCard(),
+            child: BlocProvider(
+              create: (context) => InsertCardCubit(CardRepository(CardApi())),
+              child: InsertCard(fullName: fullName),
             ));
-
 
       default:
         return null;

@@ -234,7 +234,7 @@ class _GenderSelectionState extends State<GenderSelection> {
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20.r)),
-                              minimumSize: Size(double.infinity.w, 50.h),
+                              minimumSize: Size(double.infinity, 50.h),
 
                               backgroundColor:  const Color.fromRGBO(250, 177, 196, 1), // Background color
                               foregroundColor: Colors.white, // Text color
@@ -272,7 +272,7 @@ class _GenderSelectionState extends State<GenderSelection> {
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.r)),
-                          minimumSize: Size(double.infinity.w, 50.h),
+                          minimumSize: Size(double.infinity, 50.h),
                           backgroundColor:  _selectedGender == ''
                               ? const Color.fromRGBO(250, 177, 196, 1)
                               : ColorManager.lightPink, // Background color

@@ -18,7 +18,7 @@ class CustomValidateButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        minimumSize:  Size(double.infinity.w, 50.h),
+        minimumSize:  Size(double.infinity, 50.h),
         backgroundColor: ColorManager.lightPink, // Background color
         foregroundColor: ColorManager.white,
       ),

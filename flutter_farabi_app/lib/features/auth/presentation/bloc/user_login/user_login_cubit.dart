@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter_farabi_app/core/networking/auth_network.dart';
 import 'package:meta/meta.dart';
@@ -21,9 +23,11 @@ class UserLoginCubit extends Cubit<UserLoginState> {
     
     else if (response.containsKey('token')) {
       if((response.containsKey('card')) && (response['card'].toString() != "null" )){
-        emit(UserLoginLoaded(token: response['token'].toString(), hasCard: true));
+        emit(UserLoginLoaded(token: response['token'].toString(), hasCard: true, fullName: "${response['firstname']} ${response['lastname']}"));
+        print("${response['firstname']} ${response['lastname']}");
       }else{
-         emit(UserLoginLoaded(token: response['token'].toString(), hasCard: false));
+         emit(UserLoginLoaded(token: response['token'].toString(), hasCard: false, fullName: "${response['firstname']} ${response['lastname']}"));
+        print("${response['firstname']} ${response['lastname']}");
       }
         
       

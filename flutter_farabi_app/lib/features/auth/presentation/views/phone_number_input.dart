@@ -314,7 +314,7 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                                               borderRadius:
                                                   BorderRadius.circular(20.r)),
                                           minimumSize:
-                                              Size(double.infinity.w, 50.h),
+                                              Size(double.infinity, 50.h),
                                           backgroundColor: Color.fromRGBO(250,
                                               177, 196, 1), // Background color
                                           foregroundColor: Colors.white,
@@ -339,7 +339,7 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                                             borderRadius:
                                                 BorderRadius.circular(20.r)),
                                         minimumSize:
-                                            Size(double.infinity.w, 50.h),
+                                            Size(double.infinity, 50.h),
                                         backgroundColor:
                                             Color.fromRGBO(217, 80, 116, 1),
 

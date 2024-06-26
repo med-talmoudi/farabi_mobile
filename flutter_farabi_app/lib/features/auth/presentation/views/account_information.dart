@@ -204,7 +204,7 @@ class _AccountInformationState extends State<AccountInformation> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20.r),
                                 ),
-                                minimumSize: Size(double.infinity.w, 50.h),
+                                minimumSize: Size(double.infinity, 50.h),
                                 backgroundColor:
                                     const Color.fromRGBO(217, 80, 116, 1),
                                 foregroundColor: Colors.white,

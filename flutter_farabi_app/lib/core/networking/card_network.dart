@@ -17,7 +17,7 @@ class CardApi {
     };
     BaseOptions options = BaseOptions(
       headers: headers,
-      baseUrl: "http://192.168.1.19:5000", //ipconfig cmd
+      baseUrl: "http://74.234.240.106:5000", //ipconfig cmd
       receiveDataWhenStatusError: true,
       validateStatus: (status) {
         // Validate status code 400
@@ -56,4 +56,57 @@ class CardApi {
 
     return responseData;
   }
+
+  Future<dynamic> addCard(String cardNumber) async {
+    var data = json.encode({"cardNumber": cardNumber}); // make an error
+    var response = await dio.post('/api/usercard/add-card', data: data);
+    final Map<String, dynamic> responseData = json.decode(response.toString());
+    // print(responseData);
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return "ok";
+    } else if (response.statusCode == 400) {
+      final Map<String, dynamic> responseData =
+          json.decode(response.toString());
+      if (responseData.containsKey('errors')) {
+        print(response.statusCode);
+        print(responseData['errors'][0]['msg']);
+        return responseData['errors'][0]['msg'];
+      }
+    }
+
+    return responseData;
+  }
+
+  Future<dynamic> cardDetails() async {
+    try {
+      var response = await dio.get('/api/usercard/user-card');
+      final Map<String, dynamic> responseData =
+          json.decode(response.toString());
+      return CustomResponce(
+          data: responseData, statusCode: response.statusCode!);
+    } catch (error) {
+      print(error);
+      return CustomResponce(
+          data: null, statusCode: 500); // Return a 500 status code on error
+    }
+  }
+
+  // print(responseData);
+
+  // else if (response.statusCode == 400) {
+  //   final Map<String, dynamic> responseData =
+  //       json.decode(response.toString());
+  //   if (responseData.containsKey('errors')) {
+  //     print(response.statusCode);
+  //     print(responseData['errors'][0]['msg']);
+  //     return responseData['errors'][0]['msg'];
+  //   }
+  // }
+}
+
+class CustomResponce<T> {
+  final T data;
+  final int statusCode;
+
+  CustomResponce({required this.data, required this.statusCode});
 }

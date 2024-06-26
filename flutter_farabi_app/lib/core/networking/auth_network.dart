@@ -14,7 +14,7 @@ class AuthApi {
     };
     BaseOptions options = BaseOptions(
       headers: headers,
-      baseUrl: "http://192.168.1.19:5000", //ipconfig cmd
+      baseUrl: "http://74.234.240.106:5000", //ipconfig cmd
       receiveDataWhenStatusError: true,
       validateStatus: (status) {
         // Validate status code 400

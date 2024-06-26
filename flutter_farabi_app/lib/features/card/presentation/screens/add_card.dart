@@ -12,7 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddCard extends StatelessWidget {
-  const AddCard({super.key});
+  final String fullName;
+  const AddCard({super.key, required this.fullName});
 
   @override
   Widget build(BuildContext context) {
@@ -189,10 +190,8 @@ class AddCard extends StatelessWidget {
                       10.vs,
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(
-                                context,
-                                '/insert_card',
-                              );
+                          Navigator.pushNamed(context, '/insert_card',
+                              arguments: fullName);
                         },
                         child: Container(
                           height: 50.h,
