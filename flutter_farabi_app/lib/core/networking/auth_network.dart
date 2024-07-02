@@ -3,18 +3,20 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_farabi_app/core/exceptions/exceptions.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AuthApi {
   late Dio dio;
-
+ 
   AuthApi() {
     final headers = <String, String>{
       "Content-Type": "application/json",
       "Accept": "application/json"
     };
+     final String apiUrl =  dotenv.env['API_URL'].toString();
     BaseOptions options = BaseOptions(
       headers: headers,
-      baseUrl: "http://74.234.240.106:5000", //ipconfig cmd
+      baseUrl: apiUrl, //ipconfig cmd
       // baseUrl: "http://192.168.1.19:5000",
       receiveDataWhenStatusError: true,
       validateStatus: (status) {

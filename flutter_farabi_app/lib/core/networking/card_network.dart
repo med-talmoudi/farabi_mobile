@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../../main.dart';
 
@@ -15,9 +16,10 @@ class CardApi {
       "Accept": "application/json",
       "x-auth-token": box!.get("token")
     };
+     final String apiUrl =  dotenv.env['API_URL'].toString();
     BaseOptions options = BaseOptions(
       headers: headers,
-      baseUrl: "http://74.234.240.106:5000", //ipconfig cmd
+      baseUrl: apiUrl, 
       // baseUrl: "http://192.168.1.19:5000",
       receiveDataWhenStatusError: true,
       validateStatus: (status) {
