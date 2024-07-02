@@ -1,15 +1,19 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_farabi_app/core/extensions/spacing.dart';
+
 import 'package:flutter_farabi_app/core/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_farabi_app/features/card/presentation/bloc/card_details/card_details_cubit.dart';
+
+
+import 'package:flutter_farabi_app/features/card/presentation/widgets/card_space_modal.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../core/theming/colors.dart';
 import '../widgets/has_history.dart';
 import '../widgets/no_history.dart';
 
@@ -24,7 +28,6 @@ class _CardSpaceState extends State<CardSpace> {
   bool isToggled = false;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context.read<CardDetailsCubit>().cardDetails();
   }
@@ -33,7 +36,7 @@ class _CardSpaceState extends State<CardSpace> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(247, 247, 249, 1),
-
+    
       // backgroundColor: Colors.amber,
       appBar: AppBar(
         elevation: 0,
@@ -98,9 +101,7 @@ class _CardSpaceState extends State<CardSpace> {
         ],
       ),
       body: BlocConsumer<CardDetailsCubit, CardDetailsState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           if (state is CardDetailsLoading) {
             return SafeArea(
@@ -118,11 +119,15 @@ class _CardSpaceState extends State<CardSpace> {
                           height: 40,
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(8.0.h),
                           child: Container(
                             decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/img/card_flower_bg.jpg"),
+                                  fit: BoxFit.fill),
                               color: const Color.fromARGB(255, 255, 255, 255),
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(20.r),
                               boxShadow: [
                                 BoxShadow(
                                   color: Color.fromARGB(129, 197, 197, 197)
@@ -154,39 +159,33 @@ class _CardSpaceState extends State<CardSpace> {
                                               image: AssetImage(
                                                 "assets/img/el_farabi_logo.png",
                                               ),
-                                              width: 50,
+                                              width: 60,
                                               height: 50,
                                             ),
                                             SizedBox(
                                               width: 6,
                                             ),
                                             Padding(
-                                              padding: EdgeInsets.only(top: 10),
+                                              padding:
+                                                  EdgeInsets.only(top: 10),
                                               child: Image(
                                                 image: AssetImage(
                                                   "assets/img/el_farabi_text.png",
                                                 ),
-                                                width: 110,
-                                                height: 50,
+                                                width: 100,
+                                                height: 40,
                                               ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          Icons.close,
-                                          size: 20,
-                                        ),
-                                      ),
+                                      CustomDelete()
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
+                                  20.vs,
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 30),
+                                    padding: const EdgeInsets.fromLTRB(
+                                        6, 0, 100, 0),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
@@ -194,45 +193,45 @@ class _CardSpaceState extends State<CardSpace> {
                                         Text(
                                           state.cardNumber.substring(0, 1),
                                           style: GoogleFonts.poppins(
-                                            color: const Color.fromRGBO(
-                                                43, 43, 43, 1),
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w400,
+                                            color:
+                                                Color.fromARGB(255, 0, 0, 0),
+                                            fontSize: 17.sp,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                         Text(
-                                         state.cardNumber.substring(1, 5),
+                                          state.cardNumber.substring(1, 5),
                                           style: GoogleFonts.poppins(
-                                            color: const Color.fromRGBO(
-                                                43, 43, 43, 1),
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w400,
+                                            color:
+                                                Color.fromARGB(255, 0, 0, 0),
+                                            fontSize: 17.sp,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                         Text(
-                                         state.cardNumber.substring(5, 9),
+                                          state.cardNumber.substring(5, 9),
                                           style: GoogleFonts.poppins(
-                                            color: const Color.fromRGBO(
-                                                43, 43, 43, 1),
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w400,
+                                            color:
+                                                Color.fromARGB(255, 0, 0, 0),
+                                            fontSize: 17.sp,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                         Text(
                                           state.cardNumber.substring(9, 13),
                                           style: GoogleFonts.poppins(
-                                            color: const Color.fromRGBO(
-                                                43, 43, 43, 1),
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w400,
+                                            color:
+                                                Color.fromARGB(255, 0, 0, 0),
+                                            fontSize: 17.sp,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
                                   Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(23, 25, 0, 0),
+                                    padding: const EdgeInsets.fromLTRB(
+                                        23, 20, 0, 0),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -240,27 +239,27 @@ class _CardSpaceState extends State<CardSpace> {
                                         Text(
                                           "Propriétaire",
                                           style: GoogleFonts.raleway(
-                                            color: const Color.fromRGBO(
-                                                149, 149, 149, 1),
-                                            fontSize: 15,
+                                            color: Color.fromARGB(
+                                                255, 87, 87, 87),
+                                            fontSize: 17,
                                             fontWeight: FontWeight.w400,
                                           ),
                                         ),
                                         Text(
                                           state.fullName,
                                           style: GoogleFonts.poppins(
-                                            color: const Color.fromRGBO(
-                                                43, 43, 43, 1),
-                                            fontSize: 15,
+                                            color:
+                                                Color.fromARGB(255, 0, 0, 0),
+                                            fontSize: 18.sp,
                                             fontWeight: FontWeight.w400,
                                           ),
                                         ),
                                         SizedBox(
-                                          height: 28,
+                                          height: 20,
                                         ),
                                       ],
                                     ),
-
+    
                                     ////////////////////////////////////////////////
                                   ),
                                 ],
@@ -273,18 +272,19 @@ class _CardSpaceState extends State<CardSpace> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Transform.scale(
-                                scale: 1.2,
-                                child: Switch(
-                                  activeColor: ColorManager.lightPink,
-                                  value: isToggled,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isToggled = !isToggled;
-                                    });
-                                  },
-                                ),
-                              ),
+                              30.vs,
+                              // Transform.scale(
+                              //   scale: 1.2,
+                              //   child: Switch(
+                              //     activeColor: ColorManager.lightPink,
+                              //     value: isToggled,
+                              //     onChanged: (value) {
+                              //       setState(() {
+                              //         isToggled = !isToggled;
+                              //       });
+                              //     },
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -292,7 +292,8 @@ class _CardSpaceState extends State<CardSpace> {
                         //   height: 20,
                         // ),
                         Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20),
                             child:
                                 isToggled ? HasHistory() : NoHistoryWidget()),
                       ],
@@ -303,8 +304,9 @@ class _CardSpaceState extends State<CardSpace> {
                     left: 0,
                     child: SizedBox(
                       height: 80,
-                      width:
-                          MediaQuery.of(context).size.width, // Take full width
+                      width: MediaQuery.of(context)
+                          .size
+                          .width, // Take full width
                       child: BottomNavBar(id: state.id),
                     ),
                   ),

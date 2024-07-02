@@ -34,7 +34,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-     
+     // TODO
   
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -127,6 +127,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                         
                                         PrettyQrView.data(
                                           data: id,
+                                           //TODO
                                           decoration: const PrettyQrDecoration(
                                             image: PrettyQrDecorationImage(
                                               scale: 0.35,

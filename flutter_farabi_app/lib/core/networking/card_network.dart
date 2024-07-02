@@ -18,6 +18,7 @@ class CardApi {
     BaseOptions options = BaseOptions(
       headers: headers,
       baseUrl: "http://74.234.240.106:5000", //ipconfig cmd
+      // baseUrl: "http://192.168.1.19:5000",
       receiveDataWhenStatusError: true,
       validateStatus: (status) {
         // Validate status code 400
@@ -102,6 +103,35 @@ class CardApi {
   //     return responseData['errors'][0]['msg'];
   //   }
   // }
+
+
+  Future<dynamic> deleteCard() async {
+    
+    try {
+      var response = await dio.post('/api/usercard/delete-card');
+      final Map<String, dynamic> responseData =
+          json.decode(response.toString());
+      return CustomResponce(
+          data: responseData, statusCode: response.statusCode!);
+    } catch (error) {
+      print(error);
+      return CustomResponce(
+          data: null, statusCode: 500); // Return a 500 status code on error
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 class CustomResponce<T> {

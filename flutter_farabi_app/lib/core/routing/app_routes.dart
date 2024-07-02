@@ -16,8 +16,9 @@ import '../../features/auth/presentation/bloc/resend_otp/resend_otp_cubit.dart';
 import '../../features/auth/presentation/bloc/user_login/user_login_cubit.dart';
 import '../../features/auth/presentation/views/reset_password_screen.dart';
 import '../../features/card/presentation/bloc/card_details/card_details_cubit.dart';
+import '../../features/card/presentation/bloc/delete_card/delete_card_cubit.dart';
 import '../../features/card/presentation/bloc/insert_card/insert_card_cubit.dart';
-import '../../features/card/presentation/screens/add_card.dart';
+import '../../features/card/presentation/screens/add_ecard.dart';
 import '../../features/card/presentation/screens/card_space.dart';
 import '../../features/card/presentation/screens/insert_card.dart';
 import '../../features/onboarding/splash_screen.dart';
@@ -120,17 +121,35 @@ class AppRouter {
             child: MultiBlocProvider(
               providers: [
                 BlocProvider(
-                  create: (context) =>
+                  create: ( BuildContext context) =>
                       OptVerificationCubit(AuthRepository(AuthApi())),
                 ),
                 BlocProvider(
-                  create: (context) =>
+                  create: ( BuildContext context) =>
                       ResendOtpCubit(AuthRepository(AuthApi())),
                 ),
               ],
               child: OtpVerification(),
             ),
             settings: settings);
+
+     case '/card':
+        return PageTransition(
+          type: PageTransitionType.fade,
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: ( BuildContext context) => CardDetailsCubit(CardApi()),
+              ),
+              BlocProvider(
+                create: ( BuildContext context) => DeleteCardCubit(CardApi()),
+              ),
+            ],
+            child: CardSpace(),
+          ),
+        );
+
+
 
       case '/add_card':
         final String fullName = settings.arguments as String;
@@ -142,13 +161,7 @@ class AppRouter {
               child: AddCard(fullName: fullName),
             ));
 
-      case '/card':
-        return PageTransition(
-            type: PageTransitionType.fade,
-            child: BlocProvider(
-              create: (context) => CardDetailsCubit(CardApi()),
-              child: CardSpace(),
-            ));
+    
 
       case '/insert_card':
         final String fullName = settings.arguments as String;

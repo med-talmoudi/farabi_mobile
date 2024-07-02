@@ -68,7 +68,7 @@ class AddCard extends StatelessWidget {
                       BlocConsumer<CreateECardCubit, CreateECardState>(
                         listener: (context, state) {
                           if (state is CreateECardLoaded) {
-                            print("ok responce");
+                            print("ok response");
                             Navigator.pushNamed(context, '/card');
                           }
                           if (state is CreateECardError) {

@@ -25,15 +25,15 @@ class CardDetailsCubit extends Cubit<CardDetailsState> {
     print(response.statusCode);
 
     if (response.statusCode == 200) {
-      var fullName =
+      var username =
           "${response.data['userCard']['firstname']} ${response.data['userCard']['lastname']}";
 
-      String username = capitalizeFirstLetterOfEachWord(fullName.toString());
+      String fullName = capitalizeFirstLetterOfEachWord(username.toString());
       print(username);
       var cardNumber = response.data['userCard']['cardNumber'];
       var id = response.data['userCard']['_id'];
       emit(CardDetailsLoaded(
-          fullName: username, cardNumber: cardNumber, id: id));
+          fullName: fullName, cardNumber: cardNumber, id: id));
     }
   }
 }
