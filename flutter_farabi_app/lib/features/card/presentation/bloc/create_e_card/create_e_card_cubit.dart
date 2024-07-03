@@ -16,10 +16,10 @@ class CreateECardCubit extends Cubit<CreateECardState> {
     emit(CreateECardLoading());
 
     var response = await cardRepository.createECard();
-    print(response);
+   
     if (response == "erreur inattendue") {
       emit(CreateECardError(stringError: response.toString()));
-      print(response.toString());
+      
     } else if (response == "ok") {
       emit(CreateECardLoaded());
 

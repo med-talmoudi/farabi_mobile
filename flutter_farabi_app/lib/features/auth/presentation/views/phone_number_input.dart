@@ -285,7 +285,7 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
 
                                   if (registerState is PhoneRegisterError) {
                                     isLoading = false;
-                                    print(registerState.stringError);
+                                  
                                     if (registerState.stringError ==
                                         "L'utilisateur existe déjà") {
                                       CustomErrorModal(
@@ -307,7 +307,7 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                                     isLoading = true;
                                     return ElevatedButton(
                                         onPressed: () {
-                                          print("initial clicked");
+                                        
                                         },
                                         style: ElevatedButton.styleFrom(
                                           shape: RoundedRectangleBorder(
@@ -353,7 +353,7 @@ class _PhoneNumberInputState extends State<PhoneNumberInput> {
                                         ),
                                       ),
                                       onPressed: () {
-                                        print("initial clicked");
+                                       
                                         FocusScope.of(context)
                                             .requestFocus(FocusNode());
                                         if (_formKeyRegister.currentState!

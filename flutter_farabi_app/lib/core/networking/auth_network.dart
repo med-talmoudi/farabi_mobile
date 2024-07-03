@@ -1,8 +1,8 @@
-// ignore_for_file: avoid_print
+
 
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:flutter_farabi_app/core/exceptions/exceptions.dart';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AuthApi {
@@ -14,6 +14,7 @@ class AuthApi {
       "Accept": "application/json"
     };
      final String apiUrl =  dotenv.env['API_URL'].toString();
+    
     BaseOptions options = BaseOptions(
       headers: headers,
       baseUrl: apiUrl, //ipconfig cmd
@@ -35,7 +36,7 @@ class AuthApi {
 
     var response = await dio.post('/api/auth/register', data: data);
     final Map<String, dynamic> responseData = json.decode(response.toString());
-    print(responseData);
+   
 
     return responseData;
   }
@@ -51,8 +52,7 @@ class AuthApi {
       final Map<String, dynamic> responseData =
           json.decode(response.toString());
       if (responseData.containsKey('errors')) {
-        print(response.statusCode);
-        print(responseData['errors'][0]['msg']);
+        
         return responseData['errors'][0]['msg'];
       }
     }
@@ -67,12 +67,12 @@ class AuthApi {
       "dateofbirth": date,
       "password": password
     });
-    print(data.toString());
-    print(phone); // make an error
+    
+     
     try {
       var response = await dio.post('/api/auth/continue-registration/216$phone',
           data: data);
-        print(response.statusCode);
+        
       if (response.statusCode == 200 || response.statusCode == 201) {
       
         return "ok";
@@ -80,13 +80,12 @@ class AuthApi {
       final Map<String, dynamic> responseData =
           json.decode(response.toString());
       if (responseData.containsKey('errors')) {
-        print(response.statusCode);
-        print(responseData['errors'][0]['msg']);
+       
         return responseData['errors'][0]['msg'];
       }
     }
     } catch (e) {
-      print("this the error in api $e");
+     
       return "erreur inattendue!!";
     }
   }
@@ -110,13 +109,12 @@ class AuthApi {
             json.decode(response.toString());
         if (responseData.containsKey('errors')) {
           // If the response contains error messages, return the error message
-          print(response.statusCode);
-          print(responseData['errors'][0]['msg']);
+          
           return responseData['errors'][0]['msg'];
         }
       }
     } catch (e) {
-      print("this the error in api $e");
+     
       return "erreur inattendue!";
     }
   }
@@ -126,15 +124,14 @@ class AuthApi {
         await dio.post('/api/auth/resend-verification-code/216$phone');
 
     if (response.statusCode == 200 || response.statusCode == 201) {
-      print(response);
+     
 
       return "ok";
     } else if (response.statusCode == 400 || response.statusCode == 429) {
       final Map<String, dynamic> responseData =
           json.decode(response.toString());
       if (responseData.containsKey('errors')) {
-        print(response.statusCode);
-        print(responseData['errors'][0]['msg']);
+       
         return responseData['errors'][0]['msg'];
       }
     }
@@ -144,26 +141,26 @@ class AuthApi {
 
   Future<dynamic> userLogin(String phone, String password) async {
     var data = json.encode({"phone": "216$phone", "password": password});
+    
     try {
-      var response = await dio.post('/api/auth', data: data);
-
+     
+      var response = await dio.post('/api/auth/login', data: data);
+      
+      
       if (response.statusCode == 200 || response.statusCode == 201) {
         final Map<String, dynamic> responseData =
             json.decode(response.toString());
-        print(" this is login api $responseData");
+       
 
         return responseData;
       } else if (response.statusCode == 400) {
         final Map<String, dynamic> responseData =
             json.decode(response.toString());
         if (responseData.containsKey('errors')) {
-          print(response.statusCode);
-          print(responseData);
+          
           return responseData;
         }
       }
-    } on ServerException catch (e) {
-      return e;
     } catch (_) {
       return "erreur inattendue!";
     }

@@ -175,8 +175,7 @@ class AppRouter {
       default:
         return null;
 
-      // print(settings.name);
-      //   print("this is default ");
+      
     }
   }
 }

@@ -68,7 +68,7 @@ class AddCard extends StatelessWidget {
                       BlocConsumer<CreateECardCubit, CreateECardState>(
                         listener: (context, state) {
                           if (state is CreateECardLoaded) {
-                            print("ok response");
+                           
                             Navigator.pushNamed(context, '/card');
                           }
                           if (state is CreateECardError) {
@@ -150,7 +150,7 @@ class AddCard extends StatelessWidget {
                         builder: (context, state) {
                           return GestureDetector(
                             onTap: () {
-                              print("clicked");
+                            
                               // Handle onTap action
                               context.read<CreateECardCubit>().createECard();
                             },

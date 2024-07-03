@@ -22,13 +22,13 @@ class CreateAccountCubit extends Cubit<CreateAccountState> {
 
     var response = await authRepository.createAccount(
         phone, name, lastName, password, date, gender);
-      print("function is working");
+     
     if (response == "ok") {
-        print("account created");
+      
       emit(CreateAccountLoaded());
     } else {
       emit(CreateAccountError(stringError: response.toString()));
-        print("error on response");
+        
     }
   }
 }

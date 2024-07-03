@@ -260,20 +260,20 @@ class _LoginScreenState extends State<LoginScreen> {
                           BlocConsumer<UserLoginCubit, UserLoginState>(
                             listener: (context, state) {
                               if (state is UserLoginLoaded) {
-                                // print("your token is : ${state.token}");
+                               
                                 box!.put('token', state.token);
                                 if (state.hasCard == true) {
                                   Navigator.pushNamed(
                                     context,
                                     '/card',
                                   );
-                                  print("/card");
+                                  
                                 } else {
                                   String fullName = capitalizeFirstLetterOfEachWord(state.fullName.toString());
                                   
                                   Navigator.pushNamed(context, '/add_card',
                                       arguments: fullName);
-                                  print("/add_card");
+                                
                                 }
                               }
                               if (state is UserLoginError) {

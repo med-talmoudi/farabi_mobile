@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_farabi_app/core/extensions/spacing.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,37 +16,29 @@ class HasHistory extends StatelessWidget {
             Text(
               "Historique",
               style: GoogleFonts.raleway(
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w500,
                 color: const Color.fromRGBO(14, 14, 12, 1),
               ),
             ),
           ],
         ),
-        const SizedBox(
-          height: 22,
-        ),
+        22.vs,
         const ListItem(
           title: 'Scan Code à bar Para El Farabi lac1',
           subtitle1: '12/03/2024 - 14h30',
         ),
-        const SizedBox(
-          height: 16,
-        ),
+        16.vs,
           const ListItem(
           title: 'Scan Code à bar Para El Farabi lac1',
           subtitle1: '12/03/2024 - 14h30',
         ),
-        const SizedBox(
-          height: 16,
-        ),
+        16.vs,
           const ListItem(
           title: 'Scan Code à bar Para El Farabi lac1',
           subtitle1: '12/03/2024 - 14h30',
         ),
-        const SizedBox(
-          height: 16,
-        ),
+        16.vs,
       
       ],
     );
@@ -64,20 +58,20 @@ class ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16.0),
+      padding:  EdgeInsets.all(16.0.h),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(10.0.r),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SvgPicture.asset(
             'assets/img/barcode_icon.svg', // Path to the SVG file
-            width: 25,
-            height: 25,
+            width: 25.w,
+            height: 25.h,
           ),
-          const SizedBox(width: 8), // Horizontal spacing between icon and text
+          8.vs , // Horizontal spacing between icon and text
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -85,17 +79,16 @@ class ListItem extends StatelessWidget {
                 title,
                 style: GoogleFonts.inter(
                   color: const Color.fromRGBO(14, 14, 12, 1),
-                  fontSize: 13,
+                  fontSize: 13.sp,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(
-                  height: 8), // Vertical spacing between title and subtitle
+              8.vs, // Vertical spacing between title and subtitle
               Text(
                 subtitle1,
                 style: GoogleFonts.inter(
                   color: const Color.fromRGBO(128, 134, 138, 1),
-                  fontSize: 11,
+                  fontSize: 11.sp,
                   fontWeight: FontWeight.w500,
                 ),
               ),

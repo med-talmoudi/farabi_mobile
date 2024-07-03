@@ -22,11 +22,11 @@ class CustomDelete extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<DeleteCardCubit, DeleteCardState>(
       listener: (context, state) {
-        // TODO: implement listener
+      
         if (state is DeleteCardLoaded) {
           // Navigator.pushNamed(context, '/add_card',
           //     arguments: "state.fullName");
-          print("/add_card");
+         
         }
         if (state is DeleteCardError) {
           showGeneralDialog(
@@ -148,7 +148,7 @@ class CustomDelete extends StatelessWidget {
                           20.vs,
                           GestureDetector(
                             onTap: () {
-                              print("clicked");
+                         
                           
                               // context.read<DeleteCardCubit>().deleteCard();
                             },
@@ -221,9 +221,13 @@ class CustomDelete extends StatelessWidget {
               },
             );
           },
-          icon: Icon(
-            Icons.close,
-            size: 20.w,
+          icon: CircleAvatar(
+            backgroundColor: Colors.white,
+            child: Icon(
+              Icons.close,
+              size: 20.w,
+              color: Colors.red[700],
+            ),
           ),
         );
       },

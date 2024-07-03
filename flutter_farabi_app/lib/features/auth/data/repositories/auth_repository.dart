@@ -27,10 +27,10 @@ class AuthRepository {
     try {
       var response = await authApi.otpVerification(phone, otp);
       if (response != "ok") {
-        print(response);
+        
         return response;
       } else {
-        print(response);
+     
 
         return response;
       }
@@ -48,11 +48,11 @@ class AuthRepository {
           phone, name, lastName, password, date, gender);
 
       if (response != "ok") {
-        print(response);
+       
 
         return response;
       } else {
-        print(response);
+        
 
         return response;
       }
@@ -68,11 +68,11 @@ class AuthRepository {
       var response = await authApi.resetPassword("216$phone");
 
       if (response != "ok") {
-        print(response);
+        
 
         return response;
       } else {
-        print(response);
+       
 
         return response;
       }
@@ -88,11 +88,11 @@ class AuthRepository {
       var response = await authApi.resendOtp(phone);
 
       if (response != "ok") {
-        print(response);
+        
 
         return response;
       } else {
-        print(response);
+       
 
         return response;
       }
@@ -100,7 +100,7 @@ class AuthRepository {
       
       return e;
     } catch (e) {
-    print(e);
+    
       return "erreur inattendue!";
     }
   }
@@ -111,16 +111,16 @@ class AuthRepository {
       var response = await authApi.userLogin(phone, password);
 
       if (response != "ok") {
-        print(response);
+       
 
         return response;
       } else {
-        print(response);
+       
 
         return response;
       }
     } catch (e) {
-    print(e);
+   
       return "erreur inattendue!";
     }
   }

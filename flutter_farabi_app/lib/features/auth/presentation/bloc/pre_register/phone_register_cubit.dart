@@ -15,10 +15,10 @@ class PhoneRegisterCubit extends Cubit<PhoneRegisterState> {
     emit(PhoneRegisterLoading());
 
     var response = await authRepository.registerUser(phone);
-    print(response);
+   
     if (response == "erreur inattendue") {
       emit(PhoneRegisterError(stringError: response.toString()));
-      print(response.toString());
+     
     } else if (response.containsKey('errors')) {
       emit(PhoneRegisterError(stringError: response['errors'][0]['msg']));
     } else if (response.containsKey('status')) {

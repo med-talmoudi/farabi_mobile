@@ -22,14 +22,14 @@ class CardDetailsCubit extends Cubit<CardDetailsState> {
     await Future.delayed(const Duration(seconds: 0));
 
     var response = await cardApi.cardDetails();
-    print(response.statusCode);
+   
 
     if (response.statusCode == 200) {
       var username =
           "${response.data['userCard']['firstname']} ${response.data['userCard']['lastname']}";
 
       String fullName = capitalizeFirstLetterOfEachWord(username.toString());
-      print(username);
+    
       var cardNumber = response.data['userCard']['cardNumber'];
       var id = response.data['userCard']['_id'];
       emit(CardDetailsLoaded(

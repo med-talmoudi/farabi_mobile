@@ -14,10 +14,10 @@ class InsertCardCubit extends Cubit<InsertCardState> {
     emit(InsertCardLoading());
 
     var response = await cardRepository.addCard(cardNumber);
-    print(response);
+   
     if (response == "erreur inattendue") {
       emit(InsertCardError(stringError: response.toString()));
-      print(response.toString());
+     
     } else if (response == "ok") {
       emit(InsertCardLoaded());
 

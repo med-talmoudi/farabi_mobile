@@ -1,5 +1,6 @@
-// ignore_for_file: avoid_print
 
+
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_farabi_app/core/hive/open_box.dart';
 import 'package:flutter_farabi_app/core/routing/app_routes.dart';
 
@@ -15,10 +16,11 @@ Future<void> main() async {
   String path = "/splach";
   WidgetsFlutterBinding.ensureInitialized();
   box = await openBox("elFarabi");
+  await dotenv.load(fileName: ".env");
   if (box!.containsKey('path')) {
     // Retrieve the value associated with the key "path"
      path = box!.get('path');
-    print('The value associated with the key "path" is: $path');
+    
   }
   ScreenUtil.ensureScreenSize();
   runApp(MyApp(appRouter: AppRouter(), initialRoute: "/splach"));

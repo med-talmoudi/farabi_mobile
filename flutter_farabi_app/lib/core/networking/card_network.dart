@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+
 
 import 'dart:convert';
 
@@ -36,7 +36,7 @@ class CardApi {
   Future<dynamic> getUser() async {
     var response = await dio.get('/api/auth');
     final Map<String, dynamic> responseData = json.decode(response.toString());
-    // print(" this is what $responseData");
+   
 
     return responseData;
   }
@@ -44,15 +44,14 @@ class CardApi {
   Future<dynamic> createECard() async {
     var response = await dio.post('/api/usercard/add-e-card');
     final Map<String, dynamic> responseData = json.decode(response.toString());
-    // print(responseData);
+  
     if (response.statusCode == 200 || response.statusCode == 201) {
       return "ok";
     } else if (response.statusCode == 400) {
       final Map<String, dynamic> responseData =
           json.decode(response.toString());
       if (responseData.containsKey('errors')) {
-        print(response.statusCode);
-        print(responseData['errors'][0]['msg']);
+        
         return responseData['errors'][0]['msg'];
       }
     }
@@ -64,15 +63,14 @@ class CardApi {
     var data = json.encode({"cardNumber": cardNumber}); // make an error
     var response = await dio.post('/api/usercard/add-card', data: data);
     final Map<String, dynamic> responseData = json.decode(response.toString());
-    // print(responseData);
+    
     if (response.statusCode == 200 || response.statusCode == 201) {
       return "ok";
     } else if (response.statusCode == 400) {
       final Map<String, dynamic> responseData =
           json.decode(response.toString());
       if (responseData.containsKey('errors')) {
-        print(response.statusCode);
-        print(responseData['errors'][0]['msg']);
+        
         return responseData['errors'][0]['msg'];
       }
     }
@@ -88,20 +86,19 @@ class CardApi {
       return CustomResponce(
           data: responseData, statusCode: response.statusCode!);
     } catch (error) {
-      print(error);
+     
       return CustomResponce(
           data: null, statusCode: 500); // Return a 500 status code on error
     }
   }
 
-  // print(responseData);
+ 
 
   // else if (response.statusCode == 400) {
   //   final Map<String, dynamic> responseData =
   //       json.decode(response.toString());
   //   if (responseData.containsKey('errors')) {
-  //     print(response.statusCode);
-  //     print(responseData['errors'][0]['msg']);
+  //    
   //     return responseData['errors'][0]['msg'];
   //   }
   // }
@@ -116,7 +113,7 @@ class CardApi {
       return CustomResponce(
           data: responseData, statusCode: response.statusCode!);
     } catch (error) {
-      print(error);
+      
       return CustomResponce(
           data: null, statusCode: 500); // Return a 500 status code on error
     }

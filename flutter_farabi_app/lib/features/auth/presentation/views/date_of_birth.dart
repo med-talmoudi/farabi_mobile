@@ -132,7 +132,7 @@ class _DateOfBirthState extends State<DateOfBirth> {
 
                             String formattedDate =
                                 "${_selecteDate.year}-$month-$day";
-                            // print(formattedDate);
+                          
 
                             box!.put('date', formattedDate);
 

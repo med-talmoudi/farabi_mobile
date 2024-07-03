@@ -15,10 +15,10 @@ class DeleteCardCubit extends Cubit<DeleteCardState> {
     emit(DeleteCardLoading());
 
     var response = await cardApi.deleteCard();
-    print(response);
+    
     if (response.statusCode == 200) {
       emit(DeleteCardLoaded());
-      print(response.data.toString());
+     
     } else if (response.statusCode == 404) {
       emit(DeleteCardError(
           stringError: response.data['errors'][0]['msg'].toString()));
