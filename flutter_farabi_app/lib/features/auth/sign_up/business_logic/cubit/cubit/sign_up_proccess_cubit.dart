@@ -1,4 +1,4 @@
-// // ignore_for_file: depend_on_referenced_packages
+
 
 // import 'package:bloc/bloc.dart';
 // import 'package:flutter_farabi_app/features/auth/sign_up/data/model/user.dart';

@@ -76,7 +76,7 @@ class _ResendOtpState extends State<ResendOtp> {
             if (state is ResendOtpLoaded) {
               {
                 showGeneralDialog(
-                  barrierDismissible: false,
+                  barrierDismissible: true,
                   barrierLabel: '',
                   barrierColor: const Color.fromARGB(95, 11, 6, 37),
                   //Color.fromARGB(95, 11, 6, 37)
@@ -109,7 +109,7 @@ class _ResendOtpState extends State<ResendOtp> {
                             ),
                             25.vs,
                             Text(
-                              "Vérifier Vos Messages",
+                              "Vérifier vos messages",
                               style: GoogleFonts.raleway(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w700,
@@ -117,7 +117,7 @@ class _ResendOtpState extends State<ResendOtp> {
                             ),
                             10.vs,
                             Text(
-                              "On Vous a envoyé un autre code OTP par SMS",
+                              "On vous a envoyé un autre code OTP par SMS",
                               style: GoogleFonts.poppins(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w400,

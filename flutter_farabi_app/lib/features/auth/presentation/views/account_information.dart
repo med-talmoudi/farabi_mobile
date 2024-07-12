@@ -18,11 +18,11 @@ class AccountInformation extends StatefulWidget {
 
   @override
 
-  // ignore: library_private_types_in_public_api
-  _AccountInformationState createState() => _AccountInformationState();
+
+  AccountInformationState createState() => AccountInformationState();
 }
 
-class _AccountInformationState extends State<AccountInformation> {
+class AccountInformationState extends State<AccountInformation> {
   final _formKey = GlobalKey<FormState>();
   final _nomController = TextEditingController();
   final _prenomController = TextEditingController();

@@ -17,11 +17,11 @@ class DateOfBirth extends StatefulWidget {
   const DateOfBirth({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _DateOfBirthState createState() => _DateOfBirthState();
+
+  DateOfBirthState createState() => DateOfBirthState();
 }
 
-class _DateOfBirthState extends State<DateOfBirth> {
+class DateOfBirthState extends State<DateOfBirth> {
   late final DateTime _minDate;
   late final DateTime _maxDate;
   late DateTime _selecteDate;

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
+
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_farabi_app/core/extensions/spacing.dart';
@@ -67,10 +67,10 @@ class _InsertCardState extends State<InsertCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
 
         // leading: IconButton(
         //   onPressed: () {},
@@ -90,25 +90,21 @@ class _InsertCardState extends State<InsertCard> {
                 Positioned(
                   top: 9.h,
                   left: 2.w,
-                  child: Container(
-                    child: SvgPicture.asset(
-                      'assets/img/three_lines.svg',
-                      width: 19.w,
-                      height: 19.h,
-                    ),
+                  child: SvgPicture.asset(
+                    'assets/img/three_lines.svg',
+                    width: 19.w,
+                    height: 19.h,
                   ),
                 ),
                 Positioned(
                   bottom: 0.h,
                   right: 0.w,
-                  child: Container(
-                    child: Text(
-                      'Carte',
-                      style: GoogleFonts.raleway(
-                        color: Color.fromRGBO(43, 43, 43, 1),
-                        fontSize: 33.sp,
-                        fontWeight: FontWeight.w700,
-                      ),
+                  child: Text(
+                    'Carte',
+                    style: GoogleFonts.raleway(
+                      color: const Color.fromRGBO(43, 43, 43, 1),
+                      fontSize: 33.sp,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
@@ -117,7 +113,7 @@ class _InsertCardState extends State<InsertCard> {
           ),
         ),
         centerTitle: true,
-        actions: [
+        actions: const [
           // IconButton(
           //   onPressed: () {},
           //   icon: SvgPicture.asset(
@@ -137,129 +133,127 @@ class _InsertCardState extends State<InsertCard> {
                 padding: EdgeInsets.all(8.0.w),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: const Color.fromARGB(255, 255, 255, 255),
                     borderRadius: BorderRadius.circular(20.r),
                     boxShadow: [
                       BoxShadow(
                         color:
-                            Color.fromARGB(129, 197, 197, 197).withOpacity(0.5),
+                            const Color.fromARGB(129, 197, 197, 197).withOpacity(0.5),
                         spreadRadius: 5,
                         blurRadius: 7,
                         offset: Offset(0, 3.h), // changes position of shadow
                       ),
                     ],
                   ),
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                              child: Row(
-                                children: [
-                                  Image(
-                                    image: AssetImage(
-                                      "assets/img/el_farabi_logo.png",
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 10, 0, 0),
+                            child: Row(
+                              children: [
+                                Image(
+                                  image: const AssetImage(
+                                    "assets/img/el_farabi_logo.png",
+                                  ),
+                                  width: 50.w,
+                                  height: 50.h,
+                                ),
+                                6.hs,
+                                Padding(
+                                  padding: EdgeInsets.only(top: 10.h),
+                                  child: Image(
+                                    image: const AssetImage(
+                                      "assets/img/el_farabi_text.png",
                                     ),
-                                    width: 50.w,
+                                    width: 110.w,
                                     height: 50.h,
                                   ),
-                                  6.hs,
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 10.h),
-                                    child: Image(
-                                      image: AssetImage(
-                                        "assets/img/el_farabi_text.png",
-                                      ),
-                                      width: 110.w,
-                                      height: 50.h,
-                                    ),
-                                  ),
-                                ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          // IconButton(
+                          //   onPressed: () {},
+                          //   icon: Icon(
+                          //     Icons.close,
+                          //     size: 20,
+                          //   ),
+                          // ),
+                        ],
+                      ),
+                      10.vs,
+                      Padding(
+                        padding: EdgeInsets.only(right: 40.w),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              _subStrings[0],
+                              style: GoogleFonts.poppins(
+                                color: const Color.fromRGBO(43, 43, 43, 1),
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
-                            // IconButton(
-                            //   onPressed: () {},
-                            //   icon: Icon(
-                            //     Icons.close,
-                            //     size: 20,
-                            //   ),
-                            // ),
+                            Text(
+                              _subStrings[1],
+                              style: GoogleFonts.poppins(
+                                color: const Color.fromRGBO(43, 43, 43, 1),
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            Text(
+                              _subStrings[2],
+                              style: GoogleFonts.poppins(
+                                color: const Color.fromRGBO(43, 43, 43, 1),
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            Text(
+                              _subStrings[3],
+                              style: GoogleFonts.poppins(
+                                color: const Color.fromRGBO(43, 43, 43, 1),
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
                           ],
                         ),
-                        10.vs,
-                        Padding(
-                          padding: EdgeInsets.only(right: 40.w),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                _subStrings[0],
-                                style: GoogleFonts.poppins(
-                                  color: const Color.fromRGBO(43, 43, 43, 1),
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(23.w, 20.h, 0, 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Propriétaire",
+                              style: GoogleFonts.raleway(
+                                color: const Color.fromRGBO(149, 149, 149, 1),
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w400,
                               ),
-                              Text(
-                                _subStrings[1],
-                                style: GoogleFonts.poppins(
-                                  color: const Color.fromRGBO(43, 43, 43, 1),
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                            ),
+                            Text(
+                              _nomController.text,
+                              style: GoogleFonts.poppins(
+                                color: const Color.fromRGBO(43, 43, 43, 1),
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w400,
                               ),
-                              Text(
-                                _subStrings[2],
-                                style: GoogleFonts.poppins(
-                                  color: const Color.fromRGBO(43, 43, 43, 1),
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              Text(
-                                _subStrings[3],
-                                style: GoogleFonts.poppins(
-                                  color: const Color.fromRGBO(43, 43, 43, 1),
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                            18.vs
+                          ],
                         ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(23.w, 20.h, 0, 0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Propriétaire",
-                                style: GoogleFonts.raleway(
-                                  color: const Color.fromRGBO(149, 149, 149, 1),
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              Text(
-                                _nomController.text,
-                                style: GoogleFonts.poppins(
-                                  color: const Color.fromRGBO(43, 43, 43, 1),
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              18.vs
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -320,7 +314,7 @@ class _InsertCardState extends State<InsertCard> {
                                 style: GoogleFonts.raleway(
                                     fontSize: 22.sp,
                                     fontWeight: FontWeight.w600,
-                                    color: Color.fromRGBO(66, 67, 71, 1)),
+                                    color: const Color.fromRGBO(66, 67, 71, 1)),
                               ),
                               25.vs,
                               Text(

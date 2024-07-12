@@ -1,3 +1,5 @@
+
+
 // ignore_for_file: deprecated_member_use
 
 import 'dart:ui';
@@ -16,11 +18,11 @@ class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key, required this.id});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _BottomNavBarState createState() => _BottomNavBarState();
+ 
+  BottomNavBarState createState() => BottomNavBarState();
 }
 
-class _BottomNavBarState extends State<BottomNavBar> {
+class BottomNavBarState extends State<BottomNavBar> {
   late String id;
   int currentIndex = 1;
 
@@ -123,7 +125,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                                         height: 180.h,
                                         child: PrettyQrView.data(
                                           data: id,
-                                          //TODO
+                                         
                                           // decoration: const PrettyQrDecoration(
                                           //   image: PrettyQrDecorationImage(
                                           //     scale: 0.35,

@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, prefer_const_constructors
+
 
 import 'package:flutter_farabi_app/core/extensions/spacing.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image(
-                    image: AssetImage(
+                    image: const AssetImage(
                       "assets/img/el_farabi_logo.png",
                     ),
                     width: 140.w,
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen>
                   Padding(
                     padding: EdgeInsets.only(top: 25.h),
                     child: Image(
-                      image: AssetImage(
+                      image: const AssetImage(
                         "assets/img/el_farabi_text.png",
                       ),
                       width: 200.w,

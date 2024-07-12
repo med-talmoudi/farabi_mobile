@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'dart:ui';
 
 import 'package:flutter_farabi_app/core/extensions/spacing.dart';
@@ -15,7 +13,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-//import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -118,8 +115,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
                           listener: (context, state) {
                             if (state is ResetPasswordLoaded) {
+                              _numberController.clear();
                               showGeneralDialog(
-                                barrierDismissible: false,
+                                barrierDismissible: true,
                                 barrierLabel: '',
                                 barrierColor:
                                     const Color.fromARGB(95, 11, 6, 37),
@@ -263,8 +261,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                                       BorderRadius.circular(
                                                           20.r),
                                                 ),
-                                                minimumSize: Size(
-                                                    double.infinity, 50.h),
+                                                minimumSize:
+                                                    Size(double.infinity, 50.h),
                                                 backgroundColor:
                                                     const Color.fromRGBO(
                                                         217, 80, 116, 1),
@@ -293,23 +291,6 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             }
                           },
                           builder: (context, state) {
-                            if (state is ResetPasswordLoading) {
-                              // return ElevatedButton(
-                              //     style: ElevatedButton.styleFrom(
-                              //       shape: RoundedRectangleBorder(
-                              //           borderRadius:
-                              //               BorderRadius.circular(20)),
-                              //       minimumSize:
-                              //           const Size(double.infinity, 60),
-                              //       backgroundColor: ColorManager
-                              //           .lightPink, // Background color
-                              //       foregroundColor: ColorManager.white,
-                              //     ),
-                              //     child: const CircularProgressIndicator(
-                              //       color: Colors.white,
-                              //     ),
-                              //     onPressed: () {});
-                            }
                             return ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(

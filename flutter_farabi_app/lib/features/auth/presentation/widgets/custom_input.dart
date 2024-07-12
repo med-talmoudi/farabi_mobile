@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api
+
 
 import 'package:flutter_farabi_app/core/theming/colors.dart';
 import 'package:flutter/material.dart';
@@ -26,10 +26,10 @@ class CustomInputTextField extends StatefulWidget {
   });
 
   @override
-  _CustomInputTextFieldState createState() => _CustomInputTextFieldState();
+  CustomInputTextFieldState createState() => CustomInputTextFieldState();
 }
 
-class _CustomInputTextFieldState extends State<CustomInputTextField> {
+class CustomInputTextFieldState extends State<CustomInputTextField> {
   bool isObscure = true;
 
   @override

@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+
 
 import 'package:flutter_farabi_app/core/exceptions/exceptions.dart';
 

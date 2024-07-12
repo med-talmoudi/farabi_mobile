@@ -13,6 +13,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 Box? box;
 Future<void> main() async {
+  // ignore: unused_local_variable
   String path = "/splach";
   WidgetsFlutterBinding.ensureInitialized();
   box = await openBox("elFarabi");

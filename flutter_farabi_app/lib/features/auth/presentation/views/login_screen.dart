@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+
 
 import 'package:flutter_farabi_app/core/extensions/spacing.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/bloc/user_login/user_login_cubit.dart';
@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     10.vs,
                     const SubHeader(
                             text:
-                                "Merci de saisir vos identifiants pour accéder à votre compte ")
+                                "Veuillez saisir vos identifiants pour accéder à votre compte")
                         .animate(delay: const Duration(milliseconds: 300))
                         .fadeIn(
                             duration: const Duration(milliseconds: 300),

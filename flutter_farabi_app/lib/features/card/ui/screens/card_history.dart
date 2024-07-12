@@ -1,4 +1,4 @@
-// // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
+
 
 // import 'package:flutter_farabi_app/core/widgets/bottom_nav_bar.dart';
 // import 'package:flutter/material.dart';

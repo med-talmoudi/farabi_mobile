@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+
 
 import 'dart:ui';
 
@@ -30,7 +30,7 @@ class CustomDelete extends StatelessWidget {
         }
         if (state is DeleteCardError) {
           showGeneralDialog(
-            barrierDismissible: false,
+            barrierDismissible: true,
             barrierLabel: '',
             barrierColor: const Color.fromARGB(95, 11, 6, 37),
             //Color.fromARGB(95, 11, 6, 37)

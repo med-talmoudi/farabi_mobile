@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors, avoid_print
+
 
 import 'package:flutter_farabi_app/core/networking/card_network.dart';
+import 'package:flutter_farabi_app/features/auth/presentation/bloc/phone_Input_field/phone_input_field_cubit.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/bloc/reset_pwd/reset_password_cubit.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/views/login_screen.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/bloc/complete_register/create_account_cubit.dart';
@@ -39,7 +40,7 @@ class AppRouter {
   Route? generateRoute(RouteSettings settings, String initialRoute) {
     switch (settings.name) {
       case '/splach':
-        return MaterialPageRoute(builder: (_) => SplashScreen());
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
 
       case '/welcome':
         box!.put('path', '/register');
@@ -91,7 +92,7 @@ class AppRouter {
                     CreateAccountCubit(AuthRepository(AuthApi())),
               ),
             ],
-            child: GenderSelection(),
+            child: const GenderSelection(),
           ),
         );
 
@@ -105,11 +106,14 @@ class AppRouter {
                   create: (context) =>
                       PhoneRegisterCubit(AuthRepository(AuthApi())),
                 ),
+                // BlocProvider(
+                //   create: (context) => VerifyPhoneNumberCubit(),
+                // ),
                 BlocProvider(
-                  create: (context) => VerifyPhoneNumberCubit(),
+                  create: (context) => PhoneInputFieldCubit(),
                 ),
               ],
-              child: PhoneNumberInput(),
+              child: const PhoneNumberInput(),
             ),
             settings: settings);
 
@@ -129,7 +133,7 @@ class AppRouter {
                       ResendOtpCubit(AuthRepository(AuthApi())),
                 ),
               ],
-              child: OtpVerification(),
+              child: const OtpVerification(),
             ),
             settings: settings);
 
@@ -145,7 +149,7 @@ class AppRouter {
                 create: ( BuildContext context) => DeleteCardCubit(CardApi()),
               ),
             ],
-            child: CardSpace(),
+            child: const CardSpace(),
           ),
         );
 
