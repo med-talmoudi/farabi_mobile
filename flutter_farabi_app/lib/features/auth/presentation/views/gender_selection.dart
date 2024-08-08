@@ -177,30 +177,7 @@ class _GenderSelectionState extends State<GenderSelection> {
                                 height: 40.h,
                               ),
                             ),
-                            // SimpleDialog(
-                            //   shape: RoundedRectangleBorder(
-                            //       borderRadius: BorderRadius.circular(15.0.r)),
-                            //   backgroundColor:
-                            //       const Color.fromARGB(255, 255, 255, 255),
-                            //   contentPadding: EdgeInsets.all(0.0.w),
-                            //   children: [
-                            //     Column(
-                            //       children: [
-
-                            //         Text(
-                            //           "Compte créé avec succès.",
-                            //           style: GoogleFonts.raleway(
-                            //               fontSize: 16.sp,
-                            //               fontWeight: FontWeight.w700,
-                            //               color: ColorManager.darkGrey),
-                            //         ),
-                            //         10.vs,
-
-                            //         10.vs,
-                            //       ],
-                            //     )
-                            //   ],
-                            // ),
+                           
                           ),
                           transitionBuilder: (ctx, anim1, anim2, child) =>
                               BackdropFilter(
@@ -219,9 +196,9 @@ class _GenderSelectionState extends State<GenderSelection> {
                         });
                       }
                       if (state is CreateAccountError) {
-                        final String error = state.stringError;
+                        
                         CustomErrorModal(
-                                message: error,
+                                message: state.stringError,
                                 btnText: "Réessayer",
                                 onPressed: () => Navigator.of(context).pop())
                             .show(context);

@@ -5,6 +5,7 @@ import 'package:flutter_farabi_app/core/theming/colors.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/bloc/reset_pwd/reset_password_cubit.dart';
 
 import 'package:flutter_farabi_app/features/auth/presentation/widgets/back_btn.dart';
+import 'package:flutter_farabi_app/features/auth/presentation/widgets/error_modal.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/widgets/header.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/widgets/sub_header.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -156,7 +158,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                           ),
                                           25.vs,
                                           Text(
-                                            "Vérifier Vos Messages",
+                                            "Vérifiez vos messages",
                                             style: GoogleFonts.raleway(
                                                 fontSize: 16.sp,
                                                 fontWeight: FontWeight.w700,
@@ -164,7 +166,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                           ),
                                           10.vs,
                                           Text(
-                                            "On Vous a envoyé un Mot de Passe Provisoire Sur Votre Mobile",
+                                            "On vous a envoyé un mot de passe provisoire sur votre téléphone",
                                             style: GoogleFonts.poppins(
                                                 fontSize: 16.sp,
                                                 fontWeight: FontWeight.w400,
@@ -192,103 +194,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               );
                             }
                             if (state is ResetPasswordError) {
-                              showModalBottomSheet(
-                                context: context,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(20.r)),
-                                ),
-                                builder: (BuildContext context) {
-                                  return BackdropFilter(
-                                    filter:
-                                        ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20.r),
-                                          topRight: Radius.circular(20.r),
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 30.w),
-                                        child: Column(
-                                          children: [
-                                            10.vs,
-                                            Image(
-                                              image: const AssetImage(
-                                                  "assets/img/ohno.png"),
-                                              width: 250.w,
-                                              height: 200.h,
-                                            ),
-                                            Text(
-                                              "Oh non!",
-                                              style: GoogleFonts.raleway(
-                                                fontSize: 20.sp,
-                                                fontWeight: FontWeight.w700,
-                                                color: const Color.fromRGBO(
-                                                    74, 74, 74, 1),
-                                              ),
-                                            )
-                                                .animate(
-                                                    delay: const Duration(
-                                                        milliseconds: 600))
-                                                .shake(),
-                                            20.vs,
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 0),
-                                              child: Text(
-                                                state.stringError,
-                                                textAlign: TextAlign.center,
-                                                style: GoogleFonts.raleway(
-                                                  fontSize: 20.sp,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: const Color.fromRGBO(
-                                                      74, 74, 74, 1),
-                                                ),
-                                              ),
-                                            ),
-                                            50.vs,
-                                            ElevatedButton(
-                                              onPressed: () =>
-                                                  Navigator.of(context).pop(),
-                                              style: ElevatedButton.styleFrom(
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.r),
-                                                ),
-                                                minimumSize:
-                                                    Size(double.infinity, 50.h),
-                                                backgroundColor:
-                                                    const Color.fromRGBO(
-                                                        217, 80, 116, 1),
-                                                foregroundColor: Colors.white,
-                                                textStyle: GoogleFonts.raleway(
-                                                  fontSize: 15.sp,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                              child: Text(
-                                                "Réessayer",
-                                                textAlign: TextAlign.center,
-                                                style: GoogleFonts.raleway(
-                                                  fontSize: 15.sp,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            }
+                        
+                           CustomErrorModal(
+                                message: state.stringError,
+                                btnText: "Réessayer",
+                                onPressed: () => Navigator.of(context).pop())
+                            .show(context);
+                         }
                           },
                           builder: (context, state) {
                             return ElevatedButton(

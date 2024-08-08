@@ -169,10 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (value!.isEmpty) {
                                 return 'Veuillez saisir votre mot de passe';
                               }
-                              // else if (value.length < 8 || value.length > 16) {
-                              //   // personal
-                              //   return 'Mot de passe non valide';
-                              // }
+                             
                               return null;
                             },
                             obscureText: isObscurePwd,
@@ -262,10 +259,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (state is UserLoginLoaded) {
                                
                                 box!.put('token', state.token);
+                                 print("*************************************************************************************************************************************************************");
+                                print(state.token);
                                 if (state.hasCard == true) {
                                   Navigator.pushNamed(
                                     context,
-                                    '/card',
+                                    '/drawer',
+                                     //TODO change later
                                   );
                                   
                                 } else {
@@ -289,25 +289,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             builder: (context, state) {
                               if (state is UserLoginLoading) {
-                                // return ElevatedButton(
-                                //     onPressed: () {},
-                                //     style: ElevatedButton.styleFrom(
-                                //       shape: RoundedRectangleBorder(
-                                //           borderRadius:
-                                //               BorderRadius.circular(20)),
-                                //       minimumSize:
-                                //           const Size(double.infinity, 60),
-                                //       backgroundColor: const Color.fromRGBO(
-                                //           217, 80, 116, 1), // Background color
-                                //       foregroundColor: Colors.white, // Text color
-                                //       textStyle: GoogleFonts.raleway(
-                                //         fontSize: 15,
-                                //         fontWeight: FontWeight.w600,
-                                //       ),
-                                //     ),
-                                //     child: const CircularProgressIndicator(
-                                //       color: Colors.white,
-                                //     ));
+                               
                               }
                               return ElevatedButton(
                                 onPressed: () {

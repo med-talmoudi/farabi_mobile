@@ -3,6 +3,7 @@ import 'package:flutter_farabi_app/core/extensions/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomErrorModal extends StatelessWidget {
@@ -20,14 +21,14 @@ class CustomErrorModal extends StatelessWidget {
   void show(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      shape:  RoundedRectangleBorder(
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
       ),
       builder: (BuildContext context) {
         return BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
           child: Container(
-            decoration:  BoxDecoration(
+            decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(20.r),
@@ -35,16 +36,17 @@ class CustomErrorModal extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 30.w),
+              padding: EdgeInsets.symmetric(horizontal: 30.w),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  
-                   Image(
-                    image: const AssetImage("assets/img/ohno.png"),
+                  SvgPicture.asset(
+                    'assets/img/ohno.svg',
                     width: 250.w,
-                    height: 180.h,
-                  ).animate().fadeIn(duration: const Duration(milliseconds: 800)),
+                    height: 200.h,
+                  )
+                      .animate()
+                      .fadeIn(duration: const Duration(milliseconds: 800)),
                   Text(
                     "Oh non!",
                     style: GoogleFonts.raleway(
@@ -70,7 +72,7 @@ class CustomErrorModal extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.r),
                       ),
-                      minimumSize:  Size(double.infinity, 50.h),
+                      minimumSize: Size(double.infinity, 50.h),
                       backgroundColor: const Color.fromRGBO(217, 80, 116, 1),
                       foregroundColor: Colors.white,
                       textStyle: GoogleFonts.raleway(

@@ -7,15 +7,17 @@ import 'dart:ui';
 import 'package:flutter_farabi_app/core/extensions/spacing.dart';
 import 'package:flutter_farabi_app/core/theming/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_farabi_app/main.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 class BottomNavBar extends StatefulWidget {
-  final String id;
+ 
+  final int currentIndex ;
 
-  const BottomNavBar({super.key, required this.id});
+  const BottomNavBar({super.key, required this.currentIndex});
 
   @override
  
@@ -24,7 +26,7 @@ class BottomNavBar extends StatefulWidget {
 
 class BottomNavBarState extends State<BottomNavBar> {
   late String id;
-  int currentIndex = 1;
+  late int currentIndex ;
 
   setBottomBarIndex(index) {
     setState(() {
@@ -35,8 +37,10 @@ class BottomNavBarState extends State<BottomNavBar> {
   @override
   void initState() {
     super.initState();
-    id = widget.id;
-    // Initialize 'id' with the value from the widget
+    
+    currentIndex = widget.currentIndex;
+
+    
   }
 
   @override
@@ -124,7 +128,7 @@ class BottomNavBarState extends State<BottomNavBar> {
                                         width: 180.w,
                                         height: 180.h,
                                         child: PrettyQrView.data(
-                                          data: id,
+                                          data: box!.get('id'),
                                          
                                           // decoration: const PrettyQrDecoration(
                                           //   image: PrettyQrDecorationImage(
@@ -206,6 +210,12 @@ class BottomNavBarState extends State<BottomNavBar> {
                           ),
                           onPressed: () {
                             setBottomBarIndex(0);
+                              Navigator.pushNamed(
+                              context,
+                              '/drawer',
+
+                              //TODO change later
+                            );
                           },
                           splashColor: Colors.white,
                         ),
@@ -220,7 +230,11 @@ class BottomNavBarState extends State<BottomNavBar> {
                             // Apply color filter to change color
                           ),
                           onPressed: () {
-                            setBottomBarIndex(1);
+                           setBottomBarIndex(1);
+                              Navigator.pushNamed(
+                              context,
+                              '/jackpot',
+                            );
                           },
                           splashColor: Colors.white,
                         ),
@@ -238,7 +252,8 @@ class BottomNavBarState extends State<BottomNavBar> {
                             // Apply color filter to change color
                           ),
                           onPressed: () {
-                            setBottomBarIndex(2);
+                           setBottomBarIndex(2);
+                            
                           },
                           splashColor: Colors.white,
                         ),

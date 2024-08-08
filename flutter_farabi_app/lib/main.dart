@@ -1,6 +1,7 @@
-
-
+import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_farabi_app/core/helpers/cubit_observer.dart';
 import 'package:flutter_farabi_app/core/hive/open_box.dart';
 import 'package:flutter_farabi_app/core/routing/app_routes.dart';
 
@@ -10,26 +11,29 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-
 Box? box;
 Future<void> main() async {
-  // ignore: unused_local_variable
+  Bloc.observer = MyBlocObserver();
+
   String path = "/splach";
   WidgetsFlutterBinding.ensureInitialized();
   box = await openBox("elFarabi");
   await dotenv.load(fileName: ".env");
-  if (box!.containsKey('path')) {
+
+  if (box!.containsKey('token') && box!.get('token') != null) {
     // Retrieve the value associated with the key "path"
-     path = box!.get('path');
-    
+    path = "/card";
   }
+  // if (kDebugMode) {
+  //   print(path);
+  // }
   ScreenUtil.ensureScreenSize();
-  runApp(MyApp(appRouter: AppRouter(), initialRoute: "/splach"));
+  runApp(MyApp(appRouter: AppRouter(), initialRoute: "/login"));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.appRouter, required this.initialRoute});
-   final String initialRoute;
+  final String initialRoute;
   final AppRouter appRouter;
 
   @override
@@ -38,19 +42,17 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
-      
-          child: MaterialApp(
-            theme: ThemeData(
-              useMaterial3: false,
-              primaryColor: Colors.blue,
-            ),
-            debugShowCheckedModeBanner: false,
-          
-            initialRoute: initialRoute,
-            onGenerateRoute: (settings) => appRouter.generateRoute(settings, "/splach"),
-          ),
-        );
-       //go router
-    
+      child: MaterialApp(
+        theme: ThemeData(
+          useMaterial3: false,
+          primaryColor: Colors.blue,
+        ),
+        debugShowCheckedModeBanner: false,
+        initialRoute: initialRoute,
+        onGenerateRoute: (settings) =>
+            appRouter.generateRoute(settings, "/card"),
+      ),
+    );
+    //go router
   }
 }

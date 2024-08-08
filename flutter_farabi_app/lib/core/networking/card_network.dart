@@ -1,9 +1,10 @@
-
+// ignore_for_file: avoid_print
 
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../main.dart';
 
@@ -11,32 +12,42 @@ class CardApi {
   late Dio dio;
 
   CardApi() {
+    var token = box?.get("token");
+    token ??= "null";
+
     final headers = <String, String>{
       "Content-Type": "application/json",
       "Accept": "application/json",
-      "x-auth-token": box!.get("token")
+      "x-auth-token": token
     };
-     final String apiUrl =  dotenv.env['API_URL'].toString();
+    final String apiUrl = dotenv.env['API_URL'].toString();
     BaseOptions options = BaseOptions(
       headers: headers,
-      baseUrl: apiUrl, 
+      baseUrl: apiUrl,
       // baseUrl: "http://192.168.1.19:5000",
       receiveDataWhenStatusError: true,
+
       validateStatus: (status) {
-        // Validate status code 400
-        return status! >= 200 && status < 300 || status == 400 || status == 429;
+        // Validate status codes: 200-299, 400, 401, 429
+        return status! >= 200 && status < 300 ||
+            status == 400 ||
+             status == 404 ||
+            status == 401 ||
+            status == 429;
       },
+      
       connectTimeout: const Duration(seconds: 50),
       receiveTimeout: const Duration(seconds: 50),
+     
     );
 
     dio = Dio(options);
+     dio.interceptors.add(PrettyDioLogger());
   }
 
   Future<dynamic> getUser() async {
     var response = await dio.get('/api/auth');
     final Map<String, dynamic> responseData = json.decode(response.toString());
-   
 
     return responseData;
   }
@@ -44,14 +55,13 @@ class CardApi {
   Future<dynamic> createECard() async {
     var response = await dio.post('/api/usercard/add-e-card');
     final Map<String, dynamic> responseData = json.decode(response.toString());
-  
+
     if (response.statusCode == 200 || response.statusCode == 201) {
       return "ok";
     } else if (response.statusCode == 400) {
       final Map<String, dynamic> responseData =
           json.decode(response.toString());
       if (responseData.containsKey('errors')) {
-        
         return responseData['errors'][0]['msg'];
       }
     }
@@ -63,14 +73,13 @@ class CardApi {
     var data = json.encode({"cardNumber": cardNumber}); // make an error
     var response = await dio.post('/api/usercard/add-card', data: data);
     final Map<String, dynamic> responseData = json.decode(response.toString());
-    
+
     if (response.statusCode == 200 || response.statusCode == 201) {
       return "ok";
     } else if (response.statusCode == 400) {
       final Map<String, dynamic> responseData =
           json.decode(response.toString());
       if (responseData.containsKey('errors')) {
-        
         return responseData['errors'][0]['msg'];
       }
     }
@@ -83,54 +92,56 @@ class CardApi {
       var response = await dio.get('/api/usercard/user-card');
       final Map<String, dynamic> responseData =
           json.decode(response.toString());
-      return CustomResponce(
+      print(responseData);
+      var res= CustomResponce(
           data: responseData, statusCode: response.statusCode!);
-    } catch (error) {
-     
+      return res;
+    } on DioException catch (error) {
+      print("this is eeeeee ${error.response}");
       return CustomResponce(
           data: null, statusCode: 500); // Return a 500 status code on error
     }
   }
 
- 
+   Future<dynamic> getProfile() async {
+    try {
+      var response = await dio.get('/api/auth');
+      final Map<String, dynamic> responseData =
+          json.decode(response.toString());
+      print(responseData);
+      var res= CustomResponce(
+          data: responseData, statusCode: response.statusCode!);
+      return res;
+    } on DioException catch (error) {
+      print("this is eeeeee ${error.response}");
+      return CustomResponce(
+          data: null, statusCode: 500); // Return a 500 status code on error
+    }
+  }
 
   // else if (response.statusCode == 400) {
   //   final Map<String, dynamic> responseData =
   //       json.decode(response.toString());
   //   if (responseData.containsKey('errors')) {
-  //    
+  //
   //     return responseData['errors'][0]['msg'];
   //   }
   // }
 
-
   Future<dynamic> deleteCard() async {
-    
     try {
-      var response = await dio.post('/api/usercard/delete-card');
+      var response = await dio.delete('/api/usercard/delete-card');
       final Map<String, dynamic> responseData =
           json.decode(response.toString());
       return CustomResponce(
           data: responseData, statusCode: response.statusCode!);
-    } catch (error) {
-      
+    } on DioException catch (error) {
+
+      print( " --------------------------------------------${error.response}");
       return CustomResponce(
           data: null, statusCode: 500); // Return a 500 status code on error
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 class CustomResponce<T> {

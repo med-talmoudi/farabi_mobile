@@ -12,8 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddCard extends StatelessWidget {
-  final String fullName;
-  const AddCard({super.key, required this.fullName});
+  
+  const AddCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,8 @@ class AddCard extends StatelessWidget {
                           listener: (context, state) {
                             if (state is CreateECardLoaded) {
                              
-                              Navigator.pushNamed(context, '/card');
+                              Navigator.pushNamed(context, '/drawer');
+                               //TODO change later
                             }
                             if (state is CreateECardError) {
                               showGeneralDialog(
@@ -113,7 +114,7 @@ class AddCard extends StatelessWidget {
                                           ),
                                           25.vs,
                                           Text(
-                                            "Vérifier Vos Messages",
+                                            "Erreur",
                                             style: GoogleFonts.raleway(
                                                 fontSize: 16.sp,
                                                 fontWeight: FontWeight.w700,
@@ -193,7 +194,7 @@ class AddCard extends StatelessWidget {
                         GestureDetector(
                           onTap: () {
                             Navigator.pushNamed(context, '/insert_card',
-                                arguments: fullName);
+                                );
                           },
                           child: Container(
                             height: 50.h,

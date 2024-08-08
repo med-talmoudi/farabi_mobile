@@ -22,7 +22,8 @@ class DeleteCardCubit extends Cubit<DeleteCardState> {
     } else if (response.statusCode == 404) {
       emit(DeleteCardError(
           stringError: response.data['errors'][0]['msg'].toString()));
-    } else {
+    }
+     else {
       emit(DeleteCardError(stringError: "erreur inattendue!"));
     }
   }

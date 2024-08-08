@@ -14,6 +14,7 @@ final class CardDetailsLoaded extends CardDetailsState {
 }
 final class CardDetailsError extends CardDetailsState {
   final String errorString;
+  final dynamic statusCode;
 
-  CardDetailsError({required this.errorString});
+  CardDetailsError({required this.errorString, required this.statusCode});
 }
