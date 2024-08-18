@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_farabi_app/core/extensions/spacing.dart';
 
-
 import 'package:flutter_farabi_app/core/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_farabi_app/features/jackpot/presentation/bloc/cubit/get_points_cubit.dart';
@@ -39,7 +38,10 @@ class _JackpotState extends State<Jackpot> {
     _valueNotifier.dispose();
     super.dispose();
   }
-
+   Future<void> _refreshPage() async {
+   context.read<GetPointsCubit>().getPoints();
+    
+  }
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -100,223 +102,232 @@ class _JackpotState extends State<Jackpot> {
             ],
           ),
           body: SafeArea(
-            child: SingleChildScrollView(
-              child: Column(children: [
-                BlocConsumer<GetPointsCubit, GetPointsState>(
-                  listener: (context, state) {
-                    if (state is GetPointsLoaded) {
-                      _valueNotifier.value = state.points;
-                    }
-                  },
-                  builder: (context, state) {
-                    if (state is GetPointsLoading) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    if (state is GetPointsLoaded) {
-                      return Column(
+            child: BlocConsumer<GetPointsCubit, GetPointsState>(
+              listener: (context, state) {
+                if (state is GetPointsLoaded) {
+                  _valueNotifier.value = state.points;
+                }
+              },
+              builder: (context, state) {
+                if (state is GetPointsLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (state is GetPointsLoaded) {
+                  return RefreshIndicator(
+                    onRefresh: _refreshPage,
+                    child: SingleChildScrollView(
+                       physics: const AlwaysScrollableScrollPhysics(),
+                      child: Column(
                         children: [
                           20.vs,
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 20.w),
                             child: Column(
                               children: [
-                                Container(
-                                 color: Colors.deepOrangeAccent.shade100,
-                                  child: CircularSeekBar(
-                                    interactive: false,
-                                    trackColor:
-                                        const Color.fromRGBO(234, 233, 240, 1),
-                                    width: double.infinity,
-                                    height: 250.h,
-                                    valueNotifier: _valueNotifier,
-                                    progress: _valueNotifier.value,
-                                    barWidth: 10.w,
-                                    startAngle: 90,
-                                    sweepAngle: 180,
-                                    strokeCap: StrokeCap.round,
-                                    progressGradientColors: [
-                                      Colors.pink
-                                          .shade100, // Same as background color
-                                      Colors.pink
-                                          .shade400, // Example transition color
-                                      Colors.pink
-                                          .shade700 // Example transition color
-                                    ],
-                                    dashWidth: 50.w,
-                                    dashGap: 7.w,
-                                    animation: true,
-                                    child: Center(
-                                      child: Column(
+                                SizedBox(
+                                  height: 300.h,
+                                  width: double.infinity,
+                                  child: Stack(children: [
+                                    Positioned(
+                                      top: 0,
+                                      left: 0,
+                                      right: 0,
+                                      child: CircularSeekBar(
+                                        interactive: false,
+                                        trackColor: const Color.fromRGBO(
+                                            234, 233, 240, 1),
+                                        width: double.infinity,
+                                        height: 250.h,
+                                        valueNotifier: _valueNotifier,
+                                        progress: _valueNotifier.value,
+                                        barWidth: 10.w,
+                                        startAngle: 90,
+                                        sweepAngle: 180,
+                                        strokeCap: StrokeCap.round,
+                                        progressGradientColors: [
+                                          Colors.pink
+                                              .shade100, // Same as background color
+                                          Colors.pink
+                                              .shade400, // Example transition color
+                                          Colors.pink
+                                              .shade700 // Example transition color
+                                        ],
+                                        dashWidth: 50.w,
+                                        dashGap: 7.w,
+                                        animation: true,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      EdgeInsets.only(top: 60.h),
+                                                  child: ValueListenableBuilder(
+                                                    valueListenable:
+                                                        _valueNotifier,
+                                                    builder:
+                                                        (_, double value, __) =>
+                                                            Text(
+                                                      _valueNotifier.value
+                                                          .toInt()
+                                                          .toString(),
+                                                      style: GoogleFonts.dmSans(
+                                                        color:
+                                                            const Color.fromRGBO(
+                                                                44, 38, 70, 1),
+                                                        fontSize: 55.sp,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      bottom: 130.h,
+                                      child: Row(
                                         children: [
-                                               ValueListenableBuilder(
-                                                valueListenable: _valueNotifier,
-                                                builder: (_, double value, __) =>
-                                                     Text(
-                                                            _valueNotifier.value
-                                                                .toInt()
-                                                                .toString(),
-                                                            style: GoogleFonts
-                                                                .dmSans(
-                                                              color: const Color
-                                                                  .fromRGBO(
-                                                                  44, 38, 70, 1),
-                                                              fontSize: 55.sp,
-                                                              fontWeight:
-                                                                  FontWeight.w700,
-                                                            ),
-                                                          ),
-                                                        ),
-                                       
-                                          // 50.vs,
-                                          // Row(
-                                          //   children: [
-                                          //     Expanded(
-                                          //       child: Text(
-                                          //         'Les cadeaux en point de vente',
-                                          //         style: GoogleFonts.raleway(
-                                          //           color: const Color.fromRGBO(
-                                          //               14, 14, 12, 1),
-                                          //           fontSize: 16.sp,
-                                          //           fontWeight: FontWeight.w600,
-                                          //         ),
-                                          //         softWrap: true,
-                                          //       ),
-                                          //     )
-                                          //   ],
-                                          // ),
-                                                            
-                                                            
-                                          
+                                          Text(
+                                            'Les cadeaux en point de vente',
+                                            style: GoogleFonts.raleway(
+                                              color: const Color.fromRGBO(
+                                                  14, 14, 12, 1),
+                                              fontSize: 16.sp,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            softWrap: true,
+                                          )
                                         ],
                                       ),
                                     ),
-                                  ),
+                                    Positioned(
+                                        top: 190.h, child: const SideScroller())
+                                  ]),
                                 ),
-                             100.vs,
-                             const SideScroller()
                              
-                             ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(right: 20.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                30.vs,
+                            
                               ],
                             ),
                           ),
-                        ],
-                      );
-                    } else if (state is GetPointsError) {
-                      return Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 30.w),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/img/ohno.svg',
-                                width: 250.w,
-                                height: 200.h,
-                              ).animate().fadeIn(
-                                  duration: const Duration(milliseconds: 800)),
-                              Text(
-                                "Oh non!",
-                                style: GoogleFonts.raleway(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w700,
-                                  color: const Color.fromRGBO(74, 74, 74, 1),
-                                ),
-                              )
-                                  .animate(
-                                      delay: const Duration(milliseconds: 600))
-                                  .shake(),
-                              15.vs,
-                              Text(
-                                state.errorString,
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.raleway(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color.fromRGBO(74, 74, 74, 1),
-                                ),
-                              ),
-                              20.vs,
-                              ElevatedButton(
-                                onPressed: () {
-                                  context.read<GetPointsCubit>().getPoints();
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.r),
-                                  ),
-                                  minimumSize: Size(double.infinity, 50.h),
-                                  backgroundColor:
-                                      const Color.fromRGBO(217, 80, 116, 1),
-                                  foregroundColor: Colors.white,
-                                  textStyle: GoogleFonts.raleway(
-                                    fontSize: 15.sp,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                child: Text(
-                                  'Réessayer',
-                                  textAlign: TextAlign.center,
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Historique",
                                   style: GoogleFonts.raleway(
-                                    fontSize: 15.sp,
+                                    fontSize: 18.sp,
                                     fontWeight: FontWeight.w500,
+                                    color: const Color.fromRGBO(14, 14, 12, 1),
                                   ),
                                 ),
-                              ),
-                              30.vs
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    } else {
-                      return const Text("");
-                    }
-                  },
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "Historique",
-                      style: GoogleFonts.raleway(
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w500,
-                        color: const Color.fromRGBO(14, 14, 12, 1),
+                          SvgPicture.asset(
+                            'assets/img/no_history_image.svg',
+                            width: 226.w,
+                            height: 120.h,
+                            fit: BoxFit.contain,
+                          ),
+                          Text(
+                            "Pas d’historique de conversion",
+                            style: GoogleFonts.raleway(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w600,
+                              color: const Color.fromRGBO(74, 74, 74, 1),
+                            ),
+                          ),
+                          Text(
+                            "Voir les dernières offres",
+                            style: GoogleFonts.raleway(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w400,
+                              color: const Color.fromRGBO(74, 74, 74, 1),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-                SvgPicture.asset(
-                  'assets/img/no_history_image.svg',
-                  width: 226.w,
-                  height: 120.h,
-                  fit: BoxFit.contain,
-                ),
-                Text(
-                  "Pas d’historique d'achat",
-                  style: GoogleFonts.raleway(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                    color: const Color.fromRGBO(74, 74, 74, 1),
-                  ),
-                ),
-                Text(
-                  "Voir les dernières offres",
-                  style: GoogleFonts.raleway(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w400,
-                    color: const Color.fromRGBO(74, 74, 74, 1),
-                  ),
-                ),
-              ]),
+                  );
+                } else if (state is GetPointsError) {
+                  return Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 30.w),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/img/ohno.svg',
+                            width: 250.w,
+                            height: 200.h,
+                          ).animate().fadeIn(
+                              duration: const Duration(milliseconds: 800)),
+                          Text(
+                            "Oh non!",
+                            style: GoogleFonts.raleway(
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w700,
+                              color: const Color.fromRGBO(74, 74, 74, 1),
+                            ),
+                          )
+                              .animate(delay: const Duration(milliseconds: 600))
+                              .shake(),
+                          15.vs,
+                          Text(
+                            state.errorString,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.raleway(
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w400,
+                              color: const Color.fromRGBO(74, 74, 74, 1),
+                            ),
+                          ),
+                          20.vs,
+                          ElevatedButton(
+                            onPressed: () {
+                              context.read<GetPointsCubit>().getPoints();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.r),
+                              ),
+                              minimumSize: Size(double.infinity, 50.h),
+                              backgroundColor:
+                                  const Color.fromRGBO(217, 80, 116, 1),
+                              foregroundColor: Colors.white,
+                              textStyle: GoogleFonts.raleway(
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            child: Text(
+                              'Réessayer',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.raleway(
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                          30.vs
+                        ],
+                      ),
+                    ),
+                  );
+                } else {
+                  return const Text("");
+                }
+              },
             ),
           ),
 

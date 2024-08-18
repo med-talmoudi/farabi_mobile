@@ -327,7 +327,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                       )
                                     : Text(
-                                        "Se Connecter",
+                                        "Se connecter",
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.raleway(
                                           fontSize: 15.sp,

@@ -35,7 +35,7 @@ class _CardSpaceState extends State<CardSpace> {
   }
    Future<void> _refreshPage() async {
     context.read<CardDetailsCubit>().cardDetails(); // Trigger refresh
-    //TODO refresh page
+    
   }
   @override
   Widget build(BuildContext context) {
@@ -111,188 +111,190 @@ class _CardSpaceState extends State<CardSpace> {
               child: CircularProgressIndicator(),
             );
           } else if (state is CardDetailsLoaded) {
-            return (SingleChildScrollView(
-                child: SafeArea(
-              child: Stack(
-                children: [
-                  Column(
+            return RefreshIndicator(
+              onRefresh: _refreshPage,
+              child: (SingleChildScrollView(
+                 physics: const AlwaysScrollableScrollPhysics(),
+                  child: Stack(
                     children: [
-                      40.vs,
-                      Padding(
-                        padding: EdgeInsets.all(8.0.h),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            image: const DecorationImage(
-                                image:
-                                    AssetImage("assets/img/card_flower_bg.jpg"),
-                                fit: BoxFit.fill),
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            borderRadius: BorderRadius.circular(20.r),
-                            boxShadow: [
-                              BoxShadow(
-                                color: const Color.fromARGB(129, 197, 197, 197)
-                                    .withOpacity(0.5),
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset: const Offset(
-                                    0, 3), // changes position of shadow
+                      Column(
+                        children: [
+                          40.vs,
+                          Padding(
+                            padding: EdgeInsets.all(8.0.h),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                    image:
+                                        AssetImage("assets/img/card_flower_bg.jpg"),
+                                    fit: BoxFit.fill),
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                borderRadius: BorderRadius.circular(20.r),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: const Color.fromARGB(129, 197, 197, 197)
+                                        .withOpacity(0.5),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: const Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
                                 children: [
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.fromLTRB(20, 10, 0, 0),
+                                        child: Row(
+                                          children: [
+                                            Image(
+                                              image: const AssetImage(
+                                                "assets/img/el_farabi_logo.png",
+                                              ),
+                                              width: 60.w,
+                                              height: 50.h,
+                                            ),
+                                            6.hs,
+                                            Padding(
+                                              padding: EdgeInsets.only(top: 10.h),
+                                              child: Image(
+                                                image: const AssetImage(
+                                                  "assets/img/el_farabi_text.png",
+                                                ),
+                                                width: 100.w,
+                                                height: 40.h,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const CustomDelete()
+                                    ],
+                                  ),
+                                  20.vs,
                                   Padding(
                                     padding:
-                                        const EdgeInsets.fromLTRB(20, 10, 0, 0),
+                                        const EdgeInsets.fromLTRB(6, 0, 100, 0),
                                     child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
                                       children: [
-                                        Image(
-                                          image: const AssetImage(
-                                            "assets/img/el_farabi_logo.png",
+                                        Text(
+                                          state.cardNumber.substring(0, 1),
+                                          style: GoogleFonts.poppins(
+                                            color:
+                                                const Color.fromARGB(255, 0, 0, 0),
+                                            fontSize: 17.sp,
+                                            fontWeight: FontWeight.w500,
                                           ),
-                                          width: 60.w,
-                                          height: 50.h,
                                         ),
-                                        6.hs,
-                                        Padding(
-                                          padding: EdgeInsets.only(top: 10.h),
-                                          child: Image(
-                                            image: const AssetImage(
-                                              "assets/img/el_farabi_text.png",
-                                            ),
-                                            width: 100.w,
-                                            height: 40.h,
+                                        Text(
+                                          state.cardNumber.substring(1, 5),
+                                          style: GoogleFonts.poppins(
+                                            color:
+                                                const Color.fromARGB(255, 0, 0, 0),
+                                            fontSize: 17.sp,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        Text(
+                                          state.cardNumber.substring(5, 9),
+                                          style: GoogleFonts.poppins(
+                                            color:
+                                                const Color.fromARGB(255, 0, 0, 0),
+                                            fontSize: 17.sp,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        Text(
+                                          state.cardNumber.substring(9, 13),
+                                          style: GoogleFonts.poppins(
+                                            color:
+                                                const Color.fromARGB(255, 0, 0, 0),
+                                            fontSize: 17.sp,
+                                            fontWeight: FontWeight.w500,
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                  const CustomDelete()
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(23, 20, 0, 0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Propriétaire",
+                                          style: GoogleFonts.raleway(
+                                            color: const Color.fromARGB(
+                                                255, 87, 87, 87),
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        Text(
+                                          state.fullName,
+                                          style: GoogleFonts.poppins(
+                                            color:
+                                                const Color.fromARGB(255, 0, 0, 0),
+                                            fontSize: 18.sp,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        20.vs,
+                                      ],
+                                    ),
+                        
+                                    ////////////////////////////////////////////////
+                                  ),
                                 ],
                               ),
-                              20.vs,
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(6, 0, 100, 0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Text(
-                                      state.cardNumber.substring(0, 1),
-                                      style: GoogleFonts.poppins(
-                                        color:
-                                            const Color.fromARGB(255, 0, 0, 0),
-                                        fontSize: 17.sp,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    Text(
-                                      state.cardNumber.substring(1, 5),
-                                      style: GoogleFonts.poppins(
-                                        color:
-                                            const Color.fromARGB(255, 0, 0, 0),
-                                        fontSize: 17.sp,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    Text(
-                                      state.cardNumber.substring(5, 9),
-                                      style: GoogleFonts.poppins(
-                                        color:
-                                            const Color.fromARGB(255, 0, 0, 0),
-                                        fontSize: 17.sp,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    Text(
-                                      state.cardNumber.substring(9, 13),
-                                      style: GoogleFonts.poppins(
-                                        color:
-                                            const Color.fromARGB(255, 0, 0, 0),
-                                        fontSize: 17.sp,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(23, 20, 0, 0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Propriétaire",
-                                      style: GoogleFonts.raleway(
-                                        color: const Color.fromARGB(
-                                            255, 87, 87, 87),
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    Text(
-                                      state.fullName,
-                                      style: GoogleFonts.poppins(
-                                        color:
-                                            const Color.fromARGB(255, 0, 0, 0),
-                                        fontSize: 18.sp,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                    20.vs,
-                                  ],
-                                ),
-                    
-                                ////////////////////////////////////////////////
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 20.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                30.vs,
+                                // Transform.scale(
+                                //   scale: 1.2,
+                                //   child: Switch(
+                                //     activeColor: ColorManager.lightPink,
+                                //     value: isToggled,
+                                //     onChanged: (value) {
+                                //       setState(() {
+                                //         isToggled = !isToggled;
+                                //       });
+                                //     },
+                                //   ),
+                                // ),
+                              ],
+                            ),
+                          ),
+                          // SizedBox(
+                          //   height: 20,
+                          // ),
+                          Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20.h, vertical: 10.h),
+                              child: isToggled
+                                  ? const HasHistory()
+                                  : const NoHistoryWidget()),
+                        ],
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(right: 20.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            30.vs,
-                            // Transform.scale(
-                            //   scale: 1.2,
-                            //   child: Switch(
-                            //     activeColor: ColorManager.lightPink,
-                            //     value: isToggled,
-                            //     onChanged: (value) {
-                            //       setState(() {
-                            //         isToggled = !isToggled;
-                            //       });
-                            //     },
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                      ),
-                      // SizedBox(
-                      //   height: 20,
-                      // ),
-                      Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20.h, vertical: 10.h),
-                          child: isToggled
-                              ? const HasHistory()
-                              : const NoHistoryWidget()),
                     ],
-                  ),
-                ],
-              ),
-            )));
+                  ))),
+            );
           } else if (state is CardDetailsError) {
             return Center(
               child: Padding(

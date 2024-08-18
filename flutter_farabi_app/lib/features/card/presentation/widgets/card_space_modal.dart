@@ -83,18 +83,18 @@ class _CustomDeleteState extends State<CustomDelete> {
                             listener: (context, state) {
                               if (state is DeleteCardLoaded) {
                                 isAnimated =true;
-                                MotionToast.success(
+                                MotionToast.error(
                                   title: const Text("Carte supprimée"),
                                   description: const Text(
                                       "Votre carte a été supprimée avec succès."),
                                   animationType: AnimationType.fromTop,
                                   position: MotionToastPosition.top,
                                   dismissable: false,
-                                  toastDuration: const Duration(seconds: 2),
+                                  toastDuration: const Duration(milliseconds: 1500),
                                 ).show(context);
 
                                 // Wait for 2 seconds before navigating to the card generation page
-                                Future.delayed(const Duration(seconds: 2), () {
+                                Future.delayed(const Duration(milliseconds: 1500), () {
 
                                   // Check if Navigator is still available
                                   if (Navigator.of(context).canPop()) {
