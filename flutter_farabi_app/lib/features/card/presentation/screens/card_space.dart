@@ -4,6 +4,7 @@ import 'package:flutter_farabi_app/core/extensions/spacing.dart';
 
 import 'package:flutter_farabi_app/core/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_farabi_app/core/widgets/custom_side_drawer.dart';
 
 import 'package:flutter_farabi_app/features/card/presentation/bloc/card_details/card_details_cubit.dart';
 import 'package:flutter_farabi_app/features/card/presentation/widgets/card_space_modal.dart';
@@ -11,10 +12,10 @@ import 'package:flutter_farabi_app/features/card/presentation/widgets/card_space
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../core/widgets/side_drawer.dart';
+
 import '../widgets/has_history.dart';
 import '../widgets/no_history.dart';
 
@@ -32,7 +33,10 @@ class _CardSpaceState extends State<CardSpace> {
     super.initState();
     context.read<CardDetailsCubit>().cardDetails();
   }
-
+   Future<void> _refreshPage() async {
+    context.read<CardDetailsCubit>().cardDetails(); // Trigger refresh
+    //TODO refresh page
+  }
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -42,20 +46,7 @@ class _CardSpaceState extends State<CardSpace> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: const Color.fromRGBO(247, 247, 249, 1),
-          leading:  IconButton(
-              onPressed: () { 
-                if (ZoomDrawer.of(context)!.isOpen()) {
-                  ZoomDrawer.of(context)!.close();
-                }else{ZoomDrawer.of(context)!.open();}
-                
-                
-              },
-              icon: SvgPicture.asset(
-                'assets/img/menu_icon.svg',
-                width: 23.w,
-                height: 23.h,
-              ),
-            ),
+          leading:  const CustomSideDrawer(),
           title: Padding(
             padding: EdgeInsets.only(top: 5.h),
             child: SizedBox(
@@ -110,7 +101,7 @@ class _CardSpaceState extends State<CardSpace> {
             // if (state.statusCode == 404) {
             Navigator.pushNamed(
               context,
-              '/add_card',
+              '/login',
             );
             // }
           }
@@ -260,7 +251,7 @@ class _CardSpaceState extends State<CardSpace> {
                                     20.vs,
                                   ],
                                 ),
-
+                    
                                 ////////////////////////////////////////////////
                               ),
                             ],

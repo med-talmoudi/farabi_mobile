@@ -18,7 +18,6 @@ import '../../../auth/presentation/widgets/error_modal.dart';
 import '../bloc/get_username/get_username_cubit.dart';
 
 class InsertCard extends StatefulWidget {
-  
   const InsertCard({super.key});
 
   @override
@@ -28,14 +27,13 @@ class InsertCard extends StatefulWidget {
 class _InsertCardState extends State<InsertCard> {
   final _formKey = GlobalKey<FormState>();
   final _nomController = TextEditingController();
-  final _cardNumberController = TextEditingController();
+  // final _cardNumberController = TextEditingController();
 
   final List<String> _subStrings = List.filled(4, '');
 
   @override
   void initState() {
     super.initState();
-    
 
     _updateSubStrings(); // Call the method to set initial values
     _cardNumberController.addListener(_updateSubStrings);
@@ -63,6 +61,25 @@ class _InsertCardState extends State<InsertCard> {
     _subStrings[3] = text.substring(9, 13); // The last four characters
 
     setState(() {});
+  }
+
+  final TextEditingController _cardNumberController = TextEditingController();
+  String? _errorText;
+
+  void _validateCardNumber(String value) {
+    if (value.isEmpty) {
+      setState(() {
+        _errorText = 'Le numéro de la carte est requis';
+      });
+    } else if (value.length != 13) {
+      setState(() {
+        _errorText = 'Le numéro de la carte doit contenir 13 chiffres';
+      });
+    } else {
+      setState(() {
+        _errorText = null; // No error
+      });
+    }
   }
 
   @override
@@ -131,449 +148,454 @@ class _InsertCardState extends State<InsertCard> {
             child: BlocConsumer<GetUsernameCubit, GetUsernameState>(
               listener: (context, state) {
                 // TODO: implement listener
-              if (state is GetUsernameLoaded) {
-            
-                 _nomController.text = state.fullName;
-              }
+                if (state is GetUsernameLoaded) {
+                  _nomController.text = state.fullName;
+                }
               },
               builder: (context, state) {
                 if (state is GetUsernameLoaded) {
                   return Column(
-                  children: [
-                    10.vs,
-                    Padding(
-                      padding: EdgeInsets.all(8.0.w),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.circular(20.r),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color.fromARGB(129, 197, 197, 197)
-                                  .withOpacity(0.5),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset:
-                                  Offset(0, 3.h), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(20, 10, 0, 0),
-                                  child: Row(
-                                    children: [
-                                      Image(
-                                        image: const AssetImage(
-                                          "assets/img/el_farabi_logo.png",
-                                        ),
-                                        width: 50.w,
-                                        height: 50.h,
-                                      ),
-                                      6.hs,
-                                      Padding(
-                                        padding: EdgeInsets.only(top: 10.h),
-                                        child: Image(
-                                          image: const AssetImage(
-                                            "assets/img/el_farabi_text.png",
-                                          ),
-                                          width: 110.w,
-                                          height: 50.h,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                // IconButton(
-                                //   onPressed: () {},
-                                //   icon: Icon(
-                                //     Icons.close,
-                                //     size: 20,
-                                //   ),
-                                // ),
-                              ],
-                            ),
-                            10.vs,
-                            Padding(
-                              padding: EdgeInsets.only(right: 40.w),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    _subStrings[0],
-                                    style: GoogleFonts.poppins(
-                                      color: const Color.fromRGBO(43, 43, 43, 1),
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  Text(
-                                    _subStrings[1],
-                                    style: GoogleFonts.poppins(
-                                      color: const Color.fromRGBO(43, 43, 43, 1),
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  Text(
-                                    _subStrings[2],
-                                    style: GoogleFonts.poppins(
-                                      color: const Color.fromRGBO(43, 43, 43, 1),
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  Text(
-                                    _subStrings[3],
-                                    style: GoogleFonts.poppins(
-                                      color: const Color.fromRGBO(43, 43, 43, 1),
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(23.w, 20.h, 0, 0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Propriétaire",
-                                    style: GoogleFonts.raleway(
-                                      color:
-                                          const Color.fromRGBO(149, 149, 149, 1),
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  Text(
-                                    state.fullName,
-                                    style: GoogleFonts.poppins(
-                                      color: const Color.fromRGBO(43, 43, 43, 1),
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  18.vs
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    25.vs,
-                    Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () async {
-                            var res = await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const SimpleBarcodeScannerPage(
-                                  isShowFlashIcon: true,
-                                  scanType: ScanType.barcode,
-                                ),
-                              ),
-                            );
-                            setState(() {
-                              if (res is String) {
-                                _cardNumberController.text =
-                                    res; // Update result with scanned value
-                              }
-                            });
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/img/barcode_icon.svg',
-                                width: 25.w,
-                                height: 25.h,
-                              ),
-                              5.hs,
-                              Text(
-                                "Scan your card",
-                                style: GoogleFonts.raleway(
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: ColorManager.lightPink,
-                                ),
+                    children: [
+                      10.vs,
+                      Padding(
+                        padding: EdgeInsets.all(8.0.w),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            borderRadius: BorderRadius.circular(20.r),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color.fromARGB(129, 197, 197, 197)
+                                    .withOpacity(0.5),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: Offset(
+                                    0, 3.h), // changes position of shadow
                               ),
                             ],
                           ),
-                        ),
-                        8.vs,
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 30.w),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              20.vs,
-                              Form(
-                                key: _formKey,
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(20, 10, 0, 0),
+                                    child: Row(
+                                      children: [
+                                        Image(
+                                          image: const AssetImage(
+                                            "assets/img/el_farabi_logo.png",
+                                          ),
+                                          width: 50.w,
+                                          height: 50.h,
+                                        ),
+                                        6.hs,
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 10.h),
+                                          child: Image(
+                                            image: const AssetImage(
+                                              "assets/img/el_farabi_text.png",
+                                            ),
+                                            width: 110.w,
+                                            height: 50.h,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  // IconButton(
+                                  //   onPressed: () {},
+                                  //   icon: Icon(
+                                  //     Icons.close,
+                                  //     size: 20,
+                                  //   ),
+                                  // ),
+                                ],
+                              ),
+                              10.vs,
+                              Padding(
+                                padding: EdgeInsets.only(right: 40.w),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Text(
+                                      _subStrings[0],
+                                      style: GoogleFonts.poppins(
+                                        color:
+                                            const Color.fromRGBO(43, 43, 43, 1),
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    Text(
+                                      _subStrings[1],
+                                      style: GoogleFonts.poppins(
+                                        color:
+                                            const Color.fromRGBO(43, 43, 43, 1),
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    Text(
+                                      _subStrings[2],
+                                      style: GoogleFonts.poppins(
+                                        color:
+                                            const Color.fromRGBO(43, 43, 43, 1),
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    Text(
+                                      _subStrings[3],
+                                      style: GoogleFonts.poppins(
+                                        color:
+                                            const Color.fromRGBO(43, 43, 43, 1),
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(23.w, 20.h, 0, 0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Ajout Nouvelle Carte",
+                                      "Propriétaire",
                                       style: GoogleFonts.raleway(
-                                          fontSize: 22.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: const Color.fromRGBO(
-                                              66, 67, 71, 1)),
+                                        color: const Color.fromRGBO(
+                                            149, 149, 149, 1),
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w400,
+                                      ),
                                     ),
-                                    25.vs,
                                     Text(
-                                      'Nom Sur La Carte',
-                                      style: GoogleFonts.raleway(
-                                        color:
-                                            const Color.fromRGBO(26, 37, 48, 1),
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    10.vs,
-                                    TextFormField(
-                                      controller: _nomController,
-                                      enabled: false,
-                                      readOnly: true,
+                                      state.fullName,
                                       style: GoogleFonts.poppins(
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      keyboardType: TextInputType.name,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: const Color.fromRGBO(
-                                            247, 247, 249, 1),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.r),
-                                          borderSide: BorderSide.none,
-                                        ),
-                                      ),
-                                    ),
-                                    10.vs,
-                                    Text(
-                                      'Numéro Carte',
-                                      style: GoogleFonts.raleway(
                                         color:
-                                            const Color.fromRGBO(26, 37, 48, 1),
+                                            const Color.fromRGBO(43, 43, 43, 1),
                                         fontSize: 15.sp,
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                     ),
-                                    10.vs,
-                                    TextFormField(
-                                      maxLength: 13,
-                                      inputFormatters: [
-                                        LengthLimitingTextInputFormatter(13),
-                                        FilteringTextInputFormatter.allow(
-                                            RegExp(r'[0-9]')),
-                                      ],
-                                      controller: _cardNumberController,
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'Le numéro de la carte est requis';
-                                        } else if (value.length != 13) {
-                                          return 'Le numéro de la carte doit contenir 13 chiffres';
-                                        }
-                                        return null;
-                                      },
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      keyboardType: TextInputType.number,
-                                      decoration: InputDecoration(
-                                        filled: true,
-                                        fillColor: const Color.fromRGBO(
-                                            247, 247, 249, 1),
-                                        hintText: "3 3282  3282  3282",
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.r),
-                                          borderSide: BorderSide.none,
-                                        ),
-                                      ),
-                                    ),
-                                    30.vs,
-                                    BlocConsumer<InsertCardCubit,
-                                        InsertCardState>(
-                                      listener: (context, state) {
-                                        if (state is InsertCardLoaded) {
-                                          Navigator.pushNamed(context, '/drawer');
-                                           //TODO change later
-                                        }
-                                        if (state is InsertCardError) {
-                                          CustomErrorModal(
-                                                  message: state.stringError,
-                                                  btnText: "Réessayer",
-                                                  onPressed: () =>
-                                                      Navigator.of(context).pop())
-                                              .show(context);
-                                        }
-                                      },
-                                      builder: (context, state) {
-                                        return ElevatedButton(
-                                          onPressed: () {
-                                            FocusScope.of(context)
-                                                .requestFocus(FocusNode());
-                                            if (_formKey.currentState!
-                                                .validate()) {
-                                              context
-                                                  .read<InsertCardCubit>()
-                                                  .addCard(_cardNumberController
-                                                      .text
-                                                      .toString());
-                                            }
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.r),
-                                            ),
-                                            minimumSize:
-                                                Size(double.infinity, 50.h),
-                                            backgroundColor:
-                                                state is InsertCardLoading
-                                                    ? const Color.fromRGBO(
-                                                        250, 177, 196, 1)
-                                                    : ColorManager.lightPink,
-                                            foregroundColor: Colors.white,
-                                            textStyle: GoogleFonts.raleway(
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                          child: state is InsertCardLoading
-                                              ? SizedBox(
-                                                  width: 20.w,
-                                                  height: 20.h,
-                                                  child:
-                                                      const CircularProgressIndicator(
-                                                    color: Colors.white,
-                                                    strokeWidth: 1,
-                                                  ),
-                                                )
-                                              : Text(
-                                                  "Ajout carte",
-                                                  textAlign: TextAlign.center,
-                                                  style: GoogleFonts.raleway(
-                                                    fontSize: 15.sp,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                        );
-                                      },
-                                    ),
+                                    18.vs
                                   ],
                                 ),
                               ),
                             ],
                           ),
-                        )
-                      ],
-                    ),
-                  ],
-                );
-             
-                } else if(state is GetUsernameLoading){
-                    return const SafeArea(
-                      child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                  );
-                      
-                }
-                else if(state is GetUsernameError){
-                    return SafeArea(
-                      child: Center(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 30.w),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/img/ohno.svg',
-                                    width: 250.w,
-                                    height: 200.h,
-                                  ).animate().fadeIn(
-                                      duration: const Duration(milliseconds: 800)),
-                                  Text(
-                                    "Oh non!",
-                                    style: GoogleFonts.raleway(
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w700,
-                                      color: const Color.fromRGBO(74, 74, 74, 1),
-                                    ),
-                                  )
-                                      .animate(
-                                          delay: const Duration(milliseconds: 600))
-                                      .shake(),
-                                  15.vs,
-                                  Text(
-                                    state.stringError ,
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.raleway(
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w400,
-                                      color: const Color.fromRGBO(74, 74, 74, 1),
-                                    ),
+                        ),
+                      ),
+                      25.vs,
+                      Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              var res = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SimpleBarcodeScannerPage(
+                                    cancelButtonText: "Annuler",
+                                    isShowFlashIcon: true,
+                                    scanType: ScanType.barcode,
                                   ),
-                                  20.vs,
-                                  ElevatedButton(
-                                    onPressed: () {
-                                     context.read<GetUsernameCubit>().getUsername();
-                                         
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20.r),
-                                      ),
-                                      minimumSize: Size(double.infinity, 50.h),
-                                      backgroundColor:
-                                          const Color.fromRGBO(217, 80, 116, 1),
-                                      foregroundColor: Colors.white,
-                                      textStyle: GoogleFonts.raleway(
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    child: Text(
-                                      'Réessayer',
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.raleway(
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
+                                ),
+                              );
+                              setState(() {
+                                if (res is String) {
+                                  print(res.runtimeType);
+                                  if (res == "-1") {
+                                    _cardNumberController.text = "";
+                                  } else {
+                                    _cardNumberController.text =
+                                        res; // Update result with scanned value
+                                  }
+                                }
+                              });
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  'assets/img/barcode_icon.svg',
+                                  width: 25.w,
+                                  height: 25.h,
+                                ),
+                                5.hs,
+                                Text(
+                                  "Scannez votre carte",
+                                  style: GoogleFonts.raleway(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: ColorManager.lightPink,
                                   ),
-                                  30.vs
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
-                    );
-                   
-                }
-                
-                else {
+                          8.vs,
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30.w),
+                            child: Column(
+                              children: [
+                                20.vs,
+                                Form(
+                                  key: _formKey,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Ajout nouvelle carte",
+                                        style: GoogleFonts.raleway(
+                                            fontSize: 22.sp,
+                                            fontWeight: FontWeight.w600,
+                                            color: const Color.fromRGBO(
+                                                66, 67, 71, 1)),
+                                      ),
+                                      25.vs,
+                                      Text(
+                                        'Nom sur la carte',
+                                        style: GoogleFonts.raleway(
+                                          color: const Color.fromRGBO(
+                                              26, 37, 48, 1),
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      10.vs,
+                                      TextFormField(
+                                        controller: _nomController,
+                                        enabled: false,
+                                        readOnly: true,
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        keyboardType: TextInputType.name,
+                                        decoration: InputDecoration(
+                                          filled: true,
+                                          fillColor: const Color.fromRGBO(
+                                              247, 247, 249, 1),
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20.r),
+                                            borderSide: BorderSide.none,
+                                          ),
+                                        ),
+                                      ),
+                                      10.vs,
+                                      Text(
+                                        'Numéro carte',
+                                        style: GoogleFonts.raleway(
+                                          color: const Color.fromRGBO(
+                                              26, 37, 48, 1),
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      10.vs,
+                                      TextFormField(
+                                        maxLength: 13,
+                                        inputFormatters: [
+                                          LengthLimitingTextInputFormatter(13),
+                                          FilteringTextInputFormatter.allow(
+                                              RegExp(r'[0-9]')),
+                                        ],
+                                        controller: _cardNumberController,
+                                        onChanged: (value) {
+                                          _validateCardNumber(value);
+                                        },
+
+                                      
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          errorText: _errorText,
+                                          filled: true,
+                                          fillColor: const Color.fromRGBO(
+                                              247, 247, 249, 1),
+                                          hintText: "3 3282  3282  3282",
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20.r),
+                                            borderSide: BorderSide.none,
+                                          ),
+                                        ),
+                                      ),
+                                      30.vs,
+                                      BlocConsumer<InsertCardCubit,
+                                          InsertCardState>(
+                                        listener: (context, state) {
+                                          if (state is InsertCardLoaded) {
+                                            Navigator.pushNamed(
+                                                context, '/card_home');
+                                            //TODO change later
+                                          }
+                                          if (state is InsertCardError) {
+                                            CustomErrorModal(
+                                                message: state.stringError,
+                                                btnText: "Réessayer",
+                                                onPressed: () =>
+                                                    Navigator.of(context)
+                                                        .pop()).show(context);
+                                          }
+                                        },
+                                        builder: (context, state) {
+                                          return ElevatedButton(
+                                            onPressed: () {
+                                              FocusScope.of(context)
+                                                  .requestFocus(FocusNode());
+                                              if (_formKey.currentState!
+                                                  .validate()) {
+                                                context
+                                                    .read<InsertCardCubit>()
+                                                    .addCard(
+                                                        _cardNumberController
+                                                            .text
+                                                            .toString());
+                                              }
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20.r),
+                                              ),
+                                              minimumSize:
+                                                  Size(double.infinity, 50.h),
+                                              backgroundColor:
+                                                  state is InsertCardLoading
+                                                      ? const Color.fromRGBO(
+                                                          250, 177, 196, 1)
+                                                      : ColorManager.lightPink,
+                                              foregroundColor: Colors.white,
+                                              textStyle: GoogleFonts.raleway(
+                                                fontSize: 15.sp,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            child: state is InsertCardLoading
+                                                ? SizedBox(
+                                                    width: 20.w,
+                                                    height: 20.h,
+                                                    child:
+                                                        const CircularProgressIndicator(
+                                                      color: Colors.white,
+                                                      strokeWidth: 1,
+                                                    ),
+                                                  )
+                                                : Text(
+                                                    "Ajout carte",
+                                                    textAlign: TextAlign.center,
+                                                    style: GoogleFonts.raleway(
+                                                      fontSize: 15.sp,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  );
+                } else if (state is GetUsernameLoading) {
+                  return const SafeArea(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                } else if (state is GetUsernameError) {
+                  return SafeArea(
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 30.w),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/img/ohno.svg',
+                              width: 250.w,
+                              height: 200.h,
+                            ).animate().fadeIn(
+                                duration: const Duration(milliseconds: 800)),
+                            Text(
+                              "Oh non!",
+                              style: GoogleFonts.raleway(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w700,
+                                color: const Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            )
+                                .animate(
+                                    delay: const Duration(milliseconds: 600))
+                                .shake(),
+                            15.vs,
+                            Text(
+                              state.stringError,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.raleway(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w400,
+                                color: const Color.fromRGBO(74, 74, 74, 1),
+                              ),
+                            ),
+                            20.vs,
+                            ElevatedButton(
+                              onPressed: () {
+                                context.read<GetUsernameCubit>().getUsername();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.r),
+                                ),
+                                minimumSize: Size(double.infinity, 50.h),
+                                backgroundColor:
+                                    const Color.fromRGBO(217, 80, 116, 1),
+                                foregroundColor: Colors.white,
+                                textStyle: GoogleFonts.raleway(
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              child: Text(
+                                'Réessayer',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.raleway(
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            30.vs
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                } else {
                   return Container();
                 }
-          
-                
               },
             ),
           ),

@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_farabi_app/core/helpers/cubit_observer.dart';
@@ -8,12 +8,13 @@ import 'package:flutter_farabi_app/core/routing/app_routes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 Box? box;
 Future<void> main() async {
-  Bloc.observer = MyBlocObserver();
+  Bloc.observer = MyBlocObserver(); // TODO observer
 
   String path = "/splach";
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +29,7 @@ Future<void> main() async {
   //   print(path);
   // }
   ScreenUtil.ensureScreenSize();
-  runApp(MyApp(appRouter: AppRouter(), initialRoute: "/login"));
+  runApp(MyApp(appRouter: AppRouter(), initialRoute: path));
 }
 
 class MyApp extends StatelessWidget {
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: MaterialApp(
+      child: GetMaterialApp(
         theme: ThemeData(
           useMaterial3: false,
           primaryColor: Colors.blue,
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: initialRoute,
         onGenerateRoute: (settings) =>
-            appRouter.generateRoute(settings, "/card"),
+            appRouter.generateRoute(settings, initialRoute),
       ),
     );
     //go router

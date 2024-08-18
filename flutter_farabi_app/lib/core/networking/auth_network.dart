@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../main.dart';
 
@@ -29,6 +30,8 @@ class AuthApi {
     );
 
     dio = Dio(options);
+    dio = Dio(options);
+     dio.interceptors.add(PrettyDioLogger());
   }
 
   Future<dynamic> registerUser(String phone) async {

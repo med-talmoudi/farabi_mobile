@@ -30,6 +30,7 @@ class BottomNavBarState extends State<BottomNavBar> {
 
   setBottomBarIndex(index) {
     setState(() {
+      
       currentIndex = index;
     });
   }
@@ -209,13 +210,19 @@ class BottomNavBarState extends State<BottomNavBar> {
                             // Apply color filter to change color
                           ),
                           onPressed: () {
-                            setBottomBarIndex(0);
+                            if (currentIndex == 0) {
+                             
+                            }else{
+                             
+                             setBottomBarIndex(0);
                               Navigator.pushNamed(
                               context,
-                              '/drawer',
+                              '/card_home',
 
                               //TODO change later
                             );
+                            }
+                            
                           },
                           splashColor: Colors.white,
                         ),
@@ -230,11 +237,17 @@ class BottomNavBarState extends State<BottomNavBar> {
                             // Apply color filter to change color
                           ),
                           onPressed: () {
-                           setBottomBarIndex(1);
+                            if (currentIndex == 1) {
+                            
+                            }else{
+                            
+                              setBottomBarIndex(1);
                               Navigator.pushNamed(
                               context,
-                              '/jackpot',
+                              '/jackpot_home',
                             );
+                            }
+                           
                           },
                           splashColor: Colors.white,
                         ),
@@ -252,8 +265,17 @@ class BottomNavBarState extends State<BottomNavBar> {
                             // Apply color filter to change color
                           ),
                           onPressed: () {
-                           setBottomBarIndex(2);
-                            
+                            if (currentIndex == 2) {
+                             
+                            }else{
+                             
+                              setBottomBarIndex(2);
+                            //   Navigator.pushNamed(
+                            //   context,
+                            //   '/jackpot_home',
+                            // );
+                            }
+                           
                           },
                           splashColor: Colors.white,
                         ),
@@ -268,7 +290,17 @@ class BottomNavBarState extends State<BottomNavBar> {
                             // Apply color filter to change color
                           ),
                           onPressed: () {
-                            setBottomBarIndex(3);
+                            if (currentIndex == 3) {
+                             
+                            }else{
+                            
+                              setBottomBarIndex(3);
+                            //   Navigator.pushNamed(
+                            //   context,
+                            //   '/jackpot_home',
+                            // );
+                            }
+                           
                           },
                           splashColor: Colors.white,
                         ),

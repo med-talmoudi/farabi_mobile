@@ -259,13 +259,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (state is UserLoginLoaded) {
                                
                                 box!.put('token', state.token);
-                                 print("*************************************************************************************************************************************************************");
+                                box!.put('userName', state.fullName);
                                 print(state.token);
+                                  print(state.fullName);
                                 if (state.hasCard == true) {
                                   Navigator.pushNamed(
                                     context,
-                                    '/drawer',
-                                     //TODO change later
+                                    '/card_home',
+                                   
                                   );
                                   
                                 } else {

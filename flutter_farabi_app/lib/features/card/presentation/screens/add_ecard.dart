@@ -1,7 +1,6 @@
-
-
 import 'dart:ui';
 
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_farabi_app/core/extensions/spacing.dart';
 import 'package:flutter_farabi_app/core/theming/colors.dart';
@@ -11,10 +10,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AddCard extends StatelessWidget {
-  
+class AddCard extends StatefulWidget {
   const AddCard({super.key});
 
+  @override
+  State<AddCard> createState() => _AddCardState();
+}
+
+class _AddCardState extends State<AddCard> {
+   bool _isLoading = true;
+    @override
+  void initState() {
+    super.initState();
+
+    // Simulate a loading delay
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -22,8 +38,16 @@ class AddCard extends StatelessWidget {
       child: Scaffold(
         backgroundColor: const Color.fromRGBO(134, 134, 134, 1),
         body: SafeArea(
+        
           child: Center(
-            child: Column(
+            child: _isLoading
+              ? const Scaffold(
+                   backgroundColor: Color.fromARGB(255, 255, 255, 255),
+                body: Center(
+                    child: CircularProgressIndicator(), // Show loading indicator
+                  ),
+              )
+              : Column(
               children: [
                 const Spacer(),
                 Container(
@@ -70,15 +94,14 @@ class AddCard extends StatelessWidget {
                         BlocConsumer<CreateECardCubit, CreateECardState>(
                           listener: (context, state) {
                             if (state is CreateECardLoaded) {
-                             
-                              Navigator.pushNamed(context, '/drawer');
-                               //TODO change later
+                              Navigator.pushNamed(context, '/card_home');
                             }
                             if (state is CreateECardError) {
                               showGeneralDialog(
                                 barrierDismissible: true,
                                 barrierLabel: '',
-                                barrierColor: const Color.fromARGB(95, 11, 6, 37),
+                                barrierColor:
+                                    const Color.fromARGB(95, 11, 6, 37),
                                 //Color.fromARGB(95, 11, 6, 37)
                                 transitionDuration:
                                     const Duration(milliseconds: 500),
@@ -91,8 +114,8 @@ class AddCard extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(15.0.r)),
-                                    backgroundColor:
-                                        const Color.fromARGB(255, 255, 255, 255),
+                                    backgroundColor: const Color.fromARGB(
+                                        255, 255, 255, 255),
                                     contentPadding: EdgeInsets.all(20.0.w),
                                     children: [
                                       Column(
@@ -153,7 +176,6 @@ class AddCard extends StatelessWidget {
                           builder: (context, state) {
                             return GestureDetector(
                               onTap: () {
-                              
                                 // Handle onTap action
                                 context.read<CreateECardCubit>().createECard();
                               },
@@ -171,7 +193,8 @@ class AddCard extends StatelessWidget {
                                       ? SizedBox(
                                           width: 20.w,
                                           height: 20.h,
-                                          child: const CircularProgressIndicator(
+                                          child:
+                                              const CircularProgressIndicator(
                                             color: Colors.white,
                                             strokeWidth: 1,
                                           ),
@@ -193,8 +216,10 @@ class AddCard extends StatelessWidget {
                         10.vs,
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, '/insert_card',
-                                );
+                            Navigator.pushNamed(
+                              context,
+                              '/insert_card',
+                            );
                           },
                           child: Container(
                             height: 50.h,
@@ -223,7 +248,11 @@ class AddCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                ),
+                )  .animate(delay: const Duration(milliseconds: 300))
+                      .fadeIn(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeIn)
+                      .moveY(begin: 500.h, end: 0),
               ],
             ),
           ),

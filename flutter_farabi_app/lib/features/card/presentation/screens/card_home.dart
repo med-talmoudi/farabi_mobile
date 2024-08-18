@@ -5,14 +5,14 @@ import 'package:flutter_farabi_app/features/card/presentation/screens/menu_scree
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
-class DrawerTest extends StatefulWidget {
-  const DrawerTest({super.key});
+class CardHome extends StatefulWidget {
+  const CardHome({super.key});
 
   @override
-  State<DrawerTest> createState() => _DrawerTestState();
+  State<CardHome> createState() => _CardHomeState();
 }
 
-class _DrawerTestState extends State<DrawerTest> {
+class _CardHomeState extends State<CardHome> {
   final zoomDrawerController = ZoomDrawerController();
   @override
   Widget build(BuildContext context) {

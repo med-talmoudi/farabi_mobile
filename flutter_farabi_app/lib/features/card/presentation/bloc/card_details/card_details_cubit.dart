@@ -41,7 +41,7 @@ class CardDetailsCubit extends Cubit<CardDetailsState> {
        emit(CardDetailsError(
           errorString:"no card exist", statusCode: response.statusCode));
     } }else if (response.statusCode != 200 && response.statusCode != 500){
-      print(response.statusCode.runtimeType);
+      
       emit(CardDetailsError(
           errorString: response.data['errors'][0]['msg'].toString(), statusCode: response.statusCode));
     } else {

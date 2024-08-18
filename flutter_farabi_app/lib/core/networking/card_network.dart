@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_farabi_app/core/di/dependency_injection.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../main.dart';
@@ -11,9 +12,13 @@ import '../../main.dart';
 class CardApi {
   late Dio dio;
 
+ 
+
   CardApi() {
+    //  DependencyInjection.init();
+    
     var token = box?.get("token");
-    token ??= "null";
+    token ??= "null"; //TODO check token string null or value null
 
     final headers = <String, String>{
       "Content-Type": "application/json",
@@ -42,7 +47,7 @@ class CardApi {
     );
 
     dio = Dio(options);
-     dio.interceptors.add(PrettyDioLogger());
+     dio.interceptors.add(PrettyDioLogger()); // TODO logger
   }
 
   Future<dynamic> getUser() async {
@@ -92,7 +97,7 @@ class CardApi {
       var response = await dio.get('/api/usercard/user-card');
       final Map<String, dynamic> responseData =
           json.decode(response.toString());
-      print(responseData);
+  
       var res= CustomResponce(
           data: responseData, statusCode: response.statusCode!);
       return res;
@@ -142,7 +147,37 @@ class CardApi {
           data: null, statusCode: 500); // Return a 500 status code on error
     }
   }
+
+
+Future<dynamic> getJackpot() async {
+    try {
+      var response = await dio.get('/api/jackpot/jackpot');
+      final Map<String, dynamic> responseData =
+          json.decode(response.toString());
+      return CustomResponce(
+          data: responseData, statusCode: response.statusCode!);
+    } on DioException catch (error) {
+
+      print( " --------------------------------------------${error.response}");
+      return CustomResponce(
+          data: null, statusCode: 500); // Return a 500 status code on error
+    }
+  }
+
+
+
+
+
+
+
+
+
+
 }
+  
+
+
+
 
 class CustomResponce<T> {
   final T data;

@@ -30,7 +30,7 @@ class NoHistoryWidget extends StatelessWidget {
         fit: BoxFit.contain,
       ),
       Text(
-        "Pas d’Historique de Scan",
+        "Pas d’historique d'achat",
         style: GoogleFonts.raleway(
           fontSize: 16.sp,
           fontWeight: FontWeight.w600,
@@ -38,7 +38,7 @@ class NoHistoryWidget extends StatelessWidget {
         ),
       ),
       Text(
-        "Voir les dernières Offres",
+        "Voir les dernières offres",
         style: GoogleFonts.raleway(
           fontSize: 16.sp,
           fontWeight: FontWeight.w400,
