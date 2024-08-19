@@ -1,4 +1,5 @@
 import 'package:flutter_farabi_app/core/extensions/spacing.dart';
+import 'package:flutter_farabi_app/core/theming/colors.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/widgets/header.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/widgets/label_text.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/widgets/sub_header.dart';
@@ -82,6 +83,7 @@ class AccountInformationState extends State<AccountInformation> {
                                 .moveY(begin: -10.h, end: 0),
                             10.vs,
                             CustomInputTextField(
+                              fillColor: ColorManager.lightGray,
                                 keyboardType: TextInputType.text,
                               action: TextInputAction.next,
                               controller: _nomController,
@@ -113,6 +115,7 @@ class AccountInformationState extends State<AccountInformation> {
                                 .moveY(begin: -10.h, end: 0),
                             10.vs,
                             CustomInputTextField(
+                              fillColor: ColorManager.lightGray,
                                 keyboardType: TextInputType.text,
                               action: TextInputAction.next,
                               controller: _prenomController,
@@ -144,6 +147,7 @@ class AccountInformationState extends State<AccountInformation> {
                                 .moveY(begin: -10.h, end: 0),
                             10.vs,
                             CustomInputTextField(
+                                fillColor: ColorManager.lightGray,
                               keyboardType: TextInputType.text,
                               action: TextInputAction.done,
                               controller: _passwordController,

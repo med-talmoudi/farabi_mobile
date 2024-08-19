@@ -118,6 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               .moveY(begin: -10.h, end: 0),
                           10.vs,
                           CustomInputTextField(
+                              fillColor: ColorManager.lightGray,
                             action: TextInputAction.next,
                             inputFormatters: [
                               LengthLimitingTextInputFormatter(8),
@@ -161,6 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               .moveY(begin: -10.h, end: 0),
                           10.vs,
                           CustomInputTextField(
+                              fillColor: ColorManager.lightGray,
                             keyboardType: TextInputType.text,
                             action: TextInputAction.done,
                             hintText: "* * * * * * * *",

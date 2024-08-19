@@ -270,10 +270,10 @@ class BottomNavBarState extends State<BottomNavBar> {
                             }else{
                              
                               setBottomBarIndex(2);
-                            //   Navigator.pushNamed(
-                            //   context,
-                            //   '/jackpot_home',
-                            // );
+                              Navigator.pushNamed(
+                              context,
+                              '/sponsorship_home',
+                            );
                             }
                            
                           },
@@ -295,10 +295,10 @@ class BottomNavBarState extends State<BottomNavBar> {
                             }else{
                             
                               setBottomBarIndex(3);
-                            //   Navigator.pushNamed(
-                            //   context,
-                            //   '/jackpot_home',
-                            // );
+                              Navigator.pushNamed(
+                              context,
+                              '/profile_home',
+                            );
                             }
                            
                           },

@@ -190,7 +190,10 @@ class _JackpotState extends State<Jackpot> {
                                             ),
                                           ],
                                         ),
-                                      ),
+                                      ).animate(delay: const Duration(milliseconds: 300))
+                        .fadeIn(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.ease),
                                     ),
                                     Positioned(
                                       bottom: 130.h,
@@ -205,12 +208,19 @@ class _JackpotState extends State<Jackpot> {
                                               fontWeight: FontWeight.w600,
                                             ),
                                             softWrap: true,
-                                          )
+                                          ).animate(delay: const Duration(milliseconds: 300))
+                        .fadeIn(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.ease)
+                        .moveX(begin: -10.w, end: 0),
                                         ],
                                       ),
                                     ),
                                     Positioned(
-                                        top: 190.h, child: const SideScroller())
+                                        top: 190.h, child: const SideScroller()).animate(delay: const Duration(milliseconds: 300))
+                        .fadeIn(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.ease).moveY(begin: -10.h, end: 0),
                                   ]),
                                 ),
                              
@@ -229,7 +239,11 @@ class _JackpotState extends State<Jackpot> {
                                     fontWeight: FontWeight.w500,
                                     color: const Color.fromRGBO(14, 14, 12, 1),
                                   ),
-                                ),
+                                ) .animate(delay: const Duration(milliseconds: 600))
+                        .fadeIn(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.ease)
+                        .moveX(begin: -10.w, end: 0),
                               ],
                             ),
                           ),
@@ -238,7 +252,11 @@ class _JackpotState extends State<Jackpot> {
                             width: 226.w,
                             height: 120.h,
                             fit: BoxFit.contain,
-                          ),
+                          ).animate(delay: const Duration(milliseconds: 800))
+                        .fadeIn(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.ease),
+                       
                           Text(
                             "Pas d’historique de conversion",
                             style: GoogleFonts.raleway(
@@ -246,7 +264,10 @@ class _JackpotState extends State<Jackpot> {
                               fontWeight: FontWeight.w600,
                               color: const Color.fromRGBO(74, 74, 74, 1),
                             ),
-                          ),
+                          ).animate(delay: const Duration(milliseconds: 800))
+                        .fadeIn(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.ease),
                           Text(
                             "Voir les dernières offres",
                             style: GoogleFonts.raleway(
@@ -254,7 +275,10 @@ class _JackpotState extends State<Jackpot> {
                               fontWeight: FontWeight.w400,
                               color: const Color.fromRGBO(74, 74, 74, 1),
                             ),
-                          ),
+                          ).animate(delay: const Duration(milliseconds: 800))
+                        .fadeIn(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.ease),
                         ],
                       ),
                     ),

@@ -1,9 +1,11 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 
 
-import 'package:flutter_farabi_app/core/theming/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+
 
 class CustomInputTextField extends StatefulWidget {
   final TextEditingController controller;
@@ -13,6 +15,7 @@ class CustomInputTextField extends StatefulWidget {
   final TextInputAction action;
   final TextInputType keyboardType;
   final List<TextInputFormatter>? inputFormatters;
+  final Color fillColor;
 
   const CustomInputTextField({
     super.key,
@@ -23,6 +26,7 @@ class CustomInputTextField extends StatefulWidget {
     required this.action,
     required this.keyboardType,
     this.inputFormatters,
+    this.fillColor = const Color.fromRGBO(142, 143, 179, 0.059),
   });
 
   @override
@@ -48,7 +52,7 @@ class CustomInputTextFieldState extends State<CustomInputTextField> {
       obscureText: widget.obscureText ? isObscure : false,
       decoration: InputDecoration(
         filled: true,
-        fillColor: ColorManager.lightGray,
+        fillColor: widget.fillColor,
         hintText: widget.hintText,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),

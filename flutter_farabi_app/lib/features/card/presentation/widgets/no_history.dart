@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,7 +21,10 @@ class NoHistoryWidget extends StatelessWidget {
               fontWeight: FontWeight.w500,
               color: const Color.fromRGBO(14, 14, 12, 1),
             ),
-          ),
+          ).animate(delay: const Duration(milliseconds: 600))
+                        .fadeIn(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.ease).moveX(begin: -10.w, end: 0),
         ],
       ),
       SvgPicture.asset(
@@ -28,7 +32,10 @@ class NoHistoryWidget extends StatelessWidget {
         width: 226.w,
         height: 120.h,
         fit: BoxFit.contain,
-      ),
+      ).animate(delay: const Duration(milliseconds: 800))
+                        .fadeIn(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.ease).moveX(begin: -10.w, end: 0),
       Text(
         "Pas d’historique d'achat",
         style: GoogleFonts.raleway(
@@ -36,7 +43,10 @@ class NoHistoryWidget extends StatelessWidget {
           fontWeight: FontWeight.w600,
           color: const Color.fromRGBO(74, 74, 74, 1),
         ),
-      ),
+      ).animate(delay: const Duration(milliseconds: 800))
+                        .fadeIn(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.ease).moveX(begin: -10.w, end: 0),
       Text(
         "Voir les dernières offres",
         style: GoogleFonts.raleway(
@@ -44,7 +54,10 @@ class NoHistoryWidget extends StatelessWidget {
           fontWeight: FontWeight.w400,
           color: const Color.fromRGBO(74, 74, 74, 1),
         ),
-      ),
+      ).animate(delay: const Duration(milliseconds: 800))
+                        .fadeIn(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.ease).moveX(begin: -10.w, end: 0),
     ]);
   }
 }

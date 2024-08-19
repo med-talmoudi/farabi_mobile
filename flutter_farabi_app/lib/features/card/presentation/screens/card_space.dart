@@ -258,7 +258,10 @@ class _CardSpaceState extends State<CardSpace> {
                                   ),
                                 ],
                               ),
-                            ),
+                            ).animate(delay: const Duration(milliseconds: 300))
+                        .fadeIn(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.ease).moveY(begin: -10.h, end: 0),
                           ),
                           Padding(
                             padding: EdgeInsets.only(right: 20.w),

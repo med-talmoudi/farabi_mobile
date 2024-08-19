@@ -16,6 +16,7 @@ import 'package:flutter_farabi_app/features/jackpot/presentation/bloc/cubit/get_
 
 
 import 'package:flutter_farabi_app/features/jackpot/presentation/view/jackpot_home.dart';
+import 'package:flutter_farabi_app/features/profile/presentation/view/profile_home.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../features/auth/presentation/bloc/authorization/authorization_cubit.dart';
@@ -36,6 +37,8 @@ import '../../features/auth/presentation/views/gender_selection.dart';
 import '../../features/auth/presentation/views/otp_verification.dart';
 import '../../features/auth/presentation/views/account_information.dart';
 import '../../features/auth/presentation/views/date_of_birth.dart';
+
+import '../../features/sponsorship/presentation/sponsorship_home.dart';
 
 import '../networking/auth_network.dart';
 import '../../features/auth/data/repositories/auth_repository.dart';
@@ -98,6 +101,19 @@ class AppRouter {
             ],
             child: const GenderSelection(),
           ),
+        );
+         case '/sponsorship_home':
+        return PageTransition(
+          duration: const Duration(milliseconds: 0),
+          type: PageTransitionType.fade,
+          child: const SponsorshipHome(),
+        );
+
+          case '/profile_home':
+        return PageTransition(
+          duration: const Duration(milliseconds: 0),
+          type: PageTransitionType.fade,
+          child: const ProfileHome(),
         );
 
       case '/register':
