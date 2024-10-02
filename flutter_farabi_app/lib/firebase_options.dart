@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -50,20 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDz8A2lNwdHeswCPld1ywSRqrEFPTLSLss',
-    appId: '1:712333243482:android:1016e6fa917673299f1463',
-    messagingSenderId: '712333243482',
-    projectId: 'el-farabi',
-    storageBucket: 'el-farabi.appspot.com',
+    apiKey: 'AIzaSyAA5YbxNgNo0-qUwfNCeIBRxxt1CqYOti0',
+    appId: '1:723043734264:android:d54ff1eaed235ac68a610d',
+    messagingSenderId: '723043734264',
+    projectId: 'para-el-farabi',
+    storageBucket: 'para-el-farabi.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA4g4S01u52uGF2eOkT4wBSWeknag1fmTY',
-    appId: '1:712333243482:ios:845448ead213edda9f1463',
-    messagingSenderId: '712333243482',
-    projectId: 'el-farabi',
-    storageBucket: 'el-farabi.appspot.com',
+    apiKey: 'AIzaSyDz2Pcu84dQlIT0nTKIucdXXyC8xslIOlU',
+    appId: '1:723043734264:ios:18733dfee49adae98a610d',
+    messagingSenderId: '723043734264',
+    projectId: 'para-el-farabi',
+    storageBucket: 'para-el-farabi.appspot.com',
     iosBundleId: 'com.example.flutterFarabiApp',
+  );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAnLO6BYxYQwZX-fDLViTr_WOTA5B9Ad-4',
+    appId: '1:723043734264:web:616747626aca7d338a610d',
+    messagingSenderId: '723043734264',
+    projectId: 'para-el-farabi',
+    authDomain: 'para-el-farabi.firebaseapp.com',
+    storageBucket: 'para-el-farabi.appspot.com',
+    measurementId: 'G-9SG3FVD8JK',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyDz2Pcu84dQlIT0nTKIucdXXyC8xslIOlU',
+    appId: '1:723043734264:ios:18733dfee49adae98a610d',
+    messagingSenderId: '723043734264',
+    projectId: 'para-el-farabi',
+    storageBucket: 'para-el-farabi.appspot.com',
+    iosBundleId: 'com.example.flutterFarabiApp',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyAnLO6BYxYQwZX-fDLViTr_WOTA5B9Ad-4',
+    appId: '1:723043734264:web:4112cece9d8481d68a610d',
+    messagingSenderId: '723043734264',
+    projectId: 'para-el-farabi',
+    authDomain: 'para-el-farabi.firebaseapp.com',
+    storageBucket: 'para-el-farabi.appspot.com',
+    measurementId: 'G-BLS7S1FC6G',
   );
 
 }

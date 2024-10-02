@@ -23,16 +23,7 @@ class CardRepository {
 
 
 
-  Future<dynamic> getUser() async {
-    try {
-      var response = await cardApi.getUser();
 
-    
-      return response;
-    }catch (_) {
-      return "erreur inattendue";
-    }
-  }
    Future<dynamic> addCard(String cardNumber) async {
     try {
       var response = await cardApi.addCard(cardNumber);

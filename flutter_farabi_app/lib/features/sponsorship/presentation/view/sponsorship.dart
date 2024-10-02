@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../core/theming/colors.dart';
+
 import '../../../../core/widgets/bottom_nav_bar.dart';
 
 import '../../../../core/widgets/custom_side_drawer.dart';
@@ -84,7 +84,7 @@ class _SponsorshipState extends State<Sponsorship> {
                     const SubHeader(
                             text:
                                 "Débloquez le pouvoir de la collaboration et élevez votre parcours.")
-                        .animate(delay: const Duration(milliseconds: 300))
+                        .animate(delay: const Duration(milliseconds: 250))
                         .fadeIn(
                             duration: const Duration(milliseconds: 300),
                             curve: Curves.ease)
@@ -95,9 +95,9 @@ class _SponsorshipState extends State<Sponsorship> {
                       width: 180.w,
                       height: 140.h,
                     )
-                        .animate(delay: const Duration(milliseconds: 500))
+                        .animate(delay: const Duration(milliseconds: 300))
                         .fadeIn(
-                            duration: const Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 300),
                             curve: Curves.ease)
                         .moveY(begin: -10.h, end: 0),
                     30.vs,
@@ -110,9 +110,9 @@ class _SponsorshipState extends State<Sponsorship> {
                         color: const Color.fromRGBO(0, 0, 0, 1),
                       ),
                     )
-                        .animate(delay: const Duration(milliseconds: 600))
+                        .animate(delay: const Duration(milliseconds: 350))
                         .fadeIn(
-                            duration: const Duration(milliseconds: 600),
+                            duration: const Duration(milliseconds: 200),
                             curve: Curves.ease)
                         .moveY(begin: -10.h, end: 0),
                     20.vs,
@@ -125,9 +125,9 @@ class _SponsorshipState extends State<Sponsorship> {
                         color: const Color.fromRGBO(80, 80, 81, 1),
                       ),
                     )
-                        .animate(delay: const Duration(milliseconds: 600))
+                        .animate(delay: const Duration(milliseconds: 400))
                         .fadeIn(
-                            duration: const Duration(milliseconds: 600),
+                            duration: const Duration(milliseconds: 200),
                             curve: Curves.ease)
                         .moveY(begin: -10.h, end: 0),
                     40.vs,
@@ -154,9 +154,9 @@ class _SponsorshipState extends State<Sponsorship> {
                         ),
                       ),
                     )
-                        .animate(delay: const Duration(milliseconds: 800))
+                        .animate(delay: const Duration(milliseconds: 450))
                         .fadeIn(
-                            duration: const Duration(milliseconds: 800),
+                            duration: const Duration(milliseconds: 300),
                             curve: Curves.ease)
                         .moveY(begin: 30.h, end: 0),
                   ],

@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
 
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_farabi_app/core/helpers/notification_controller.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../main.dart';
@@ -133,7 +135,10 @@ class AuthApi {
   }
 
   Future<dynamic> userLogin(String phone, String password) async {
-    var data = json.encode({"phone": "216$phone", "password": password});
+    final fcmToken = await NotificationController
+                                                    .requestFirebaseToken();
+    print("this your fcm token : $fcmToken");
+    var data = json.encode({"phone": "216$phone", "password": password, "fcmToken": fcmToken});
 
     try {
       var response = await dio.post('/api/auth/login', data: data);

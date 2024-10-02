@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../core/theming/colors.dart';
+
 import '../../../../core/widgets/bottom_nav_bar.dart';
 
 import '../../../../core/widgets/custom_side_drawer.dart';
@@ -113,9 +113,9 @@ class _ProfileState extends State<Profile> {
                       size: 100.h,
                       color: Colors.black,
                     )
-                        .animate(delay: const Duration(milliseconds: 300))
+                        .animate(delay: const Duration(milliseconds: 200))
                         .fadeIn(
-                            duration: const Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 200),
                             curve: Curves.ease)
                         .moveY(begin: -10.h, end: 0),
                     5.vs,
@@ -126,9 +126,9 @@ class _ProfileState extends State<Profile> {
                         children: [
                           const LabelText(text: "Nom")
                               .animate(
-                                  delay: const Duration(milliseconds: 400))
+                                  delay: const Duration(milliseconds: 250))
                               .fadeIn(
-                                  duration: const Duration(milliseconds: 400),
+                                  duration: const Duration(milliseconds: 200),
                                   curve: Curves.ease)
                               .moveY(begin: -10.h, end: 0),
                           5.vs,
@@ -165,17 +165,17 @@ class _ProfileState extends State<Profile> {
                             ),
                           )
                               .animate(
-                                  delay: const Duration(milliseconds: 400))
+                                  delay: const Duration(milliseconds: 270))
                               .fadeIn(
-                                  duration: const Duration(milliseconds: 400),
+                                  duration: const Duration(milliseconds: 200),
                                   curve: Curves.ease)
                               .moveY(begin: -10.h, end: 0),
                           5.vs,
                           const LabelText(text: "Prénom")
                               .animate(
-                                  delay: const Duration(milliseconds: 500))
+                                  delay: const Duration(milliseconds: 300))
                               .fadeIn(
-                                  duration: const Duration(milliseconds: 500),
+                                  duration: const Duration(milliseconds: 200),
                                   curve: Curves.ease)
                               .moveY(begin: -10.h, end: 0),
                           5.vs,
@@ -212,17 +212,17 @@ class _ProfileState extends State<Profile> {
                             ),
                           )
                              .animate(
-                                  delay: const Duration(milliseconds: 500))
+                                  delay: const Duration(milliseconds: 330))
                               .fadeIn(
-                                  duration: const Duration(milliseconds: 500),
+                                  duration: const Duration(milliseconds: 200),
                                   curve: Curves.ease)
                               .moveY(begin: -10.h, end: 0),
                           5.vs,
                           const LabelText(text: "Numéro de téléphone")
                               .animate(
-                                  delay: const Duration(milliseconds: 600))
+                                  delay: const Duration(milliseconds: 350))
                               .fadeIn(
-                                  duration: const Duration(milliseconds: 600),
+                                  duration: const Duration(milliseconds: 200),
                                   curve: Curves.ease)
                               .moveY(begin: -10.h, end: 0),
                           5.vs,
@@ -247,17 +247,17 @@ class _ProfileState extends State<Profile> {
                             },
                           )
                               .animate(
-                                  delay: const Duration(milliseconds: 400))
+                                  delay: const Duration(milliseconds: 380))
                               .fadeIn(
-                                  duration: const Duration(milliseconds: 300),
+                                  duration: const Duration(milliseconds: 200),
                                   curve: Curves.ease)
                               .moveY(begin: -10.h, end: 0),
                               5.vs,
                           const LabelText(text: "Mot de passe")
                               .animate(
-                                  delay: const Duration(milliseconds: 600))
+                                  delay: const Duration(milliseconds: 400))
                               .fadeIn(
-                                  duration: const Duration(milliseconds: 600),
+                                  duration: const Duration(milliseconds: 200),
                                   curve: Curves.ease)
                               .moveY(begin: -10.h, end: 0),
                           5.vs,
@@ -288,9 +288,9 @@ class _ProfileState extends State<Profile> {
                             obscureText: isObscure,
                           )
                               .animate(
-                                  delay: const Duration(milliseconds: 600))
+                                  delay: const Duration(milliseconds: 430))
                               .fadeIn(
-                                  duration: const Duration(milliseconds: 600),
+                                  duration: const Duration(milliseconds: 200),
                                   curve: Curves.ease)
                               .moveY(begin: -10.h, end: 0),
                           30.vs,
@@ -319,9 +319,9 @@ class _ProfileState extends State<Profile> {
                             ),
                           )
                               .animate(
-                                  delay: const Duration(milliseconds: 800))
+                                  delay: const Duration(milliseconds: 500))
                               .fadeIn(
-                                  duration: const Duration(milliseconds: 800),
+                                  duration: const Duration(milliseconds: 200),
                                   curve: Curves.ease)
                               .moveY(begin: 30.h, end: 0),
                               40.vs

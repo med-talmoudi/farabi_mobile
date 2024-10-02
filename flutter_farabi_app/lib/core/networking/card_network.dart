@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_farabi_app/core/di/dependency_injection.dart';
+
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../main.dart';
@@ -50,11 +50,21 @@ class CardApi {
      dio.interceptors.add(PrettyDioLogger()); // TODO logger
   }
 
-  Future<dynamic> getUser() async {
-    var response = await dio.get('/api/auth');
-    final Map<String, dynamic> responseData = json.decode(response.toString());
+  
 
-    return responseData;
+  Future<dynamic> getAuth() async {
+    try {
+      var response = await dio.get('/api/auth');
+      final Map<String, dynamic> responseData =
+          json.decode(response.toString());
+      return CustomResponce(
+          data: responseData, statusCode: response.statusCode!);
+    } on DioException catch (error) {
+
+      print( " --------------------------------------------${error.response}");
+      return CustomResponce(
+          data: null, statusCode: 500); // Return a 500 status code on error
+    }
   }
 
   Future<dynamic> createECard() async {
@@ -163,10 +173,52 @@ Future<dynamic> getJackpot() async {
           data: null, statusCode: 500); // Return a 500 status code on error
     }
   }
+  // last 3
+  Future<dynamic> getCardHistory() async {
+    try {
+      var response = await dio.get("/api/usercard/history?type=CARD&limit=3");
+      final Map<String, dynamic> responseData =
+          json.decode(response.toString());
+      return CustomResponce(
+          data: responseData, statusCode: response.statusCode!);
+    } on DioException catch (error) {
+
+      print( " --------------------------------------------${error.response}");
+      return CustomResponce(
+          data: null, statusCode: 500); // Return a 500 status code on error
+    }
+  }
 
 
 
+  Future<dynamic> getJackpotHistory() async {
+    try {
+      var response = await dio.get("/api/usercard/history?type=JACKPOT&limit=3");
+      final Map<String, dynamic> responseData =
+          json.decode(response.toString());
+      return CustomResponce(
+          data: responseData, statusCode: response.statusCode!);
+    } on DioException catch (error) {
 
+      print( " --------------------------------------------${error.response}");
+      return CustomResponce(
+          data: null, statusCode: 500); // Return a 500 status code on error
+    }
+  }
+  Future<dynamic> getJackpotHisto33ry() async {
+    try {
+      var response = await dio.get("/api/usercard/history?type=JACKPOT&limit=3");
+      final Map<String, dynamic> responseData =
+          json.decode(response.toString());
+      return CustomResponce(
+          data: responseData, statusCode: response.statusCode!);
+    } on DioException catch (error) {
+
+      print( " --------------------------------------------${error.response}");
+      return CustomResponce(
+          data: null, statusCode: 500); // Return a 500 status code on error
+    }
+  }
 
 
 

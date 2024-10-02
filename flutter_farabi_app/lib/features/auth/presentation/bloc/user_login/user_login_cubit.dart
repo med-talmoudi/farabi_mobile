@@ -23,9 +23,11 @@ class UserLoginCubit extends Cubit<UserLoginState> {
     
     else if (response.containsKey('token')) {
       if((response.containsKey('card')) && (response['card'].toString() != "null" )){
+        print(" user have card");
         emit(UserLoginLoaded(token: response['token'].toString(), hasCard: true, fullName: "${response['firstname']} ${response['lastname']}"));
        
       }else{
+          print(" user do not have card");
          emit(UserLoginLoaded(token: response['token'].toString(), hasCard: false, fullName: "${response['firstname']} ${response['lastname']}"));
        
       }

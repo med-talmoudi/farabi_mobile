@@ -259,10 +259,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           BlocConsumer<UserLoginCubit, UserLoginState>(
                             listener: (context, state) {
                               if (state is UserLoginLoaded) {
-                               
+                                print("put token ");
                                 box!.put('token', state.token);
                                 box!.put('userName', state.fullName);
                                 print(state.token);
+                                print("************************************************* ");
                                   print(state.fullName);
                                 if (state.hasCard == true) {
                                   Navigator.pushNamed(

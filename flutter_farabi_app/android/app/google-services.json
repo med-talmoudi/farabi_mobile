@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "712333243482",
-    "project_id": "el-farabi",
-    "storage_bucket": "el-farabi.appspot.com"
+    "project_number": "723043734264",
+    "project_id": "para-el-farabi",
+    "storage_bucket": "para-el-farabi.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:712333243482:android:1016e6fa917673299f1463",
+        "mobilesdk_app_id": "1:723043734264:android:d54ff1eaed235ac68a610d",
         "android_client_info": {
           "package_name": "com.example.flutter_farabi_app"
         }
@@ -15,7 +15,26 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDz8A2lNwdHeswCPld1ywSRqrEFPTLSLss"
+          "current_key": "AIzaSyAA5YbxNgNo0-qUwfNCeIBRxxt1CqYOti0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723043734264:android:fc4f8229dfeec1218a610d",
+        "android_client_info": {
+          "package_name": "com.fidness.paraelfarabi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAA5YbxNgNo0-qUwfNCeIBRxxt1CqYOti0"
         }
       ],
       "services": {

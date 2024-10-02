@@ -12,29 +12,15 @@ class NoHistoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Row(
-        children: [
-          Text(
-            "Historique",
-            style: GoogleFonts.raleway(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w500,
-              color: const Color.fromRGBO(14, 14, 12, 1),
-            ),
-          ).animate(delay: const Duration(milliseconds: 600))
-                        .fadeIn(
-                            duration: const Duration(milliseconds: 600),
-                            curve: Curves.ease).moveX(begin: -10.w, end: 0),
-        ],
-      ),
+     
       SvgPicture.asset(
         'assets/img/no_history_image.svg',
         width: 226.w,
         height: 120.h,
         fit: BoxFit.contain,
-      ).animate(delay: const Duration(milliseconds: 800))
+      ).animate(delay: const Duration(milliseconds: 400))
                         .fadeIn(
-                            duration: const Duration(milliseconds: 600),
+                            duration: const Duration(milliseconds: 200),
                             curve: Curves.ease).moveX(begin: -10.w, end: 0),
       Text(
         "Pas d’historique d'achat",
@@ -43,9 +29,9 @@ class NoHistoryWidget extends StatelessWidget {
           fontWeight: FontWeight.w600,
           color: const Color.fromRGBO(74, 74, 74, 1),
         ),
-      ).animate(delay: const Duration(milliseconds: 800))
+      ).animate(delay: const Duration(milliseconds: 400))
                         .fadeIn(
-                            duration: const Duration(milliseconds: 600),
+                            duration: const Duration(milliseconds: 200),
                             curve: Curves.ease).moveX(begin: -10.w, end: 0),
       Text(
         "Voir les dernières offres",
@@ -54,9 +40,9 @@ class NoHistoryWidget extends StatelessWidget {
           fontWeight: FontWeight.w400,
           color: const Color.fromRGBO(74, 74, 74, 1),
         ),
-      ).animate(delay: const Duration(milliseconds: 800))
+      ).animate(delay: const Duration(milliseconds: 400))
                         .fadeIn(
-                            duration: const Duration(milliseconds: 600),
+                            duration: const Duration(milliseconds: 200),
                             curve: Curves.ease).moveX(begin: -10.w, end: 0),
     ]);
   }

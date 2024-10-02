@@ -6,7 +6,10 @@ import 'package:flutter_farabi_app/core/extensions/spacing.dart';
 
 import 'package:flutter_farabi_app/core/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_farabi_app/features/jackpot/presentation/bloc/cubit/get_points_cubit.dart';
+import 'package:flutter_farabi_app/features/jackpot/presentation/bloc/get_jackpot_history/get_jackpot_history_cubit.dart';
+import 'package:flutter_farabi_app/features/jackpot/presentation/bloc/get_points/get_points_cubit.dart';
+import 'package:flutter_farabi_app/features/jackpot/presentation/view/widgets/jackpot_history.dart';
+
 import 'package:flutter_farabi_app/features/jackpot/presentation/view/widgets/scroller.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,12 +28,14 @@ class Jackpot extends StatefulWidget {
 
 class _JackpotState extends State<Jackpot> {
   final ValueNotifier<double> _valueNotifier = ValueNotifier<double>(0.0);
+  double maxPoints = 0.0;
 
   @override
   void initState() {
     // print(box!.get("token"));
     super.initState();
     context.read<GetPointsCubit>().getPoints();
+    context.read<GetJackpotHistoryCubit>().getJackpotHistory();
   }
 
   @override
@@ -38,18 +43,18 @@ class _JackpotState extends State<Jackpot> {
     _valueNotifier.dispose();
     super.dispose();
   }
-   Future<void> _refreshPage() async {
-   context.read<GetPointsCubit>().getPoints();
-    
+
+  Future<void> _refreshPage() async {
+    context.read<GetPointsCubit>().getPoints();
+    context.read<GetJackpotHistoryCubit>().getJackpotHistory();
   }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
-        canPop: true,
+        canPop: false,
         child: Scaffold(
           backgroundColor: const Color.fromRGBO(247, 247, 249, 1),
-
-          // backgroundColor: Colors.amber,
           appBar: AppBar(
             elevation: 0,
             backgroundColor: const Color.fromRGBO(247, 247, 249, 1),
@@ -106,6 +111,7 @@ class _JackpotState extends State<Jackpot> {
               listener: (context, state) {
                 if (state is GetPointsLoaded) {
                   _valueNotifier.value = state.points;
+                  maxPoints = state.maxPoints;
                 }
               },
               builder: (context, state) {
@@ -118,16 +124,16 @@ class _JackpotState extends State<Jackpot> {
                   return RefreshIndicator(
                     onRefresh: _refreshPage,
                     child: SingleChildScrollView(
-                       physics: const AlwaysScrollableScrollPhysics(),
+                      physics: const AlwaysScrollableScrollPhysics(),
                       child: Column(
                         children: [
-                          20.vs,
+                          5.vs,
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 20.w),
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: 300.h,
+                                  height: 270.h,
                                   width: double.infinity,
                                   child: Stack(children: [
                                     Positioned(
@@ -140,6 +146,7 @@ class _JackpotState extends State<Jackpot> {
                                             234, 233, 240, 1),
                                         width: double.infinity,
                                         height: 250.h,
+                                        maxProgress: maxPoints,
                                         valueNotifier: _valueNotifier,
                                         progress: _valueNotifier.value,
                                         barWidth: 10.w,
@@ -164,8 +171,8 @@ class _JackpotState extends State<Jackpot> {
                                             Column(
                                               children: [
                                                 Padding(
-                                                  padding:
-                                                      EdgeInsets.only(top: 60.h),
+                                                  padding: EdgeInsets.only(
+                                                      top: 60.h),
                                                   child: ValueListenableBuilder(
                                                     valueListenable:
                                                         _valueNotifier,
@@ -176,12 +183,12 @@ class _JackpotState extends State<Jackpot> {
                                                           .toInt()
                                                           .toString(),
                                                       style: GoogleFonts.dmSans(
-                                                        color:
-                                                            const Color.fromRGBO(
-                                                                44, 38, 70, 1),
+                                                        color: const Color
+                                                            .fromRGBO(
+                                                            44, 38, 70, 1),
                                                         fontSize: 55.sp,
                                                         fontWeight:
-                                                            FontWeight.w700,
+                                                            FontWeight.w600,
                                                       ),
                                                     ),
                                                   ),
@@ -190,13 +197,17 @@ class _JackpotState extends State<Jackpot> {
                                             ),
                                           ],
                                         ),
-                                      ).animate(delay: const Duration(milliseconds: 300))
-                        .fadeIn(
-                            duration: const Duration(milliseconds: 600),
-                            curve: Curves.ease),
+                                      )
+                                          .animate(
+                                              delay: const Duration(
+                                                  milliseconds: 200))
+                                          .fadeIn(
+                                              duration: const Duration(
+                                                  milliseconds: 600),
+                                              curve: Curves.ease),
                                     ),
                                     Positioned(
-                                      bottom: 130.h,
+                                      bottom: 115.h,
                                       child: Row(
                                         children: [
                                           Text(
@@ -208,29 +219,38 @@ class _JackpotState extends State<Jackpot> {
                                               fontWeight: FontWeight.w600,
                                             ),
                                             softWrap: true,
-                                          ).animate(delay: const Duration(milliseconds: 300))
-                        .fadeIn(
-                            duration: const Duration(milliseconds: 600),
-                            curve: Curves.ease)
-                        .moveX(begin: -10.w, end: 0),
+                                          )
+                                              .animate(
+                                                  delay: const Duration(
+                                                      milliseconds: 200))
+                                              .fadeIn(
+                                                  duration: const Duration(
+                                                      milliseconds: 200),
+                                                  curve: Curves.ease)
+                                              .moveX(begin: -10.w, end: 0),
                                         ],
                                       ),
                                     ),
                                     Positioned(
-                                        top: 190.h, child: const SideScroller()).animate(delay: const Duration(milliseconds: 300))
-                        .fadeIn(
-                            duration: const Duration(milliseconds: 600),
-                            curve: Curves.ease).moveY(begin: -10.h, end: 0),
+                                            top: 170.h,
+                                            child: const SideScroller())
+                                        .animate(
+                                            delay: const Duration(
+                                                milliseconds: 300))
+                                        .fadeIn(
+                                            duration: const Duration(
+                                                milliseconds: 200),
+                                            curve: Curves.ease)
+                                        .moveY(begin: -10.h, end: 0),
                                   ]),
                                 ),
-                             
-                            
                               ],
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            padding: EdgeInsets.fromLTRB(10.w, 0, 10.w, 10.h),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   "Historique",
@@ -239,46 +259,23 @@ class _JackpotState extends State<Jackpot> {
                                     fontWeight: FontWeight.w500,
                                     color: const Color.fromRGBO(14, 14, 12, 1),
                                   ),
-                                ) .animate(delay: const Duration(milliseconds: 600))
-                        .fadeIn(
-                            duration: const Duration(milliseconds: 600),
-                            curve: Curves.ease)
-                        .moveX(begin: -10.w, end: 0),
+                                )
+                                    .animate(
+                                        delay:
+                                            const Duration(milliseconds: 350))
+                                    .fadeIn(
+                                        duration:
+                                            const Duration(milliseconds: 200),
+                                        curve: Curves.ease)
+                                    .moveX(begin: -10.w, end: 0),
+                                const Icon(Icons.arrow_forward_ios)
                               ],
                             ),
                           ),
-                          SvgPicture.asset(
-                            'assets/img/no_history_image.svg',
-                            width: 226.w,
-                            height: 120.h,
-                            fit: BoxFit.contain,
-                          ).animate(delay: const Duration(milliseconds: 800))
-                        .fadeIn(
-                            duration: const Duration(milliseconds: 600),
-                            curve: Curves.ease),
-                       
-                          Text(
-                            "Pas d’historique de conversion",
-                            style: GoogleFonts.raleway(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
-                              color: const Color.fromRGBO(74, 74, 74, 1),
-                            ),
-                          ).animate(delay: const Duration(milliseconds: 800))
-                        .fadeIn(
-                            duration: const Duration(milliseconds: 600),
-                            curve: Curves.ease),
-                          Text(
-                            "Voir les dernières offres",
-                            style: GoogleFonts.raleway(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w400,
-                              color: const Color.fromRGBO(74, 74, 74, 1),
-                            ),
-                          ).animate(delay: const Duration(milliseconds: 800))
-                        .fadeIn(
-                            duration: const Duration(milliseconds: 600),
-                            curve: Curves.ease),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20.w),
+                            child: const JackpotHistory(),
+                          )
                         ],
                       ),
                     ),
@@ -354,7 +351,6 @@ class _JackpotState extends State<Jackpot> {
               },
             ),
           ),
-
           bottomNavigationBar: BottomAppBar(
             elevation: 0,
             color: const Color.fromRGBO(247, 247, 249, 1),

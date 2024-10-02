@@ -1,6 +1,7 @@
 import 'package:flutter_farabi_app/core/networking/card_network.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/bloc/phone_Input_field/phone_input_field_cubit.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/bloc/reset_pwd/reset_password_cubit.dart';
+import 'package:flutter_farabi_app/features/auth/presentation/views/check_auth.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/views/login_screen.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/bloc/complete_register/create_account_cubit.dart';
 import 'package:flutter_farabi_app/features/auth/presentation/bloc/verify_otp/opt_verification_cubit.dart';
@@ -9,11 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_farabi_app/features/card/data/repository/card_repository.dart';
 import 'package:flutter_farabi_app/features/card/presentation/bloc/create_e_card/create_e_card_cubit.dart';
+import 'package:flutter_farabi_app/features/card/presentation/bloc/get_auth/get_auth_cubit.dart';
+import 'package:flutter_farabi_app/features/card/presentation/bloc/get_card_history/get_card_history_cubit.dart';
 
 import 'package:flutter_farabi_app/features/card/presentation/screens/card_home.dart';
+import 'package:flutter_farabi_app/features/jackpot/presentation/bloc/get_jackpot_history/get_jackpot_history_cubit.dart';
 
-import 'package:flutter_farabi_app/features/jackpot/presentation/bloc/cubit/get_points_cubit.dart';
-
+import 'package:flutter_farabi_app/features/jackpot/presentation/bloc/get_points/get_points_cubit.dart';
 
 import 'package:flutter_farabi_app/features/jackpot/presentation/view/jackpot_home.dart';
 import 'package:flutter_farabi_app/features/profile/presentation/view/profile_home.dart';
@@ -38,11 +41,14 @@ import '../../features/auth/presentation/views/otp_verification.dart';
 import '../../features/auth/presentation/views/account_information.dart';
 import '../../features/auth/presentation/views/date_of_birth.dart';
 
-import '../../features/sponsorship/presentation/sponsorship_home.dart';
+import '../../features/sponsorship/presentation/view/sponsorship_home.dart';
 
 import '../networking/auth_network.dart';
 import '../../features/auth/data/repositories/auth_repository.dart';
 import '../../features/auth/presentation/views/phone_number_input.dart';
+
+final rootNavigatorKey = GlobalKey<NavigatorState>();
+// final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings, String initialRoute) {
@@ -102,18 +108,27 @@ class AppRouter {
             child: const GenderSelection(),
           ),
         );
-         case '/sponsorship_home':
+      case '/sponsorship_home':
         return PageTransition(
           duration: const Duration(milliseconds: 0),
           type: PageTransitionType.fade,
           child: const SponsorshipHome(),
         );
 
-          case '/profile_home':
+      case '/profile_home':
         return PageTransition(
           duration: const Duration(milliseconds: 0),
           type: PageTransitionType.fade,
           child: const ProfileHome(),
+        );
+      case '/check_auth':
+        return PageTransition(
+          duration: const Duration(milliseconds: 0),
+          type: PageTransitionType.fade,
+          child: BlocProvider(
+            create: (context) => GetAuthCubit(CardApi()),
+            child: const CheckAuth(),
+          ),
         );
 
       case '/register':
@@ -154,28 +169,19 @@ class AppRouter {
             ),
             settings: settings);
 
-      case '/card':
-        return PageTransition(
-          type: PageTransitionType.fade,
-          child: MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (BuildContext context) => CardDetailsCubit(CardApi()),
-              ),
-              BlocProvider(
-                create: (BuildContext context) => AuthorizationCubit(AuthApi()),
-              ),
-            ],
-            child: const CardHome(),
-          ),
-        );
-
       case '/jackpot_home':
         return PageTransition(
             type: PageTransitionType.fade,
-           duration: const Duration(milliseconds: 300),
-            child: BlocProvider(
-              create: (context) => GetPointsCubit(CardApi()),
+            duration: const Duration(milliseconds: 300),
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => GetPointsCubit(CardApi()),
+                ),
+                BlocProvider(
+                  create: (context) => GetJackpotHistoryCubit(CardApi()),
+                ),
+              ],
               child: const JackpotHome(),
             ));
 
@@ -190,7 +196,7 @@ class AppRouter {
       case '/card_home':
         return PageTransition(
           type: PageTransitionType.fade,
-           duration: const Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           child: MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -199,6 +205,10 @@ class AppRouter {
               BlocProvider(
                 create: (BuildContext context) => AuthorizationCubit(AuthApi()),
               ),
+              BlocProvider(
+                create: (BuildContext context) =>
+                    GetCardHistoryCubit(CardApi()),
+              )
             ],
             child: const CardHome(),
           ),

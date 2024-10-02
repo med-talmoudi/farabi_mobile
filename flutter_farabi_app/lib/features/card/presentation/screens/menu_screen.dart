@@ -114,6 +114,7 @@ class _MenuScreenState extends State<MenuScreen> {
                          splashFactory: InkRipple.splashFactory,
                         onTap: () {
                           box!.put('token', null);
+                          print("token deleted");
                            Navigator.pushNamed(
                                 context,
                                 '/login',);

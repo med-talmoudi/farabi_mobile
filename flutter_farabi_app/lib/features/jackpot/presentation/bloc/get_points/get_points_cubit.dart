@@ -20,14 +20,14 @@ class GetPointsCubit extends Cubit<GetPointsState> {
     if (response.statusCode == 200 ) {
 
       var points = response.data['soldeptsfid'];
-    
+      var maxPoints = response.data['max_points'];
 
     
 
      
    
       emit(GetPointsLoaded(
-           points: points.toDouble()));
+           points: points.toDouble(), maxPoints: maxPoints.toDouble()));
     }else if (response.statusCode == 500) {
        emit(GetPointsError(
           errorString:"erreur inattendue"));

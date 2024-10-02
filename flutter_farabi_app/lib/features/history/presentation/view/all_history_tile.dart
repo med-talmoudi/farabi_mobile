@@ -11,8 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HistoryTileWidget extends StatelessWidget {
-  const HistoryTileWidget({super.key});
+class AllHistory extends StatelessWidget {
+  const AllHistory({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -2,11 +2,13 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_farabi_app/core/extensions/spacing.dart';
 
+
 import 'package:flutter_farabi_app/core/widgets/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_farabi_app/core/widgets/custom_side_drawer.dart';
 
 import 'package:flutter_farabi_app/features/card/presentation/bloc/card_details/card_details_cubit.dart';
+import 'package:flutter_farabi_app/features/card/presentation/bloc/get_card_history/get_card_history_cubit.dart';
 import 'package:flutter_farabi_app/features/card/presentation/widgets/card_space_modal.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,10 +18,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
+import '../../../../main.dart';
 import '../widgets/has_history.dart';
-import '../widgets/no_history.dart';
+
 
 class CardSpace extends StatefulWidget {
+  
   const CardSpace({super.key});
 
   @override
@@ -28,14 +32,24 @@ class CardSpace extends StatefulWidget {
 
 class _CardSpaceState extends State<CardSpace> {
   bool isToggled = false;
+ 
   @override
   void initState() {
     super.initState();
+   
     context.read<CardDetailsCubit>().cardDetails();
+    context.read<GetCardHistoryCubit>().getCardHistory();
+    final String token = box!.get("token");
+   
+    print(token);
+     print("this is init func");
+   
   }
    Future<void> _refreshPage() async {
     context.read<CardDetailsCubit>().cardDetails(); // Trigger refresh
-    
+    //  var  response =  await CardApi().getCardHistory();
+    //   print(response);
+    context.read<GetCardHistoryCubit>().getCardHistory();
   }
   @override
   Widget build(BuildContext context) {
@@ -108,7 +122,7 @@ class _CardSpaceState extends State<CardSpace> {
         }, builder: (context, state) {
           if (state is CardDetailsLoading) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: RepaintBoundary(child: CircularProgressIndicator()),
             );
           } else if (state is CardDetailsLoaded) {
             return RefreshIndicator(
@@ -119,7 +133,7 @@ class _CardSpaceState extends State<CardSpace> {
                     children: [
                       Column(
                         children: [
-                          40.vs,
+                          20.vs,
                           Padding(
                             padding: EdgeInsets.all(8.0.h),
                             child: Container(
@@ -258,41 +272,39 @@ class _CardSpaceState extends State<CardSpace> {
                                   ),
                                 ],
                               ),
-                            ).animate(delay: const Duration(milliseconds: 300))
+                            ).animate(delay: const Duration(milliseconds: 200))
                         .fadeIn(
-                            duration: const Duration(milliseconds: 600),
+                            duration: const Duration(milliseconds: 200),
                             curve: Curves.ease).moveY(begin: -10.h, end: 0),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(right: 20.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                30.vs,
-                                // Transform.scale(
-                                //   scale: 1.2,
-                                //   child: Switch(
-                                //     activeColor: ColorManager.lightPink,
-                                //     value: isToggled,
-                                //     onChanged: (value) {
-                                //       setState(() {
-                                //         isToggled = !isToggled;
-                                //       });
-                                //     },
-                                //   ),
-                                // ),
-                              ],
-                            ),
-                          ),
-                          // SizedBox(
-                          //   height: 20,
-                          // ),
+                        20.vs,
+                         
+                           Padding(
+                             padding:  EdgeInsets.fromLTRB(10.w, 0, 10.w, 10.h),
+                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                     children: [
+                                       Text(
+                                         "Historique",
+                                         style: GoogleFonts.raleway(
+                                           fontSize: 18.sp,
+                                           fontWeight: FontWeight.w500,
+                                           color: const Color.fromRGBO(14, 14, 12, 1),
+                                         ),
+                                       ).animate(delay: const Duration(milliseconds: 350))
+                                                     .fadeIn(
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.ease).moveX(begin: -10.w, end: 0),
+                              const Icon(Icons.arrow_forward_ios)
+                                     ],
+                                   ),
+                           ),
                           Padding(
                               padding: EdgeInsets.symmetric(
                                   horizontal: 20.h, vertical: 10.h),
-                              child: isToggled
-                                  ? const HasHistory()
-                                  : const NoHistoryWidget()),
+                              child: const HistoryTileWidget()
+                                 
+                                  ),
                         ],
                       ),
                     ],
