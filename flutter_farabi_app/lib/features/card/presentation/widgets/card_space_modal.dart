@@ -90,11 +90,11 @@ class _CustomDeleteState extends State<CustomDelete> {
                                   animationType: AnimationType.fromTop,
                                   position: MotionToastPosition.top,
                                   dismissable: false,
-                                  toastDuration: const Duration(milliseconds: 1500),
+                                  toastDuration: const Duration(milliseconds: 1800),
                                 ).show(context);
 
                                 // Wait for 2 seconds before navigating to the card generation page
-                                Future.delayed(const Duration(milliseconds: 1500), () {
+                                Future.delayed(const Duration(milliseconds: 1800), () {
 
                                   // Check if Navigator is still available
                                   if (Navigator.of(context).canPop()) {

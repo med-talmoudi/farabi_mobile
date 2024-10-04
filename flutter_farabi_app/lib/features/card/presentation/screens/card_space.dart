@@ -95,14 +95,23 @@ class _CardSpaceState extends State<CardSpace> {
           ),
           centerTitle: true,
           actions: [
-            SizedBox(
-              width: 60.w,
-              child: IconButton(
-                onPressed: () {},
-                icon: SvgPicture.asset(
-                  'assets/img/notification_bell_marked.svg',
-                  width: 90.w,
-                  height: 90.h,
+            Padding(
+              padding:  EdgeInsets.only(top: 6.h),
+              child: SizedBox(
+                width: 60.w,
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: IconButton(
+                    onPressed: () {
+                       Navigator.pushNamed(
+                                  context,
+                                  '/all_history',
+                  
+                                  
+                                );
+                    },
+                    icon: Icon(Icons.notifications_outlined, color: Colors.black,size: 25.h,),
+                  ),
                 ),
               ),
             ),

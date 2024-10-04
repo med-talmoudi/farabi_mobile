@@ -14,6 +14,8 @@ import 'package:flutter_farabi_app/features/card/presentation/bloc/get_auth/get_
 import 'package:flutter_farabi_app/features/card/presentation/bloc/get_card_history/get_card_history_cubit.dart';
 
 import 'package:flutter_farabi_app/features/card/presentation/screens/card_home.dart';
+import 'package:flutter_farabi_app/features/history/presentation/bloc/get_all_history/get_all_history_cubit.dart';
+import 'package:flutter_farabi_app/features/history/presentation/view/all_history_space.dart';
 import 'package:flutter_farabi_app/features/jackpot/presentation/bloc/get_jackpot_history/get_jackpot_history_cubit.dart';
 
 import 'package:flutter_farabi_app/features/jackpot/presentation/bloc/get_points/get_points_cubit.dart';
@@ -229,6 +231,15 @@ class AppRouter {
               ],
               child: const InsertCard(),
             ));
+
+         case '/all_history':
+        return PageTransition(
+            type: PageTransitionType.fade,
+            child: BlocProvider(
+              create: (context) => GetAllHistoryCubit(CardApi()),
+              child: const AllHistorySpace(),
+            ));
+
 
       default:
         return null;

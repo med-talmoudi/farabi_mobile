@@ -93,17 +93,26 @@ class _JackpotState extends State<Jackpot> {
             ),
             centerTitle: true,
             actions: [
-              SizedBox(
+             Padding(
+              padding:  EdgeInsets.only(top: 6.h),
+              child: SizedBox(
                 width: 60.w,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(
-                    'assets/img/notification_bell_marked.svg',
-                    width: 90.w,
-                    height: 90.h,
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: IconButton(
+                    onPressed: () {
+                       Navigator.pushNamed(
+                                  context,
+                                  '/all_history',
+                  
+                                  
+                                );
+                    },
+                    icon: Icon(Icons.notifications_outlined, color: Colors.black,size: 25.h,),
                   ),
                 ),
               ),
+            ),
             ],
           ),
           body: SafeArea(

@@ -205,9 +205,9 @@ Future<dynamic> getJackpot() async {
           data: null, statusCode: 500); // Return a 500 status code on error
     }
   }
-  Future<dynamic> getJackpotHisto33ry() async {
+  Future<dynamic> getAllHistory() async {
     try {
-      var response = await dio.get("/api/usercard/history?type=JACKPOT&limit=3");
+      var response = await dio.get("/api/auth/notification");
       final Map<String, dynamic> responseData =
           json.decode(response.toString());
       return CustomResponce(
@@ -219,6 +219,8 @@ Future<dynamic> getJackpot() async {
           data: null, statusCode: 500); // Return a 500 status code on error
     }
   }
+
+  
 
 
 
